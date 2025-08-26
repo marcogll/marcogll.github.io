@@ -75,8 +75,29 @@ function initializeSkills() {
     }
 }
 
+// Preload critical images for better performance
+const preloadCriticalImages = () => {
+    const criticalImages = [
+        'assets/img/mg_logo.png',
+        'assets/img/mg_logo_black.png',
+        'assets/img/profiles/mg_1.png',
+        'assets/img/profiles/mg_2.png'
+    ];
+    
+    criticalImages.forEach(imagePath => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = imagePath;
+        document.head.appendChild(link);
+    });
+}
+
 // Call initialization when page loads
-document.addEventListener('DOMContentLoaded', initializeSkills)
+document.addEventListener('DOMContentLoaded', () => {
+    initializeSkills();
+    preloadCriticalImages();
+})
 
 /*==================== BLOB MOUSE INTERACTION ====================*/
 document.addEventListener('DOMContentLoaded', function() {
@@ -324,7 +345,7 @@ const getSystemTheme = () => {
     return 'light'
 }
 
-// Function to update navbar logo based on theme
+// Function to update navbar logo and favicon based on theme
 const updateNavbarLogo = () => {
     const navbarLogo = document.getElementById('navbar-logo')
     const isDarkTheme = document.body.classList.contains('dark-theme')
@@ -344,6 +365,34 @@ const updateNavbarLogo = () => {
     }
 }
 
+// Function to update PWA manifest based on theme
+const updatePWAManifest = () => {
+    const manifestLink = document.getElementById('theme-manifest')
+    const isDarkTheme = document.body.classList.contains('dark-theme')
+    
+    if (manifestLink) {
+        if (isDarkTheme) {
+            manifestLink.href = '/assets/img/favicons-white/site.webmanifest'
+        } else {
+            manifestLink.href = '/site.webmanifest'
+        }
+    }
+}
+
+// Function to update theme-specific meta tags
+const updateThemeMetaTags = () => {
+    const isDarkTheme = document.body.classList.contains('dark-theme')
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]:not([media])')
+    const tileColorMeta = document.querySelector('meta[name="msapplication-TileColor"]')
+    
+    if (themeColorMeta) {
+        themeColorMeta.content = isDarkTheme ? '#181825' : '#f4b8e4'
+    }
+    if (tileColorMeta) {
+        tileColorMeta.content = isDarkTheme ? '#181825' : '#f4b8e4'
+    }
+}
+
 // Initialize theme based on user preference or system preference (defaulting to dark if no system preference)
 if (selectedTheme) {
     // User has previously selected a theme
@@ -360,9 +409,11 @@ if (selectedTheme) {
     }
 }
 
-// Update logo on initial load after DOM is ready
+// Update all theme-related elements on initial load after DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     updateNavbarLogo()
+    updatePWAManifest()
+    updateThemeMetaTags()
 })
 
 // Listen for system theme changes (only if user hasn't manually selected a theme)
@@ -378,8 +429,10 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
             document.body.classList.remove(darkTheme)
             themeButton.classList.remove(iconTheme)
         }
-        // Update logo after theme change
+        // Update logo, manifest and meta tags after theme change
         updateNavbarLogo()
+        updatePWAManifest()
+        updateThemeMetaTags()
     }
 })
 
@@ -391,6 +444,8 @@ themeButton.addEventListener('click', () => {
     // We save the theme and the current icon that the user chose
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())
-    // Update logo after manual theme change
+    // Update logo, manifest and meta tags after manual theme change
     updateNavbarLogo()
+    updatePWAManifest()
+    updateThemeMetaTags()
 })

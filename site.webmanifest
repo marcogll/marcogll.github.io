@@ -1,0 +1,23 @@
+{
+    "name": "Marco Gallegos | Polímata Digital",
+    "short_name": "Marco MG",
+    "description": "Ingeniero en Mecatrónica convertido en polímata digital. Fundador de Vanity Nail Salon y cofundador de Aura Marketing.",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#f4b8e4",
+    "background_color": "#eff1f5",
+    "display": "standalone",
+    "start_url": "/",
+    "scope": "/",
+    "orientation": "portrait-primary"
+}

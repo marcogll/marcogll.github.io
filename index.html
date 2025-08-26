@@ -23,12 +23,37 @@
 
     <title>Marco Gallegos | Polymath</title>
 
-    <!--==================== Favicon ====================-->
-    <link rel="icon" href="/assets/img/mg_logo_black.png" type="image/png">
-    <link rel="shortcut icon" href="/assets/img/mg_logo_black.png" type="image/png">
-    <link rel="apple-touch-icon" href="/assets/img/mg_logo_black.png">
-    <link rel="icon" sizes="32x32" href="/assets/img/mg_logo_black.png">
-    <link rel="icon" sizes="16x16" href="/assets/img/mg_logo_black.png">
+    <!--==================== Favicon & PWA ====================-->
+    <!-- Standard favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- PNG favicons for better quality -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Android/Chrome icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/site.webmanifest" id="theme-manifest">
+    
+    <!-- Theme-specific meta tags -->
+    <meta name="theme-color" content="#f4b8e4" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#181825" media="(prefers-color-scheme: dark)">
+    <meta name="msapplication-TileColor" content="#f4b8e4">
+    <meta name="application-name" content="Marco Gallegos">
+    <meta name="apple-mobile-web-app-title" content="Marco MG">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Performance and caching -->
+    <meta name="format-detection" content="telephone=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
     <!--==================== Animate on scroll CDN ====================-->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
