@@ -349,6 +349,37 @@ img {
   box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
 }
 
+/*========== Navbar Links - Catppuccin Colors ==========*/
+.nav__items:nth-child(1) .nav__link:hover,
+.nav__items:nth-child(1) .nav__link.active-link {
+  color: var(--ctp-blue);
+}
+
+.nav__items:nth-child(2) .nav__link:hover,
+.nav__items:nth-child(2) .nav__link.active-link {
+  color: var(--ctp-green);
+}
+
+.nav__items:nth-child(3) .nav__link:hover,
+.nav__items:nth-child(3) .nav__link.active-link {
+  color: var(--ctp-mauve);
+}
+
+.nav__items:nth-child(4) .nav__link:hover,
+.nav__items:nth-child(4) .nav__link.active-link {
+  color: var(--ctp-peach);
+}
+
+.nav__items:nth-child(5) .nav__link:hover,
+.nav__items:nth-child(5) .nav__link.active-link {
+  color: var(--ctp-teal);
+}
+
+.nav__items:nth-child(6) .nav__link:hover,
+.nav__items:nth-child(6) .nav__link.active-link {
+  color: var(--ctp-pink);
+}
+
 /*==================== HOME ====================*/
 .home__container {
   gap: 1rem;
@@ -377,13 +408,144 @@ img {
   transition: 1.5s;
 }
 
-.home__blob {
-  width: 200px;
-  fill: var(--first-color);
+.home__blob-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.home__blob-shape {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #f4b8e4;
+  border: 4px solid #f4b8e4;
+  animation: blobMorph 8s ease-in-out infinite, blobColorChangeBorder 12s ease-in-out infinite, blobColorChangeBackground 12s ease-in-out infinite;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+  cursor: pointer;
+  z-index: 1;
+  filter: drop-shadow(0 0 15px rgba(244, 184, 228, 0.4));
+  border-radius: 70% 30% 40% 60% / 45% 65% 35% 55%;
+  box-sizing: border-box;
+}
+
+.home__blob-shape:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1) saturate(1.2) drop-shadow(0 0 25px rgba(244, 184, 228, 0.5));
+}
+
+.home__blob-border {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border: 4px solid rgba(255, 255, 255, 0.8);
+  animation: blobMorph 8s ease-in-out infinite;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+  cursor: pointer;
+  z-index: 3;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+  border-radius: 70% 30% 40% 60% / 45% 65% 35% 55%;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.home__blob-container:hover .home__blob-border {
+  transform: scale(1.05);
+}
+
+@keyframes blobMorph {
+  0% {
+    border-radius: 70% 30% 40% 60% / 45% 65% 35% 55%;
+  }
+  16.66% {
+    border-radius: 35% 65% 70% 30% / 60% 40% 70% 30%;
+  }
+  33.33% {
+    border-radius: 60% 40% 30% 70% / 35% 65% 45% 55%;
+  }
+  50% {
+    border-radius: 40% 60% 65% 35% / 70% 30% 60% 40%;
+  }
+  66.66% {
+    border-radius: 75% 25% 45% 55% / 50% 50% 35% 65%;
+  }
+  83.33% {
+    border-radius: 30% 70% 55% 45% / 65% 35% 75% 25%;
+  }
+  100% {
+    border-radius: 70% 30% 40% 60% / 45% 65% 35% 55%;
+  }
+}
+
+@keyframes blobColorChangeBorder {
+  0% { border-color: #f4b8e4; }
+  16.66% { border-color: #ca9ee6; }
+  33.33% { border-color: #8caaee; }
+  50% { border-color: #81c8be; }
+  66.66% { border-color: #a6d189; }
+  83.33% { border-color: #ef9f76; }
+  100% { border-color: #f4b8e4; }
+}
+
+@keyframes blobColorChangeBackground {
+  0% { background: #f4b8e4; }
+  16.66% { background: #ca9ee6; }
+  33.33% { background: #8caaee; }
+  50% { background: #81c8be; }
+  66.66% { background: #a6d189; }
+  83.33% { background: #ef9f76; }
+  100% { background: #f4b8e4; }
+}
+
+.home__blob-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .home__blob-img {
-  width: 170px;
+  width: 292px;
+  height: 292px;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.6s cubic-bezier(0.23, 1, 0.320, 1),
+              border-radius 0.6s ease-in-out;
+  filter: brightness(1) contrast(1.02) saturate(1.05);
+  z-index: 2;
+  border-radius: 70% 30% 40% 60% / 45% 65% 35% 55%;
+  animation: blobMorph 8s ease-in-out infinite;
+}
+
+.home__blob-img.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.02);
+}
+
+.home__blob-container:hover .home__blob-img.active {
+  transform: translate(-50%, -50%) scale(1.02);
+  filter: brightness(1.05) contrast(1.03) saturate(1.08);
 }
 
 .home__data {
@@ -440,7 +602,7 @@ img {
 }
 
 .button:hover {
-  background-color: var(--ctp-sapphire);
+  background-color: var(--ctp-teal);
   color: var(--ctp-base);
 }
 
@@ -590,6 +752,14 @@ img {
   background-color: var(--first-color-lighter);
 }
 
+.skills__description {
+  font-size: var(--small-font-size);
+  color: var(--text-color-light);
+  margin-top: var(--mb-0-5);
+  line-height: 1.4;
+  font-style: italic;
+}
+
 .skills__percentage {
   display: block;
   background-color: var(--first-color);
@@ -644,6 +814,22 @@ img {
 
 .skills__ai.animate {
   width: 80%;
+}
+
+.skills__leadership.animate {
+  width: 95%;
+}
+
+.skills__finance.animate {
+  width: 90%;
+}
+
+.skills__standardization.animate {
+  width: 88%;
+}
+
+.skills__business-launch.animate {
+  width: 60%;
 }
 
 .skills__close .skills__list {
@@ -1195,7 +1381,17 @@ footer .footer__social a:hover {
   }
 
   .home__blob {
-    width: 180px;
+    width: 250px;
+  }
+  
+  .home__blob-container {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .home__blob-img {
+    width: 200px;
+    height: 200px;
   }
 
   .skills__title {
@@ -1462,6 +1658,16 @@ footer .footer__social a:hover {
   .home__blob {
     width: 320px;
   }
+  
+  .home__blob-container {
+    width: 320px;
+    height: 320px;
+  }
+  
+  .home__blob-img {
+    width: 270px;
+    height: 270px;
+  }
 
   .home__social {
     transform: translateX(-6rem);
@@ -1591,6 +1797,63 @@ footer .footer__social a:hover {
   color: var(--ctp-pink);
 }
 
+/*==================== Different Colors for Skill Bars ====================*/
+/* Technology & Development */
+.skills__html {
+  background-color: var(--ctp-green);
+}
+.skills__css {
+  background-color: var(--ctp-peach);
+}
+.skills__js {
+  background-color: var(--ctp-sky);
+}
+.skills__react {
+  background-color: var(--ctp-pink);
+}
+
+/* Engineering & Technical Systems */
+.skills__php {
+  background-color: var(--ctp-blue);
+}
+.skills__mysql {
+  background-color: var(--ctp-red);
+}
+.skills__node {
+  background-color: var(--ctp-yellow);
+}
+.skills__python {
+  background-color: var(--ctp-maroon);
+}
+
+/* Marketing & Creativity */
+.skills__blender {
+  background-color: var(--ctp-lavender);
+}
+.skills__photoshop {
+  background-color: var(--ctp-flamingo);
+}
+.skills__adobeillustrator {
+  background-color: var(--ctp-rosewater);
+}
+.skills__ai {
+  background-color: var(--ctp-sapphire);
+}
+
+/* Entrepreneurship & Management */
+.skills__leadership {
+  background-color: var(--ctp-mauve);
+}
+.skills__finance {
+  background-color: var(--ctp-teal);
+}
+.skills__standardization {
+  background-color: var(--ctp-green);
+}
+.skills__business-launch {
+  background-color: var(--ctp-peach);
+}
+
 /* Service icons specific colors using Catppuccin palette */
 .services__content:nth-child(1) .services__icon {
   color: var(--ctp-mauve);
@@ -1617,7 +1880,7 @@ footer .footer__social a:hover {
 }
 
 .button:hover {
-  background-color: var(--ctp-sapphire);
+  background-color: var(--ctp-teal);
   color: var(--ctp-base);
   transform: translateY(-2px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);

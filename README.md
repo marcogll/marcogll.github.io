@@ -49,6 +49,48 @@ Sitio web profesional de Marco Gallegos - Ingeniero en Mecatrónica convertido e
 - Producción Videos y Campañas (85%)
 - Encuestas y Análisis de Mercado (80%)
 
+## 📸 Especificaciones para Imágenes del Blob
+
+### 🎨 Imágenes de Perfil (assets/img/profiles/)
+Las imágenes para el blob interactivo deben cumplir estas especificaciones:
+
+**Características técnicas:**
+- **Formato:** PNG con transparencia
+- **Resolución:** 512x512px (mínimo) o 1024x1024px (recomendado)
+- **Aspecto:** Cuadrado 1:1
+- **Calidad:** Alta resolución para nitidez
+- **Fondo:** Transparente o fácilmente removible
+
+**Contenido visual:**
+- **Estilo:** Profesional, creativo o casual según el contexto
+- **Encuadre:** Busto o retrato (cabeza y hombros)
+- **Expresión:** Variada (profesional, sonriente, pensativo, creativo)
+- **Iluminación:** Bien iluminado, evitar sombras duras
+- **Orientación:** Frontal o 3/4, mirando hacia adelante
+
+**Naming convention:**
+- `marco_engineer.png` - Foto profesional principal
+- `mg_1.png` a `mg_7.png` - Variaciones de personalidad/contexto
+- Usar nombres descriptivos si representan contextos específicos
+
+**Procesamiento:**
+1. Redimensionar a 512x512px
+2. Remover fondo (usar herramientas como remove.bg)
+3. Centrar el sujeto en el frame
+4. Optimizar peso del archivo sin perder calidad
+5. Asegurar que funcione bien con el clip-path circular del blob
+
+**Contextos sugeridos:**
+- Profesional con traje/camisa
+- Casual/relajado
+- Creativo/artístico
+- Técnico con herramientas
+- Empresarial
+- Sonriente/amigable
+- Serio/enfocado
+
+El sistema rotará automáticamente entre estas imágenes cada 4 segundos y cambiará dinámicamente con la interacción del mouse.
+
 ## ✨ Características del Sitio
 
 - 🌓 **Tema adaptativo** con paleta Catppuccin (Latte/Mocha)

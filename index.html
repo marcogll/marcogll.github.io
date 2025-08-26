@@ -58,7 +58,7 @@
                         </a>
                     </li>
 
-                    <li class="nav_items">
+                    <li class="nav__items">
                         <a href="#skills" class="nav__link ">
                             <i class="uil uil-file nav__icon"></i> Skills
                         </a>
@@ -115,23 +115,21 @@
                     </div>
 
                     <div data-aos="fade-right" class="home__img">
-                        <svg class="home__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <mask id="mask0" mask-type="alpha">
-                                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
-                                130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
-                                97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
-                                0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z" />
-                            </mask>
-                            <g mask="url(#mask0)">
-                                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
-                                165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
-                                129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
-                                -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z" />
-
-                                <image class="home__blob-img" x="12" y="18" href="assets/img/perfil.png" />
-                            </g>
-                        </svg>
+                        <div class="home__blob-container">
+                            <div class="home__blob-shape"></div>
+                            <div class="home__blob-border"></div>
+                            <div class="home__blob-carousel">
+                                <img src="assets/img/profiles/mg_1.png" alt="Marco 1" class="home__blob-img active" />
+                                <img src="assets/img/profiles/mg_2.png" alt="Marco 2" class="home__blob-img" />
+                                <img src="assets/img/profiles/mg_3.png" alt="Marco 3" class="home__blob-img" />
+                                <img src="assets/img/profiles/mg_4.png" alt="Marco 4" class="home__blob-img" />
+                                <img src="assets/img/profiles/mg_5.png" alt="Marco 5" class="home__blob-img" />
+                                <img src="assets/img/profiles/mg_6.png" alt="Marco 6" class="home__blob-img" />
+                                <img src="assets/img/profiles/mg_7.png" alt="Marco 7" class="home__blob-img" />
+                                <img src="assets/img/profiles/mg_8.png" alt="Marco 8" class="home__blob-img" />
+                                <img src="assets/img/profiles/mg_9.png" alt="Marco 9" class="home__blob-img" />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="home__data">
@@ -212,7 +210,7 @@
             <div data-aos="fade-up" class="skills__container container grid">
                 <div>
                     <!--==================== SKILL 1 ====================-->
-                    <div class="skills__content skills__open">
+                    <div class="skills__content skills__close">
                         <div class="skills__header">
                             <i class="uil uil-brackets-curly skills__icon"></i>
 
@@ -233,6 +231,7 @@
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__html"></span>
                                 </div>
+                                <p class="skills__description">Configuración y gestión de servidores virtuales, contenedores Docker y orquestación de servicios en la nube.</p>
                             </div>
                             <div class="skills__data">
                                 <div class="skills__titles">
@@ -242,15 +241,17 @@
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__css"></span>
                                 </div>
+                                <p class="skills__description">Creación de flujos de trabajo automatizados, integraciones entre sistemas y procesos de negocio sin código.</p>
                             </div>
                             <div class="skills__data">
                                 <div class="skills__titles">
-                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">memory</span> Desarrollo con ESP32/IoT</h3>
+                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">memory</span> Implementaciones IoT en negocios</h3>
                                     <span class="skills__number">85%</span>
                                 </div>
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__js"></span>
                                 </div>
+                                <p class="skills__description">Desarrollo con ESP32, sensores, conectividad WiFi/Bluetooth y aplicaciones IoT para automatización empresarial.</p>
                             </div>
                             <div class="skills__data">
                                 <div class="skills__titles">
@@ -260,6 +261,7 @@
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__react"></span>
                                 </div>
+                                <p class="skills__description">Desarrollo full-stack con React, JavaScript moderno, Python y APIs REST para aplicaciones web robustas.</p>
                             </div>
                         </div>
                     </div>
@@ -267,11 +269,11 @@
                     <!--==================== SKILL 2 ====================-->
                     <div class="skills__content skills__close">
                         <div class="skills__header">
-                            <i class="uil uil-server-network skills__icon"></i>
+                            <i class="uil uil-wrench skills__icon"></i>
 
                             <div>
-                                <h1 class="skills__title">Gestión Empresarial</h1>
-                                <span class="skills__subtitle">Líder y fundador de empresas</span>
+                                <h1 class="skills__title">Ingeniería & Sistemas Técnicos</h1>
+                                <span class="skills__subtitle">Diseño mecánico, arquitectónico e instalaciones</span>
                             </div>
 
                             <i class="uil uil-angle-down skills__arrow"></i>
@@ -280,39 +282,43 @@
                         <div class="skills__list grid">
                             <div class="skills__data">
                                 <div class="skills__titles">
-                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">group</span> Liderazgo de Equipos</h3>
-                                    <span class="skills__number">95%</span>
+                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">engineering</span> Diseño Mecánico & CAD</h3>
+                                    <span class="skills__number">92%</span>
                                 </div>
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__php"></span>
                                 </div>
+                                <p class="skills__description">Modelado 3D, simulaciones, planos técnicos y desarrollo de prototipos mecánicos con software CAD especializado.</p>
                             </div>
                             <div class="skills__data">
                                 <div class="skills__titles">
-                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">store</span> Gestión de Múltiples Sucursales</h3>
-                                    <span class="skills__number">90%</span>
+                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">architecture</span> Program Management</h3>
+                                    <span class="skills__number">85%</span>
                                 </div>
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__mysql"></span>
                                 </div>
+                                <p class="skills__description">Gestión integral de proyectos complejos, coordinación de equipos multidisciplinarios y seguimiento de cronogramas.</p>
                             </div>
                             <div class="skills__data">
                                 <div class="skills__titles">
-                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">trending_up</span> Estrategia & Crecimiento</h3>
-                                    <span class="skills__number">85%</span>
+                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">electrical_services</span> Instalaciones</h3>
+                                    <span class="skills__number">88%</span>
                                 </div>
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__node"></span>
                                 </div>
+                                <p class="skills__description">Instalaciones eléctricas, hidráulicas, sistemas HVAC y puesta en marcha de equipos industriales.</p>
                             </div>
                             <div class="skills__data">
                                 <div class="skills__titles">
-                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">precision_manufacturing</span> Optimización de Procesos</h3>
-                                    <span class="skills__number">90%</span>
+                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">build_circle</span> Mantenimiento en General</h3>
+                                    <span class="skills__number">95%</span>
                                 </div>
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__python"></span>
                                 </div>
+                                <p class="skills__description">Mantenimiento preventivo y correctivo de equipos, maquinaria industrial y sistemas automatizados.</p>
                             </div>
                         </div>
                     </div>
@@ -336,38 +342,99 @@
                             <div class="skills__data">
                                 <div class="skills__titles">
                                     <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">campaign</span> Estrategias de Posicionamiento</h3>
-                                    <span class="skills__number">90%</span>
+                                    <span class="skills__number">85%</span>
                                 </div>
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__blender"></span>
                                 </div>
+                                <p class="skills__description">Desarrollo de estrategias de marca, posicionamiento en mercado y campañas de marketing digital efectivas.</p>
                             </div>
                             <div class="skills__data">
                                 <div class="skills__titles">
-                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">palette</span> Contenido Visual Anime-Style</h3>
+                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">palette</span> Diseño gráfico</h3>
                                     <span class="skills__number">95%</span>
                                 </div>
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__photoshop"></span>
                                 </div>
+                                <p class="skills__description">Creación de identidad visual, diseño de logotipos, material publicitario y contenido gráfico profesional.</p>
                             </div>
                             <div class="skills__data">
                                 <div class="skills__titles">
                                     <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">videocam</span> Producción de Videos y Campañas</h3>
-                                    <span class="skills__number">85%</span>
+                                    <span class="skills__number">90%</span>
                                 </div>
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__adobeillustrator"></span>
                                 </div>
+                                <p class="skills__description">Producción audiovisual, edición de video, animaciones y contenido multimedia para redes sociales.</p>
                             </div>
                             <div class="skills__data">
                                 <div class="skills__titles">
                                     <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">poll</span> Encuestas y Análisis de Mercado</h3>
-                                    <span class="skills__number">80%</span>
+                                    <span class="skills__number">97%</span>
                                 </div>
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__ai"></span>
                                 </div>
+                                <p class="skills__description">Investigación de mercado, análisis de tendencias, encuestas automatizadas y reportes con inteligencia artificial.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--==================== SKILL 4 ====================-->
+                    <div class="skills__content skills__close">
+                        <div class="skills__header">
+                            <i class="uil uil-briefcase-alt skills__icon"></i>
+
+                            <div>
+                                <h1 class="skills__title">Entrepreneurship & Gestión</h1>
+                                <span class="skills__subtitle">Liderazgo empresarial y manejo de personal</span>
+                            </div>
+
+                            <i class="uil uil-angle-down skills__arrow"></i>
+                        </div>
+
+                        <div class="skills__list grid">
+                            <div class="skills__data">
+                                <div class="skills__titles">
+                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">group</span> Manejo de Personal</h3>
+                                    <span class="skills__number">95%</span>
+                                </div>
+                                <div class="skills__bar">
+                                    <span class="skills__percentage skills__leadership"></span>
+                                </div>
+                                <p class="skills__description">Liderazgo de equipos multidisciplinarios, gestión de talento, motivación y desarrollo de personal.</p>
+                            </div>
+                            <div class="skills__data">
+                                <div class="skills__titles">
+                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">account_balance</span> Gestión Financiera</h3>
+                                    <span class="skills__number">90%</span>
+                                </div>
+                                <div class="skills__bar">
+                                    <span class="skills__percentage skills__finance"></span>
+                                </div>
+                                <p class="skills__description">Administración de presupuestos, flujo de caja, análisis financiero y control de costos empresariales.</p>
+                            </div>
+                            <div class="skills__data">
+                                <div class="skills__titles">
+                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">tune</span> Estandarización de Procesos</h3>
+                                    <span class="skills__number">88%</span>
+                                </div>
+                                <div class="skills__bar">
+                                    <span class="skills__percentage skills__standardization"></span>
+                                </div>
+                                <p class="skills__description">Documentación de procesos, creación de manuales operativos y optimización de flujos de trabajo.</p>
+                            </div>
+                            <div class="skills__data">
+                                <div class="skills__titles">
+                                    <h3 class="skills__name"><span class="material-symbols-outlined skills__logo">rocket_launch</span> Lanzamiento de Modelos de Negocio Probados</h3>
+                                    <span class="skills__number">60%</span>
+                                </div>
+                                <div class="skills__bar">
+                                    <span class="skills__percentage skills__business-launch"></span>
+                                </div>
+                                <p class="skills__description">Validación de conceptos, MVPs, pruebas de mercado y escalamiento de modelos de negocio exitosos.</p>
                             </div>
                         </div>
                     </div>
@@ -419,7 +486,7 @@
                     <div class="education__header">
                         <i class="uil uil-code-branch education__icon"></i>
                         <div>
-                            <h3 class="education__title">Academia Romac</h3>
+                            <h3 class="education__title">Developer Bootcamps</h3>
                             <span class="education__subtitle">Cursos de Desarrollo</span>
                             <span class="education__date">2020 - 2022</span>
                         </div>
@@ -481,7 +548,7 @@
                                 </li>
                                 <li class="services__modal-service">
                                     <i class="uil uil-check-circle services__modal-icon"></i>
-                                    <p>Reportes via email</p>
+                                    <p>Reportes via email, con decisiones razonadas por ina IA</p>
                                 </li>
                                 <li class="services__modal-service">
                                     <i class="uil uil-check-circle services__modal-icon"></i>
@@ -757,14 +824,13 @@
                                 <img src="/assets/img/testimonial1.jpg" alt="" class="testimonial__img">
 
                                 <div>
-                                    <h3 class="testimonial__name">Name1</h3>
-                                    <span class="testimonial__client">Client</span>
+                                    <h3 class="testimonial__name">Socia de Vanity</h3>
+                                    <span class="testimonial__client">Vanity Nail Salon</span>
                                 </div>
                             </div>
                         </div>
                         <p class="testimonial__description">
-                            I get a good impression, I carry out my project with all the possible quality and attention
-                            and support 24 hours a day.</p>
+                            Desde que me integré a Vanity, los procesos y sistemas que Marco implementó nos han ayudado a incrementar un 45% en ventas. La automatización cambió completamente nuestra operación.</p>
                     </div>
                     <!--==================== TESTIMONIAL 2 ====================-->
                     <div class="testimonial__content swiper-slide">
@@ -773,15 +839,13 @@
                                 <img src="/assets/img/testimonial4.jpg" alt="" class="testimonial__img">
 
                                 <div>
-                                    <h3 class="testimonial__name">Name2</h3>
-                                    <span class="testimonial__client">Client</span>
+                                    <h3 class="testimonial__name">Director Creativo</h3>
+                                    <span class="testimonial__client">Agencia de Marketing</span>
                                 </div>
                             </div>
                         </div>
                         <p class="testimonial__description">
-                            It's always a pleasure to work with Mrinmoy, he brings 100% to each project and gets work
-                            done when
-                            it's needed the most.</p>
+                            Marco revolucionó nuestra producción de contenido. Los sistemas que desarrolló nos permiten crear campañas más efectivas en menos tiempo, optimizando todo nuestro flujo creativo.</p>
                     </div>
                     <!--==================== TESTIMONIAL 3 ====================-->
                     <div class="testimonial__content swiper-slide">
@@ -790,13 +854,13 @@
                                 <img src="/assets/img/testimonial3.jpg" alt="" class="testimonial__img">
 
                                 <div>
-                                    <h3 class="testimonial__name">Brian Cox</h3>
-                                    <span class="testimonial__client">Client</span>
+                                    <h3 class="testimonial__name">Gerente General</h3>
+                                    <span class="testimonial__client">Restaurante Gourmet</span>
                                 </div>
                             </div>
                         </div>
                         <p class="testimonial__description">
-                            He's a good programmer, I carry out my project with all the possible quality. </p>
+                            El sistema de encuestas con IA que Marco desarrolló nos permitió enfocar nuestro servicio con reportes automatizados precisos. Estamos próximos a contratar la automatización completa del restaurante.</p>
                     </div>
                     <!--==================== TESTIMONIAL 4 ====================-->
                     <div class="testimonial__content swiper-slide">
@@ -805,14 +869,13 @@
                                 <img src="/assets/img/testimonial2.jpg" alt="" class="testimonial__img">
 
                                 <div>
-                                    <h3 class="testimonial__name">Name3</h3>
-                                    <span class="testimonial__client">Client</span>
+                                    <h3 class="testimonial__name">CEO Startup Tech</h3>
+                                    <span class="testimonial__client">Empresa de Tecnología</span>
                                 </div>
                             </div>
                         </div>
                         <p class="testimonial__description">
-                            He's an amazing web developer, he has a deep understanding about his sphere, and delivers
-                            great result.</p>
+                            Marco tiene una comprensión profunda de la automatización de procesos. Su enfoque integral y entrega de resultados excepcionales lo convierte en un socio estratégico invaluable.</p>
                     </div>
                 </div>
 
@@ -833,14 +896,14 @@
                         <!--home__social-->
                         <div>
                             <h3 class="contact__title">Email</h3>
-                            <span class="contact__subtitle"> cosmosmrinmoy@gmail.com</span>
+                            <span class="contact__subtitle"> marco@vanityexperience.mx</span>
                         </div>
                     </div>
                     <div class="contact__information">
                         <i class="uil uil-github-alt contact__icon"></i>
                         <div>
                             <h3 class="contact__title">Github</h3>
-                            <span class="contact__subtitle">https://github.com/MRINMOY662 </span>
+                            <span class="contact__subtitle">https://github.com/marcogll</span>
                         </div>
                     </div>
                 </div>
@@ -898,20 +961,20 @@
                         <a href="#portfolio" class="footer__link">Portfolio</a>
                     </li>
                     <li>
-                        <a href="#contact" class="footer__link">Contactme</a>
+                        <a href="#contact" class="footer__link">Contáctame 🫡</a>
                     </li>
                 </ul>
 
                 <div class="footer__socials">
-                    <a href="https://www.instagram.com/mr1m0y._dev" target="_blank" class="footer__social">
+                    <a href="https://www.instagram.com/auramarketing.mx" target="_blank" class="footer__social">
                         <i class="uil uil-instagram"></i></a>
                     </a>
 
-                    <a href="https://github.com/mrinmoy-hex" target="_blank" class="footer__social">
+                    <a href="https://github.com/marcogll" target="_blank" class="footer__social">
                         <i class="uil uil-github-alt"></i></a>
                     </a>
 
-                    <a href="https://twitter.com/mrinmoy91013697" target="_blank" class="footer__social">
+                    <a href="https://x.com/AuraMarketingMX" target="_blank" class="footer__social">
                         <i class="uil uil-twitter-alt"></i></a>
                     </a>
                 </div>
@@ -931,19 +994,21 @@
 
     <!--==================== MAIN JS ====================-->
     <script src="assets/js/main.js"></script>
+    <!--==================== BLOB CONTROLS JS ====================-->
+    <script src="assets/js/blob-controls.js"></script>
 
     <!--=================== Animated text ===============-->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
         var typed = new Typed(".auto-input", {
             strings: [
-                "Fundador de Vanity",
-                "Cofundador de Aura Marketing",
+                "Creativo de Vanity",
+                "Maker en Aura <strong>Marketing</strong>",
                 "un Polímata Digital",
-                "Ingeniero en Mecatrónica",
-                "Desarrollador de Ecosistemas",
+                "Ingeniero",
+                "Desarrollador de Ideas",
                 "Automatizador de Procesos",
-                "Líder Empresarial",
+                "Emprendedor",
                 "Innovador Tecnológico",
             ],
             typeSpeed: 60,
@@ -960,6 +1025,7 @@
             duration: 2000
         });
     </script>
+
 
 </body>
 

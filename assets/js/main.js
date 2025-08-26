@@ -78,6 +78,134 @@ function initializeSkills() {
 // Call initialization when page loads
 document.addEventListener('DOMContentLoaded', initializeSkills)
 
+/*==================== BLOB MOUSE INTERACTION ====================*/
+document.addEventListener('DOMContentLoaded', function() {
+    const blob = document.querySelector('.home__blob-container');
+    const blobShape = document.querySelector('.home__blob-shape');
+    
+    // Auto-rotate images every 4 seconds
+    const images = document.querySelectorAll('.home__blob-img');
+    let currentImageIndex = 0;
+    
+    setInterval(() => {
+        if (!blob.matches(':hover')) { // Solo auto-rotar cuando no hay hover
+            images.forEach(img => img.classList.remove('active'));
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            images[currentImageIndex].classList.add('active');
+        }
+    }, 4000);
+    
+    if (blob && blobShape) {
+        let isHovering = false;
+        let animationFrame;
+        
+        // Función para interpolación suave
+        function lerp(start, end, factor) {
+            return start + (end - start) * factor;
+        }
+        
+        let currentTransform = {
+            x: 0,
+            y: 0,
+            scale: 1,
+            rotation: 0
+        };
+        
+        let targetTransform = {
+            x: 0,
+            y: 0,
+            scale: 1,
+            rotation: 0
+        };
+        
+        function updateTransform() {
+            // Interpolación suave hacia el objetivo
+            currentTransform.x = lerp(currentTransform.x, targetTransform.x, 0.1);
+            currentTransform.y = lerp(currentTransform.y, targetTransform.y, 0.1);
+            currentTransform.scale = lerp(currentTransform.scale, targetTransform.scale, 0.08);
+            currentTransform.rotation = lerp(currentTransform.rotation, targetTransform.rotation, 0.05);
+            
+            if (isHovering) {
+                blobShape.style.transform = `translate(${currentTransform.x}px, ${currentTransform.y}px) scale(${currentTransform.scale}) rotate(${currentTransform.rotation}deg)`;
+                animationFrame = requestAnimationFrame(updateTransform);
+            }
+        }
+        
+        blob.addEventListener('mouseenter', () => {
+            isHovering = true;
+            blobShape.style.animationPlayState = 'paused';
+            updateTransform();
+        });
+        
+        blob.addEventListener('mouseleave', () => {
+            isHovering = false;
+            
+            // Volver suavemente al estado original
+            targetTransform = { x: 0, y: 0, scale: 1, rotation: 0 };
+            
+            const returnAnimation = () => {
+                currentTransform.x = lerp(currentTransform.x, 0, 0.15);
+                currentTransform.y = lerp(currentTransform.y, 0, 0.15);
+                currentTransform.scale = lerp(currentTransform.scale, 1, 0.12);
+                currentTransform.rotation = lerp(currentTransform.rotation, 0, 0.1);
+                
+                blobShape.style.transform = `translate(${currentTransform.x}px, ${currentTransform.y}px) scale(${currentTransform.scale}) rotate(${currentTransform.rotation}deg)`;
+                
+                if (Math.abs(currentTransform.x) > 0.1 || Math.abs(currentTransform.y) > 0.1 || Math.abs(currentTransform.scale - 1) > 0.01) {
+                    requestAnimationFrame(returnAnimation);
+                } else {
+                    blobShape.style.animationPlayState = 'running';
+                    blobShape.style.transform = '';
+                }
+            };
+            
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+            returnAnimation();
+        });
+        
+        blob.addEventListener('mousemove', (e) => {
+            if (!isHovering) return;
+            
+            const rect = blob.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const mouseX = e.clientX - centerX;
+            const mouseY = e.clientY - centerY;
+            
+            // Calcular el desplazamiento y limitarlo
+            const maxDistance = 25; // Máximo desplazamiento en píxeles
+            const distance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
+            const factor = Math.min(distance, maxDistance) / maxDistance;
+            
+            // Movimiento suave del blob siguiendo el mouse
+            targetTransform.x = (mouseX / rect.width) * 20;
+            targetTransform.y = (mouseY / rect.height) * 20;
+            targetTransform.scale = 1.05 + factor * 0.1;
+            targetTransform.rotation = (mouseX / rect.width) * 8;
+            
+            // Cambiar imagen cuando el mouse se mueva significativamente
+            const images = document.querySelectorAll('.home__blob-img');
+            if (factor > 0.15 && Math.random() < 0.15) { // 15% chance cuando el mouse está activo
+                const activeImage = document.querySelector('.home__blob-img.active');
+                const activeIndex = Array.from(images).indexOf(activeImage);
+                let nextIndex;
+                
+                // Seleccionar siguiente imagen de forma inteligente
+                do {
+                    nextIndex = Math.floor(Math.random() * images.length);
+                } while (nextIndex === activeIndex && images.length > 1);
+                
+                images.forEach(img => img.classList.remove('active'));
+                images[nextIndex].classList.add('active');
+                currentImageIndex = nextIndex; // Actualizar el índice para la rotación automática
+            }
+        });
+    }
+});
+
 /*==================== QUALIFICATION TABS ====================*/
 
 
