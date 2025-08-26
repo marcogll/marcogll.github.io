@@ -1107,7 +1107,7 @@ footer .footer__social a:hover {
 .footer__copy {
   font-size: var(--smaller-font-size);
   text-align: center;
-  color: rgba(51, 51, 51, 0.3);
+  color: rgba(51, 51, 51, 0.7);
   margin-top: var(--mb-3);
 }
 
