@@ -10,9 +10,9 @@ Sitio web profesional de Marco Gallegos - Ingeniero en Mecatrónica convertido e
 
 **¡Me alegra que preguntes! :)**
 
-Soy **Marco Gallegos**, ingeniero en mecatrónica convertido en **polímata digital**. Fundé **Vanity Nail Salon** (múltiples sucursales) y cofundé **Aura Marketing**. Mi experiencia combina **gestión empresarial**, **desarrollo de software** y **automatización inteligente**.
+Soy **Marco Gallegos**, ingeniero en mecatrónica convertido en **polímata digital**. Soy **Partner en Vanity Nail Salon** (múltiples sucursales), donde me uní para implementar mis habilidades de ingeniería, y cofundé **Aura Marketing**. Mi experiencia abarca **múltiples disciplinas** integrando **gestión empresarial**, **desarrollo de software** y **automatización inteligente**.
 
-Construyo **ecosistemas digitales** completos: desde sistemas POS y CRM hasta prototipos con ESP32. Mi enfoque es **transformar ideas en proyectos sostenibles** que conectan creatividad, tecnología y gestión de equipos.
+He trabajado en **proyectos multidisciplinarios** desarrollando **soluciones IoT** que se integran con mis negocios y los de mis clientes para **simplificar la vida** y eliminar procesos repetitivos. Construyo **ecosistemas digitales completos**: desde sistemas POS y CRM hasta prototipos con ESP32.
 
 > *"Si existe una forma mejor de hacerlo, la voy a encontrar."*
 
@@ -21,8 +21,8 @@ Construyo **ecosistemas digitales** completos: desde sistemas POS y CRM hasta pr
 - **2** Empresas fundadas  
 - **∞** Aprendizaje continuo
 
-### 🎓 Formación Académica
-- 🏢 **Fundador** de Vanity Nail Salon (múltiples sucursales)
+### 🎓 Formación Académica y Empresarial
+- 🏢 **Partner** en Vanity Nail Salon (múltiples sucursales)
 - 🎨 **Cofundador** de Aura Marketing 
 - ⚙️ **Ingeniero** en Mecatrónica (Universidad Tecnológica de Coahuila)
 - 📈 **MBA** en Gestión de Negocios de Manufactura
@@ -36,11 +36,12 @@ Construyo **ecosistemas digitales** completos: desde sistemas POS y CRM hasta pr
 - **Sistemas POS & CRM** integrados con chatbot de WhatsApp
 - **Automatización de procesos** empresariales con workflows inteligentes
 
-### ⚡ Hardware & IoT
-- **Prototipos ESP32** con sensores OLED y RFID/NFC
-- **Mesas inteligentes** para salones de uñas con automatización
-- **Control automatizado** de LEDs y sistemas de iluminación
-- **Implementaciones IoT** para automatización empresarial
+### ⚡ Hardware & IoT para Simplificar la Vida
+- **Soluciones IoT personalizadas** para eliminar procesos repetitivos
+- **Prototipos ESP32** integrados con sistemas de negocio
+- **Automatización inteligente** para salones, restaurantes y comercios  
+- **Sistemas de control** que se adaptan a las necesidades reales del cliente
+- **Mesas inteligentes** y dispositivos que reducen el trabajo manual
 
 ### 🎨 Marketing & Creatividad
 - **Estrategias de posicionamiento** para empresas y marcas
@@ -259,11 +260,12 @@ Este sitio web refleja mi filosofía de **mejora continua** y **excelencia técn
 
 ## 🏆 Casos de Éxito
 
-### 💅 Vanity Nail Salon
-- **Múltiples sucursales** con gestión centralizada
-- **Sistema POS personalizado** con integración contable
-- **Chatbot de WhatsApp** para reservas automáticas
-- **Mesas inteligentes** con tecnología IoT
+### 💅 Vanity Nail Salon (Partner)
+- **Partner técnico** implementando soluciones de ingeniería
+- **Sistema POS personalizado** que eliminó procesos manuales
+- **Chatbot de WhatsApp** para automatizar reservas y consultas
+- **Mesas inteligentes** IoT que simplifican el trabajo del personal
+- **Automatización de inventarios** y control de sucursales múltiples
 
 ### 🎨 Aura Marketing
 - **Estrategias de posicionamiento** para +20 marcas
