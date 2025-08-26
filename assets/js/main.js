@@ -205,10 +205,14 @@ const updateNavbarLogo = () => {
         if (isDarkTheme) {
             // Dark theme - use white logo
             navbarLogo.src = 'assets/img/mg_logo.png'
+            console.log('Logo changed to white (dark theme)')
         } else {
             // Light theme - use black logo  
             navbarLogo.src = 'assets/img/mg_logo_black.png'
+            console.log('Logo changed to black (light theme)')
         }
+    } else {
+        console.error('Navbar logo element not found!')
     }
 }
 
@@ -228,8 +232,10 @@ if (selectedTheme) {
     }
 }
 
-// Update logo on initial load
-updateNavbarLogo()
+// Update logo on initial load after DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    updateNavbarLogo()
+})
 
 // Listen for system theme changes (only if user hasn't manually selected a theme)
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {

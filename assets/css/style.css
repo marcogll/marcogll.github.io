@@ -263,9 +263,9 @@ img {
   height: 2.5rem;
   width: auto;
   transition: all 0.3s ease;
+  display: block;
+  max-width: 100%;
 }
-
-/* Remove content override - will be handled by JavaScript */
 
 .nav__logo:hover .nav__logo-img {
   transform: scale(1.1);
@@ -1172,8 +1172,6 @@ footer .footer__social a:hover {
   .nav__logo-img {
     height: 2rem;
   }
-  
-  /* Mobile - JavaScript will handle logo switching */
 
   .nav__menu {
     padding: 2rem .25rem 4rem;
