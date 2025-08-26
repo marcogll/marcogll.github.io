@@ -2,6 +2,10 @@
 
 Sitio web profesional de Marco Gallegos - Ingeniero en Mecatrónica convertido en polímata digital, fundador y cofundador de empresas, desarrollador de ecosistemas tecnológicos completos.
 
+![Preview del Sitio Web](preview.png)
+
+*Vista del sitio web mostrando el blob interactivo orgánico con sistema de capas dinámico y tema oscuro Catppuccin Mocha*
+
 ## 👨‍💻 Sobre Marco
 
 **¡Me alegra que preguntes! :)**
@@ -86,6 +90,9 @@ Construyo **ecosistemas digitales** completos: desde sistemas POS y CRM hasta pr
 
 ### 🎭 Blob Interactivo Avanzado
 El sitio cuenta con un **sistema de blob dinámico** completamente personalizable:
+
+![Blob Interactivo](preview.png)
+*El blob orgánico en acción con tema oscuro y efectos de capas*
 
 #### 🔧 Características Técnicas
 - **Sistema CSS/JS puro** - Sin dependencias SVG, completamente flexible
@@ -205,6 +212,16 @@ El sistema rotará automáticamente entre estas imágenes cada 4 segundos y camb
 - **Meta tags optimizados** para redes sociales
 - **Estructura semántica** HTML5 correcta
 - **Lighthouse score** optimizado para Core Web Vitals
+- **Preload de imágenes críticas** para logos y blob
+- **DNS prefetch** para recursos externos
+
+### 📱 PWA y Favicons Avanzados
+- **Favicons adaptativos** que cambian según el tema (claro/oscuro)
+- **Múltiples tamaños** optimizados (16x16, 32x32, 192x192, 512x512)
+- **Apple Touch Icons** específicos para iOS
+- **Manifests PWA duales** con theme-colors correctos
+- **Microsoft Tile** configuración para Windows
+- **Cambio dinámico** de manifest según tema activo
 
 ## 🎯 Filosofía de Desarrollo
 
