@@ -34,17 +34,49 @@ const skillsContent = document.getElementsByClassName('skills__content'),
 function toggleSkills() {
     let itemClass = this.parentNode.className
 
+    // Close all skills sections and remove animations
     for (i = 0; i < skillsContent.length; i++) {
         skillsContent[i].className = 'skills__content skills__close'
+        // Remove animate class from all skill bars in closed sections
+        const skillBars = skillsContent[i].querySelectorAll('.skills__percentage')
+        skillBars.forEach(bar => {
+            bar.classList.remove('animate')
+        })
     }
+    
+    // Open clicked section
     if (itemClass === 'skills__content skills__close') {
         this.parentNode.className = 'skills__content skills__open'
+        
+        // Add animate class to skill bars in opened section with delay
+        const skillBars = this.parentNode.querySelectorAll('.skills__percentage')
+        skillBars.forEach((bar, index) => {
+            setTimeout(() => {
+                bar.classList.add('animate')
+            }, index * 200) // Stagger animation by 200ms
+        })
     }
 }
 
 skillsHeader.forEach((el) => {
     el.addEventListener('click', toggleSkills)
 })
+
+// Initialize first skills section with animated bars
+function initializeSkills() {
+    const firstSkillsSection = document.querySelector('.skills__content.skills__open')
+    if (firstSkillsSection) {
+        const skillBars = firstSkillsSection.querySelectorAll('.skills__percentage')
+        skillBars.forEach((bar, index) => {
+            setTimeout(() => {
+                bar.classList.add('animate')
+            }, 500 + (index * 200)) // Start after 500ms with 200ms stagger
+        })
+    }
+}
+
+// Call initialization when page loads
+document.addEventListener('DOMContentLoaded', initializeSkills)
 
 /*==================== QUALIFICATION TABS ====================*/
 
@@ -156,12 +188,45 @@ const selectedIcon = localStorage.getItem('selected-icon')
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
 const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun'
 
-// We validate if the user previously chose a topic
-if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
-  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-  themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
+// Function to get system theme preference
+const getSystemTheme = () => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+    }
+    return 'light'
 }
+
+// Initialize theme based on user preference or system preference (defaulting to dark if no system preference)
+if (selectedTheme) {
+    // User has previously selected a theme
+    document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+    themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
+} else {
+    // No user preference, use system preference or default to dark
+    const systemTheme = getSystemTheme()
+    const defaultTheme = systemTheme === 'light' ? 'light' : 'dark' // Default to dark if system doesn't prefer light
+    
+    if (defaultTheme === 'dark') {
+        document.body.classList.add(darkTheme)
+        themeButton.classList.add(iconTheme)
+    }
+}
+
+// Listen for system theme changes (only if user hasn't manually selected a theme)
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('selected-theme')) {
+        // Only update if user hasn't manually set a preference
+        if (e.matches) {
+            // System switched to dark
+            document.body.classList.add(darkTheme)
+            themeButton.classList.add(iconTheme)
+        } else {
+            // System switched to light
+            document.body.classList.remove(darkTheme)
+            themeButton.classList.remove(iconTheme)
+        }
+    }
+})
 
 // Activate / deactivate the theme manually with the button
 themeButton.addEventListener('click', () => {
