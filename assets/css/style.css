@@ -265,6 +265,16 @@ img {
   transition: all 0.3s ease;
 }
 
+/* Light theme - black logo */
+.nav__logo-img {
+  content: url('../img/mg_logo_black.png');
+}
+
+/* Dark theme - white logo */
+.dark-theme .nav__logo-img {
+  content: url('../img/mg_logo.png');
+}
+
 .nav__logo:hover .nav__logo-img {
   transform: scale(1.1);
 }
@@ -1059,8 +1069,12 @@ img {
 .footer__logo-img {
   height: 3rem;
   width: auto;
-  filter: brightness(0) invert(1);
   transition: all 0.3s ease;
+}
+
+/* Footer always uses white logo on colored background */
+.footer__logo-img {
+  content: url('../img/mg_logo.png');
 }
 
 .footer__logo:hover .footer__logo-img {
@@ -1166,6 +1180,16 @@ footer .footer__social a:hover {
   .nav__logo-img {
     height: 2rem;
   }
+  
+  /* Mobile - Light theme black logo */
+  .nav__logo-img {
+    content: url('../img/mg_logo_black.png');
+  }
+  
+  /* Mobile - Dark theme white logo */
+  .dark-theme .nav__logo-img {
+    content: url('../img/mg_logo.png');
+  }
 
   .nav__menu {
     padding: 2rem .25rem 4rem;
@@ -1177,6 +1201,11 @@ footer .footer__social a:hover {
 
   .footer__logo-img {
     height: 2.5rem;
+  }
+  
+  /* Mobile footer always white logo */
+  .footer__logo-img {
+    content: url('../img/mg_logo.png');
   }
 
   .home__content {
