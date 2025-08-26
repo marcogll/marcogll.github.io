@@ -254,14 +254,24 @@ img {
   align-items: center;
 }
 
-.nav__logo,
+.nav__logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav__logo-img {
+  height: 2.5rem;
+  width: auto;
+  transition: all 0.3s ease;
+}
+
+.nav__logo:hover .nav__logo-img {
+  transform: scale(1.1);
+}
+
 .nav__toggle {
   color: var(--title-color);
   font-weight: var(--font-medium);
-}
-
-.nav__logo:hover {
-  color: var(--first-color);
 }
 
 .nav__toggle {
@@ -420,7 +430,7 @@ img {
 /*==================== BUTTONS ====================*/
 .button {
   display: inline-block;
-  background-color: var(--first-color);
+  background-color: var(--ctp-mauve);
   color: var(--ctp-base);
   padding: 1rem;
   border-radius: .5rem;
@@ -428,7 +438,7 @@ img {
 }
 
 .button:hover {
-  background-color: var(--first-color-alt);
+  background-color: var(--ctp-sapphire);
   color: var(--ctp-base);
 }
 
@@ -591,27 +601,27 @@ img {
 }
 
 .skills__css.animate {
-  width: 90%;
+  width: 95%;
 }
 
 .skills__js.animate {
-  width: 95%;
+  width: 85%;
 }
 
 .skills__react.animate {
-  width: 65%;
+  width: 80%;
 }
 
 .skills__php.animate {
-  width: 90%;
-}
-
-.skills__mysql.animate {
   width: 95%;
 }
 
+.skills__mysql.animate {
+  width: 90%;
+}
+
 .skills__node.animate {
-  width: 80%;
+  width: 85%;
 }
 
 .skills__python.animate {
@@ -619,19 +629,19 @@ img {
 }
 
 .skills__blender.animate {
-  width: 85%;
-}
-
-.skills__photoshop.animate {
   width: 90%;
 }
 
+.skills__photoshop.animate {
+  width: 95%;
+}
+
 .skills__adobeillustrator.animate {
-  width: 100%;
+  width: 85%;
 }
 
 .skills__ai.animate {
-  width: 95%;
+  width: 80%;
 }
 
 .skills__close .skills__list {
@@ -1040,6 +1050,23 @@ img {
   padding: 2rem 0 3rem;
 }
 
+.footer__logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--mb-1);
+}
+
+.footer__logo-img {
+  height: 3rem;
+  width: auto;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+}
+
+.footer__logo:hover .footer__logo-img {
+  transform: scale(1.1);
+}
+
 .footer__title {
   font-size: var(--h1-font-size);
   margin-bottom: var(--mb-0-25);
@@ -1079,7 +1106,7 @@ footer .footer__social a:hover {
 .footer__subtitle,
 .footer__link,
 .footer__social {
-  color: var(--ctp-text);
+  color: #333333;
 }
 
 
@@ -1136,12 +1163,20 @@ footer .footer__social a:hover {
     margin-right: var(--mb-1);
   }
 
+  .nav__logo-img {
+    height: 2rem;
+  }
+
   .nav__menu {
     padding: 2rem .25rem 4rem;
   }
 
   .nav__list {
     column-gap: 0;
+  }
+
+  .footer__logo-img {
+    height: 2.5rem;
   }
 
   .home__content {
@@ -1562,19 +1597,17 @@ footer .footer__social a:hover {
   color: var(--ctp-pink);
 }
 
-/* Add some subtle gradient to buttons with better contrast */
+/* Solid Catppuccin colors for buttons */
 .button {
-  background: linear-gradient(135deg, var(--first-color) 0%, var(--first-color-alt) 100%);
-  color: var(--container-color);
+  background-color: var(--ctp-mauve);
+  color: var(--ctp-base);
   font-weight: var(--font-semi-bold);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 .button:hover {
-  background: linear-gradient(135deg, var(--first-color-alt) 0%, var(--ctp-sapphire) 100%);
+  background-color: var(--ctp-sapphire);
   color: var(--ctp-base);
   transform: translateY(-2px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
