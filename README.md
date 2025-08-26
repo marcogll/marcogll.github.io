@@ -10,9 +10,9 @@ Sitio web profesional de Marco Gallegos - Ingeniero en Mecatrónica convertido e
 
 **¡Me alegra que preguntes! :)**
 
-Soy **Marco Gallegos**, ingeniero en mecatrónica convertido en **polímata digital**. Soy **Partner en Vanity Nail Salon** (múltiples sucursales), donde me uní para implementar mis habilidades de ingeniería, y cofundé **Aura Marketing**. Mi experiencia abarca **múltiples disciplinas** integrando **gestión empresarial**, **desarrollo de software** y **automatización inteligente**.
+Soy **Marco Gallegos**, ingeniero en mecatrónica convertido en **polímata digital**. Partner en **Vanity Nail Salon** y cofundador de **Aura Marketing**. Mi experiencia abarca **múltiples disciplinas** integrando **gestión empresarial**, **desarrollo de software** y **automatización inteligente**.
 
-He trabajado en **proyectos multidisciplinarios** desarrollando **soluciones IoT** que se integran con mis negocios y los de mis clientes para **simplificar la vida** y eliminar procesos repetitivos. Construyo **ecosistemas digitales completos**: desde sistemas POS y CRM hasta prototipos con ESP32.
+Desarrollo **soluciones con microcontroladores** que se integran con negocios para **simplificar procesos** y eliminar tareas repetitivas. Construyo **ecosistemas digitales completos** conectando hardware, software y gestión.
 
 > *"Si existe una forma mejor de hacerlo, la voy a encontrar."*
 
@@ -36,12 +36,11 @@ He trabajado en **proyectos multidisciplinarios** desarrollando **soluciones IoT
 - **Sistemas POS & CRM** integrados con chatbot de WhatsApp
 - **Automatización de procesos** empresariales con workflows inteligentes
 
-### ⚡ Hardware & IoT para Simplificar la Vida
-- **Soluciones IoT personalizadas** para eliminar procesos repetitivos
-- **Prototipos ESP32** integrados con sistemas de negocio
-- **Automatización inteligente** para salones, restaurantes y comercios  
-- **Sistemas de control** que se adaptan a las necesidades reales del cliente
-- **Mesas inteligentes** y dispositivos que reducen el trabajo manual
+### ⚡ Hardware & Microcontroladores
+- **Soluciones con microcontroladores** integradas a negocios reales
+- **Automatización inteligente** para simplificar procesos diarios
+- **Sistemas de control** que eliminan tareas repetitivas
+- **Dispositivos IoT personalizados** según necesidades específicas
 
 ### 🎨 Marketing & Creatividad
 - **Estrategias de posicionamiento** para empresas y marcas
