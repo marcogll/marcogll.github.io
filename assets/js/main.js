@@ -196,6 +196,22 @@ const getSystemTheme = () => {
     return 'light'
 }
 
+// Function to update navbar logo based on theme
+const updateNavbarLogo = () => {
+    const navbarLogo = document.getElementById('navbar-logo')
+    const isDarkTheme = document.body.classList.contains('dark-theme')
+    
+    if (navbarLogo) {
+        if (isDarkTheme) {
+            // Dark theme - use white logo
+            navbarLogo.src = 'assets/img/mg_logo.png'
+        } else {
+            // Light theme - use black logo  
+            navbarLogo.src = 'assets/img/mg_logo_black.png'
+        }
+    }
+}
+
 // Initialize theme based on user preference or system preference (defaulting to dark if no system preference)
 if (selectedTheme) {
     // User has previously selected a theme
@@ -212,6 +228,9 @@ if (selectedTheme) {
     }
 }
 
+// Update logo on initial load
+updateNavbarLogo()
+
 // Listen for system theme changes (only if user hasn't manually selected a theme)
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     if (!localStorage.getItem('selected-theme')) {
@@ -225,6 +244,8 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
             document.body.classList.remove(darkTheme)
             themeButton.classList.remove(iconTheme)
         }
+        // Update logo after theme change
+        updateNavbarLogo()
     }
 })
 
@@ -236,4 +257,6 @@ themeButton.addEventListener('click', () => {
     // We save the theme and the current icon that the user chose
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())
+    // Update logo after manual theme change
+    updateNavbarLogo()
 })
