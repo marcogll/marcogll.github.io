@@ -189,6 +189,27 @@ El sistema rotará automáticamente entre estas imágenes cada 4 segundos y camb
 
 ## 🚀 Funcionalidades Destacadas
 
+### 🎭 Modales Interactivos de Servicios
+- **4 modales detallados** para cada área de servicio profesional
+- **Transiciones suaves** con animaciones de escala y opacidad optimizadas
+- **Cierre intuitivo** con click fuera del modal, botón X, o tecla ESC
+- **Scroll prevention** del body cuando modal está abierto
+- **Consistencia visual** usando el mismo patrón exitoso del modal CV
+- **Responsive design** adaptativo a todos los tamaños de pantalla
+
+#### 📋 Servicios Incluidos:
+1. **Automatizaciones de procesos** - Integración de data, reportes con IA, encuestas automatizadas
+2. **Proyectos Llave en Mano** - Desarrollo iterativo, capacitación incluida, despliegue completo  
+3. **Lo visual es nuestro Fuerte** - Contenido multiplataforma, campañas estratégicas, red de colaboradores
+4. **Paquetes Vanity para Empresas** - Servicios de spa corporativo, bienestar empresarial, convenios exclusivos
+
+### 📋 Modal Interactivo del CV
+- **CV completo** con información profesional detallada
+- **Barras de progreso animadas** para skills técnicos y blandos
+- **Colores Catppuccin individuales** para cada categoría de habilidad
+- **Diseño profesional** con scroll personalizado y efectos visuales
+- **Descarga directa** del CV en PDF desde el modal
+
 ### 🌙 Sistema de Temas
 - **Detección automática** del tema del sistema operativo
 - **Toggle manual** con persistencia en localStorage
