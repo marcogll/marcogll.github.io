@@ -1582,7 +1582,6 @@ footer .footer__social a:hover {
   .about__container,
   .skills__container,
   .portfolio__content,
-  .project__container,
   .contact__container,
   .footer__container,
   .education__container {
@@ -1843,6 +1842,15 @@ footer .footer__social a:hover {
     display: inline-flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+    position: relative !important;
+    z-index: 100 !important;
+  }
+  
+  /* Asegurar que el contenedor del proyecto mantenga su layout correcto */
+  .project__container {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    align-items: center !important;
   }
 }
 
