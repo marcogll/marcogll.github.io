@@ -1,59 +1,61 @@
-/*==================== MENU SHOW Y HIDDEN ====================*/
+/*==================== MOSTRAR Y OCULTAR MENÚ ====================*/
 const navMenu = document.getElementById('nav-menu'),
     navToggle = document.getElementById('nav-toggle'),
     navClose = document.getElementById('nav-close')
-/*===== MENU SHOW =====*/
-/* Validate if constant exists */
+
+/*===== MOSTRAR MENÚ =====*/
+/* Validar si la constante existe */
 if (navToggle) {
     navToggle.addEventListener('click', () => {
         navMenu.classList.add('show-menu')
     })
 }
 
-/*===== MENU HIDDEN =====*/
-/* Validate if constant exists */
+/*===== OCULTAR MENÚ =====*/
+/* Validar si la constante existe */
 if (navClose) {
     navClose.addEventListener('click', () => {
         navMenu.classList.remove('show-menu')
     })
 }
 
-/*==================== REMOVE MENU MOBILE ====================*/
+/*==================== QUITAR MENÚ MÓVIL ====================*/
 const navLink = document.querySelectorAll('.nav__link')
 
 function linkAction() {
     const navMenu = document.getElementById('nav-menu')
-    // When we click on each nav__link, we remove the show-menu class
+    // Al hacer clic en cada nav__link, eliminamos la clase show-menu
     navMenu.classList.remove('show-menu')
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
-/*==================== ACCORDION SKILLS ====================*/
+
+/*==================== ACORDEÓN DE HABILIDADES ====================*/
 const skillsContent = document.getElementsByClassName('skills__content'),
     skillsHeader = document.querySelectorAll('.skills__header')
 
 function toggleSkills() {
     let itemClass = this.parentNode.className
 
-    // Close all skills sections and remove animations
+    // Cierra todas las secciones de habilidades y elimina las animaciones
     for (i = 0; i < skillsContent.length; i++) {
         skillsContent[i].className = 'skills__content skills__close'
-        // Remove animate class from all skill bars in closed sections
+        // Elimina la clase de animación de todas las barras de habilidades en las secciones cerradas
         const skillBars = skillsContent[i].querySelectorAll('.skills__percentage')
         skillBars.forEach(bar => {
             bar.classList.remove('animate')
         })
     }
     
-    // Open clicked section
+    // Abre la sección clickeada
     if (itemClass === 'skills__content skills__close') {
         this.parentNode.className = 'skills__content skills__open'
         
-        // Add animate class to skill bars in opened section with delay
+        // Agrega la clase de animación a las barras de habilidades en la sección abierta con un retraso
         const skillBars = this.parentNode.querySelectorAll('.skills__percentage')
         skillBars.forEach((bar, index) => {
             setTimeout(() => {
                 bar.classList.add('animate')
-            }, index * 200) // Stagger animation by 200ms
+            }, index * 200) // Escalonar la animación por 200ms
         })
     }
 }
@@ -62,7 +64,7 @@ skillsHeader.forEach((el) => {
     el.addEventListener('click', toggleSkills)
 })
 
-// Initialize first skills section with animated bars
+// Inicializa la primera sección de habilidades con barras animadas
 function initializeSkills() {
     const firstSkillsSection = document.querySelector('.skills__content.skills__open')
     if (firstSkillsSection) {
@@ -70,12 +72,12 @@ function initializeSkills() {
         skillBars.forEach((bar, index) => {
             setTimeout(() => {
                 bar.classList.add('animate')
-            }, 500 + (index * 200)) // Start after 500ms with 200ms stagger
+            }, 500 + (index * 200)) // Comienza después de 500ms con un escalonamiento de 200ms
         })
     }
 }
 
-// Preload critical images for better performance
+// Precarga imágenes críticas para un mejor rendimiento
 const preloadCriticalImages = () => {
     const criticalImages = [
         'assets/img/mg_logo.png',
@@ -93,18 +95,18 @@ const preloadCriticalImages = () => {
     });
 }
 
-// Call initialization when page loads
+// Llama a la inicialización cuando la página se carga
 document.addEventListener('DOMContentLoaded', () => {
     initializeSkills();
     preloadCriticalImages();
 })
 
-/*==================== BLOB MOUSE INTERACTION ====================*/
+/*==================== INTERACCIÓN DEL BLOB CON EL RATÓN ====================*/
 document.addEventListener('DOMContentLoaded', function() {
     const blob = document.querySelector('.home__blob-container');
     const blobShape = document.querySelector('.home__blob-shape');
     
-    // Auto-rotate images every 4 seconds
+    // Rotación automática de imágenes cada 4 segundos
     const images = document.querySelectorAll('.home__blob-img');
     let currentImageIndex = 0;
     
@@ -120,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let isHovering = false;
         let animationFrame;
         
-        // Función para interpolación suave
+        // Función para interpolación suave (lerp)
         function lerp(start, end, factor) {
             return start + (end - start) * factor;
         }
@@ -201,20 +203,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const distance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
             const factor = Math.min(distance, maxDistance) / maxDistance;
             
-            // Movimiento suave del blob siguiendo el mouse
+            // Movimiento suave del blob siguiendo el ratón
             targetTransform.x = (mouseX / rect.width) * 20;
             targetTransform.y = (mouseY / rect.height) * 20;
             targetTransform.scale = 1.05 + factor * 0.1;
             targetTransform.rotation = (mouseX / rect.width) * 8;
             
-            // Cambiar imagen cuando el mouse se mueva significativamente
+            // Cambiar imagen cuando el ratón se mueva significativamente
             const images = document.querySelectorAll('.home__blob-img');
-            if (factor > 0.15 && Math.random() < 0.15) { // 15% chance cuando el mouse está activo
+            if (factor > 0.15 && Math.random() < 0.15) { // 15% de probabilidad cuando el ratón está activo
                 const activeImage = document.querySelector('.home__blob-img.active');
                 const activeIndex = Array.from(images).indexOf(activeImage);
                 let nextIndex;
                 
-                // Seleccionar siguiente imagen de forma inteligente
+                // Seleccionar la siguiente imagen de forma inteligente
                 do {
                     nextIndex = Math.floor(Math.random() * images.length);
                 } while (nextIndex === activeIndex && images.length > 1);
@@ -227,10 +229,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-/*==================== QUALIFICATION TABS ====================*/
+/*==================== PESTAÑAS DE CALIFICACIÓN ====================*/
 
 
-/*==================== SERVICES MODAL ====================*/
+/*==================== MODAL DE SERVICIOS ====================*/
 const modalViews = document.querySelectorAll('.services__modal'),
     modalBtns = document.querySelectorAll('.services__button'),
     modalCloses = document.querySelectorAll('.services__modal-close')
@@ -252,7 +254,7 @@ modalCloses.forEach((modalClose) => {
         })
     })
 })
-/*==================== PORTFOLIO SWIPER  ====================*/
+/*==================== CARRUSEL DEL PORTAFOLIO ====================*/
 let swiperPortfolio = new Swiper('.portfolio__container', {
     cssMode: true,
     loop: true,
@@ -267,7 +269,7 @@ let swiperPortfolio = new Swiper('.portfolio__container', {
     },
 });
 
-/*==================== TESTIMONIAL ====================*/
+/*==================== TESTIMONIOS ====================*/
 let swiperTestimonial = new Swiper('.testimonial__container', {
     loop: true,
     grabCursor: true,
@@ -281,12 +283,12 @@ let swiperTestimonial = new Swiper('.testimonial__container', {
     },
     breakpoints:{
         568:{
-            slidesPerview: 2,
+            slidesPerView: 2,
         }
     }
 });
 
-/*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
+/*==================== ENLACE ACTIVO DE SECCIONES AL HACER SCROLL ====================*/
 const sections = document.querySelectorAll('section[id]')
 
 function scrollActive(){
@@ -306,38 +308,38 @@ function scrollActive(){
 }
 window.addEventListener('scroll', scrollActive)
 
-/*==================== CHANGE BACKGROUND HEADER ====================*/
+/*==================== CAMBIAR FONDO DEL ENCABEZADO ====================*/
 function scrollHeader(){
     const nav = document.getElementById('header')
-    // When the scroll is greater than 200 viewport height, add the scroll-header class to the header tag
+    // Cuando el scroll es mayor que 200 de la altura del viewport, se añade la clase scroll-header a la etiqueta del encabezado
     if(this.scrollY >= 80) nav.classList.add('scroll-header'); else nav.classList.remove('scroll-header')
 }
 window.addEventListener('scroll', scrollHeader)
 
 
-/*==================== SHOW SCROLL UP ====================*/
+/*==================== MOSTRAR BOTÓN DE SUBIR ====================*/
 function scrollUp(){
     const scrollUp = document.getElementById('scroll-up');
-    // When the scroll is higher than 560 viewport height, add the show-scroll class to the a tag with the scroll-top class
+    // Cuando el scroll es mayor que 560 de la altura del viewport, se añade la clase show-scroll a la etiqueta 'a' con la clase scroll-top
     if(this.scrollY >= 560) scrollUp.classList.add('show-scroll'); else scrollUp.classList.remove('show-scroll')
 }
 window.addEventListener('scroll', scrollUp)
 
 
-/*==================== DARK LIGHT THEME ====================*/ 
+/*==================== TEMA OSCURO/CLARO ====================*/ 
 const themeButton = document.getElementById('theme-button')
 const darkTheme = 'dark-theme'
 const iconTheme = 'uil-sun'
 
-// Previously selected topic (if user selected)
+// Tema previamente seleccionado (si el usuario lo seleccionó)
 const selectedTheme = localStorage.getItem('selected-theme')
 const selectedIcon = localStorage.getItem('selected-icon')
 
-// We obtain the current theme that the interface has by validating the dark-theme class
+// Obtenemos el tema actual que tiene la interfaz validando la clase dark-theme
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
 const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun'
 
-// Function to get system theme preference
+// Función para obtener la preferencia de tema del sistema
 const getSystemTheme = () => {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         return 'dark'
@@ -345,27 +347,27 @@ const getSystemTheme = () => {
     return 'light'
 }
 
-// Function to update navbar logo and favicon based on theme
+// Función para actualizar el logo de la barra de navegación y el favicon según el tema
 const updateNavbarLogo = () => {
     const navbarLogo = document.getElementById('navbar-logo')
     const isDarkTheme = document.body.classList.contains('dark-theme')
     
     if (navbarLogo) {
         if (isDarkTheme) {
-            // Dark theme - use white logo
+            // Tema oscuro - usar logo blanco
             navbarLogo.src = 'assets/img/mg_logo.png'
-            console.log('Logo changed to white (dark theme)')
+            console.log('Logo cambiado a blanco (tema oscuro)')
         } else {
-            // Light theme - use black logo  
+            // Tema claro - usar logo negro  
             navbarLogo.src = 'assets/img/mg_logo_black.png'
-            console.log('Logo changed to black (light theme)')
+            console.log('Logo cambiado a negro (tema claro)')
         }
     } else {
-        console.error('Navbar logo element not found!')
+        console.error('¡Elemento del logo de la barra de navegación no encontrado!')
     }
 }
 
-// Function to update PWA manifest based on theme
+// Función para actualizar el manifiesto de la PWA según el tema
 const updatePWAManifest = () => {
     const manifestLink = document.getElementById('theme-manifest')
     const isDarkTheme = document.body.classList.contains('dark-theme')
@@ -379,7 +381,7 @@ const updatePWAManifest = () => {
     }
 }
 
-// Function to update theme-specific meta tags
+// Función para actualizar las metaetiquetas específicas del tema
 const updateThemeMetaTags = () => {
     const isDarkTheme = document.body.classList.contains('dark-theme')
     const themeColorMeta = document.querySelector('meta[name="theme-color"]:not([media])')
@@ -393,15 +395,15 @@ const updateThemeMetaTags = () => {
     }
 }
 
-// Initialize theme based on user preference or system preference (defaulting to dark if no system preference)
+// Inicializar el tema según la preferencia del usuario o del sistema (por defecto, oscuro si no hay preferencia del sistema)
 if (selectedTheme) {
-    // User has previously selected a theme
+    // El usuario ha seleccionado previamente un tema
     document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
     themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
 } else {
-    // No user preference, use system preference or default to dark
+    // No hay preferencia del usuario, usar la preferencia del sistema o por defecto oscuro
     const systemTheme = getSystemTheme()
-    const defaultTheme = systemTheme === 'light' ? 'light' : 'dark' // Default to dark if system doesn't prefer light
+    const defaultTheme = systemTheme === 'light' ? 'light' : 'dark' // Por defecto, oscuro si el sistema no prefiere claro
     
     if (defaultTheme === 'dark') {
         document.body.classList.add(darkTheme)
@@ -409,42 +411,123 @@ if (selectedTheme) {
     }
 }
 
-// Update all theme-related elements on initial load after DOM is ready
+// Actualizar todos los elementos relacionados con el tema en la carga inicial después de que el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     updateNavbarLogo()
     updatePWAManifest()
     updateThemeMetaTags()
 })
 
-// Listen for system theme changes (only if user hasn't manually selected a theme)
+/*==================== MODAL DEL CV ====================*/
+const cvButton = document.getElementById('cv-button'),
+      cvModal = document.getElementById('cv-modal'),
+      cvModalClose = document.getElementById('cv-modal-close')
+
+// Abrir modal del CV
+if(cvButton) {
+    cvButton.addEventListener('click', () => {
+        cvModal.classList.add('show-modal')
+        // Animar las barras de progreso de skills cuando se abra el modal
+        setTimeout(() => {
+            animateSkillBars()
+        }, 400)
+        // Prevenir scroll del body
+        document.body.style.overflow = 'hidden'
+    })
+}
+
+// Cerrar modal del CV
+if(cvModalClose) {
+    cvModalClose.addEventListener('click', () => {
+        cvModal.classList.remove('show-modal')
+        document.body.style.overflow = 'auto'
+    })
+}
+
+// Cerrar modal al hacer click fuera del contenido
+cvModal?.addEventListener('click', (e) => {
+    if(e.target === cvModal) {
+        cvModal.classList.remove('show-modal')
+        document.body.style.overflow = 'auto'
+    }
+})
+
+// Cerrar modal con tecla ESC
+document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && cvModal?.classList.contains('show-modal')) {
+        cvModal.classList.remove('show-modal')
+        document.body.style.overflow = 'auto'
+    }
+})
+
+// Función para animar las barras de progreso de skills
+function animateSkillBars() {
+    const skillBars = document.querySelectorAll('.cv-skill__progress')
+    
+    skillBars.forEach((bar, index) => {
+        setTimeout(() => {
+            const level = bar.getAttribute('data-level')
+            bar.style.width = '0%'
+            setTimeout(() => {
+                bar.style.width = level + '%'
+            }, 50)
+        }, index * 150) // Animación escalonada
+    })
+}
+
+/*==================== CARRUSEL DE IMÁGENES CTA ====================*/
+document.addEventListener('DOMContentLoaded', function() {
+    const projectImages = document.querySelectorAll('.project__img');
+    
+    if (projectImages.length > 0) {
+        let currentProjectIndex = 0;
+        
+        function showNextProjectImage() {
+            // Ocultar imagen actual
+            projectImages.forEach(img => img.classList.remove('active'));
+            
+            // Mostrar siguiente imagen
+            currentProjectIndex = (currentProjectIndex + 1) % projectImages.length;
+            projectImages[currentProjectIndex].classList.add('active');
+        }
+        
+        // Cambiar imagen cada 3 segundos
+        setInterval(showNextProjectImage, 3000);
+        
+        // Asegurarse de que la primera imagen esté visible
+        projectImages[0].classList.add('active');
+    }
+});
+
+// Escuchar los cambios de tema del sistema (solo si el usuario no ha seleccionado manualmente un tema)
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     if (!localStorage.getItem('selected-theme')) {
-        // Only update if user hasn't manually set a preference
+        // Solo actualizar si el usuario no ha establecido manualmente una preferencia
         if (e.matches) {
-            // System switched to dark
+            // El sistema cambió a oscuro
             document.body.classList.add(darkTheme)
             themeButton.classList.add(iconTheme)
         } else {
-            // System switched to light
+            // El sistema cambió a claro
             document.body.classList.remove(darkTheme)
             themeButton.classList.remove(iconTheme)
         }
-        // Update logo, manifest and meta tags after theme change
+        // Actualizar logo, manifiesto y metaetiquetas después del cambio de tema
         updateNavbarLogo()
         updatePWAManifest()
         updateThemeMetaTags()
     }
 })
 
-// Activate / deactivate the theme manually with the button
+// Activar / desactivar el tema manualmente con el botón
 themeButton.addEventListener('click', () => {
-    // Add or remove the dark / icon theme
+    // Añadir o quitar el tema oscuro / de iconos
     document.body.classList.toggle(darkTheme)
     themeButton.classList.toggle(iconTheme)
-    // We save the theme and the current icon that the user chose
+    // Guardamos el tema y el icono actual que el usuario eligió
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())
-    // Update logo, manifest and meta tags after manual theme change
+    // Actualizar logo, manifiesto y metaetiquetas después del cambio manual de tema
     updateNavbarLogo()
     updatePWAManifest()
     updateThemeMetaTags()
