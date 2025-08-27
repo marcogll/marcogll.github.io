@@ -1,4 +1,4 @@
-/*==================== BLOB DYNAMIC CONTROLS ====================*/
+/*==================== CONTROLES DINÁMICOS DE BLOB ====================*/
 class BlobController {
     constructor() {
         this.vertices = 8; // Número de vértices (4-12)
@@ -31,7 +31,7 @@ class BlobController {
     }
     
     updateBlobStyle() {
-        if (!this.blobShape) return;
+        if (!this.blobShape) return; 
         
         // Generar keyframes dinámicos para morphing
         const keyframes = [];
@@ -92,7 +92,7 @@ class BlobController {
                 min-width: 200px;
                 display: none;
             ">
-                <h4 style="margin: 0 0 10px 0;">Blob Controls</h4>
+                <h4 style="margin: 0 0 10px 0;">Controles del Blob</h4>
                 
                 <label>Vértices: <span id="vertices-value">${this.vertices}</span></label>
                 <input type="range" id="vertices-slider" min="4" max="12" value="${this.vertices}" style="width: 100%; margin-bottom: 10px;">
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.blobController = new BlobController();
     
     // Agregar info en consola
-    console.log('🎨 Blob Controller inicializado!');
-    console.log('💡 Presiona Ctrl+B para mostrar/ocultar controles');
+    console.log('🎨 Controlador de Blob inicializado!');
+    console.log('💡 Presiona Ctrl+B para mostrar/ocultar los controles');
     console.log('🛠️ Usa window.blobController para control programático');
 });
