@@ -1,12 +1,12 @@
-/*==================== GOOGLE FONTS ====================*/
+/*==================== FUENTES DE GOOGLE ====================*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
 /*==================== VARIABLES CSS ====================*/
 :root {
   --header-height: 3rem;
 
-  /*========== Catppuccin Colors - Latte Theme ==========*/
-  /* Base Colors */
+  /*========== Colores Catppuccin - Tema Latte ==========*/
+  /* Colores Base */
   --ctp-rosewater: #dc8a78;
   --ctp-flamingo: #dd7878;
   --ctp-pink: #ea76cb;
@@ -22,7 +22,7 @@
   --ctp-blue: #1e66f5;
   --ctp-lavender: #7287fd;
   
-  /* Surface Colors */
+  /* Colores de Superficie */
   --ctp-text: #4c4f69;
   --ctp-subtext1: #5c5f77;
   --ctp-subtext0: #6c6f85;
@@ -36,7 +36,7 @@
   --ctp-mantle: #e6e9ef;
   --ctp-crust: #dce0e8;
 
-  /* Application Colors using Catppuccin palette */
+  /* Colores de la Aplicación usando la paleta Catppuccin */
   --first-color: var(--ctp-mauve);
   --first-color-second: var(--ctp-lavender);
   --first-color-alt: var(--ctp-sapphire);
@@ -50,7 +50,7 @@
   --scroll-bar-color: var(--ctp-surface1);
   --scroll-thumb-color: var(--ctp-surface2);
 
-  /*========== Font and typography ==========*/
+  /*========== Fuente y tipografía ==========*/
   --body-font: 'Poppins', sans-serif;
 
   /* .5rem = 8px, 1rem = 16px, 1.5rem = 24px ... */
@@ -62,11 +62,11 @@
   --small-font-size: .813rem;
   --smaller-font-size: .75rem;
 
-  /*========== Font weight ==========*/
+  /*========== Grosor de la fuente ==========*/
   --font-medium: 500;
   --font-semi-bold: 600;
 
-  /*========== Margenes Bottom ==========*/
+  /*========== Márgenes Inferiores ==========*/
   /* .25rem = 4px, .5rem = 8px, .75rem = 12px ... */
   --mb-0-25: .25rem;
   --mb-0-5: .5rem;
@@ -77,13 +77,13 @@
   --mb-2-5: 2.5rem;
   --mb-3: 3rem;
 
-  /*========== z index ==========*/
+  /*========== z-index ==========*/
   --z-tooltip: 10;
   --z-fixed: 100;
   --z-modal: 1000;
 }
 
-/* Font size for large devices */
+/* Tamaño de fuente para dispositivos grandes */
 @media screen and (min-width: 968px) {
   :root {
     --big-font-size: 3rem;
@@ -96,9 +96,9 @@
   }
 }
 
-/*========== Variables Dark theme - Catppuccin Mocha ==========*/
+/*========== Variables Tema Oscuro - Catppuccin Mocha ==========*/
 body.dark-theme {
-  /* Catppuccin Mocha Colors */
+  /* Colores Catppuccin Mocha */
   --ctp-rosewater: #f5e0dc;
   --ctp-flamingo: #f2cdcd;
   --ctp-pink: #f5c2e7;
@@ -114,7 +114,7 @@ body.dark-theme {
   --ctp-blue: #89b4fa;
   --ctp-lavender: #b4befe;
   
-  /* Surface Colors */
+  /* Colores de Superficie */
   --ctp-text: #cdd6f4;
   --ctp-subtext1: #bac2de;
   --ctp-subtext0: #a6adc8;
@@ -128,7 +128,7 @@ body.dark-theme {
   --ctp-mantle: #181825;
   --ctp-crust: #11111b;
 
-  /* Application Colors using Dark Catppuccin palette */
+  /* Colores de la Aplicación usando la paleta Oscura de Catppuccin */
   --first-color: var(--ctp-mauve);
   --first-color-second: var(--ctp-lavender);
   --first-color-alt: var(--ctp-sapphire);
@@ -143,7 +143,7 @@ body.dark-theme {
   --scroll-thumb-color: var(--ctp-surface2);
 }
 
-/*========== Button Dark/Light ==========*/
+/*========== Botón Oscuro/Claro ==========*/
 .nav__btns {
   display: flex;
   align-items: center;
@@ -203,7 +203,7 @@ img {
   height: auto;
 }
 
-/*==================== REUSABLE CSS CLASSES ====================*/
+/*==================== CLASES CSS REUTILIZABLES ====================*/
 .section {
   padding: 2rem 0 4rem;
 }
@@ -224,7 +224,7 @@ img {
   text-align: center;
 }
 
-/*==================== LAYOUT ====================*/
+/*==================== DISEÑO ====================*/
 .container {
   max-width: 768px;
   margin-left: var(--mb-1-5);
@@ -245,7 +245,7 @@ img {
   background-color: var(--body-color);
 }
 
-/*==================== NAV ====================*/
+/*==================== NAVEGACIÓN ====================*/
 .nav {
   max-width: 968px;
   height: var(--header-height);
@@ -334,22 +334,22 @@ img {
   color: var(--first-color-alt);
 }
 
-/* show menu */
+/* Mostrar menú */
 .show-menu {
   bottom: 0;
 }
 
-/* Active link */
+/* Enlace activo */
 .active-link {
   color: var(--first-color);
 }
 
-/* Change background header */
+/* Cambiar fondo del encabezado */
 .scroll-header {
   box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
 }
 
-/*========== Navbar Links - Catppuccin Colors ==========*/
+/*========== Enlaces de la Barra de Navegación - Colores Catppuccin ==========*/
 .nav__items:nth-child(1) .nav__link:hover,
 .nav__items:nth-child(1) .nav__link.active-link {
   color: var(--ctp-blue);
@@ -380,7 +380,7 @@ img {
   color: var(--ctp-pink);
 }
 
-/*==================== HOME ====================*/
+/*==================== INICIO ====================*/
 .home__container {
   gap: 1rem;
 }
@@ -515,9 +515,9 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 1;
   pointer-events: none;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .home__blob-img {
@@ -533,7 +533,7 @@ img {
               transform 0.6s cubic-bezier(0.23, 1, 0.320, 1),
               border-radius 0.6s ease-in-out;
   filter: brightness(1) contrast(1.02) saturate(1.05);
-  z-index: 2;
+  z-index: 0;
   border-radius: 70% 30% 40% 60% / 45% 65% 35% 55%;
   animation: blobMorph 8s ease-in-out infinite;
 }
@@ -591,7 +591,11 @@ img {
   font-size: 1.25rem;
 }
 
-/*==================== BUTTONS ====================*/
+.home__scroll-mobile {
+    display: none;
+}
+
+/*==================== BOTONES ====================*/
 .button {
   display: inline-block;
   background-color: var(--ctp-mauve);
@@ -649,7 +653,7 @@ img {
   text-shadow: none;
 }
 
-/*==================== ABOUT ====================*/
+/*==================== ACERCA DE ====================*/
 .about__img {
   width: 200px;
   border-radius: .5rem;
@@ -689,7 +693,7 @@ img {
   justify-content: center;
 }
 
-/*==================== SKILLS ====================*/
+/*==================== HABILIDADES ====================*/
 .skills__container {
   row-gap: 0;
 }
@@ -767,7 +771,7 @@ img {
   transition: width 1.5s ease-in-out;
 }
 
-/* Skills percentages - will be animated with JavaScript */
+/* Porcentajes de habilidades - se animarán con JavaScript */
 .skills__html.animate {
   width: 90%;
 }
@@ -846,7 +850,7 @@ img {
   transform: rotate(-180deg);
 }
 
-/*==================== EDUCATION ====================*/
+/*==================== EDUCACIÓN ====================*/
 .education__container {
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -911,7 +915,7 @@ img {
   margin-top: var(--mb-1);
 }
 
-/* Education icons specific colors using Catppuccin palette */
+/* Colores específicos para iconos de educación usando la paleta Catppuccin */
 .education__content:nth-child(1) .education__icon {
   color: var(--ctp-blue);
 }
@@ -928,10 +932,10 @@ img {
   color: var(--ctp-pink);
 }
 
-/*==================== QUALIFICATION ====================*/
+/*==================== CALIFICACIÓN ====================*/
 
 
-/*==================== SERVICES ====================*/
+/*==================== SERVICIOS ====================*/
 .services__container {
   gap: 1.5rem;
   grid-template-columns: repeat(2, 1fr);
@@ -1042,13 +1046,13 @@ img {
   margin-right: var(--mb-0-25);
 }
 
-/* Active Modal */
+/* Modal Activo */
 .active-modal {
   opacity: 1;
   visibility: visible;
 }
 
-/*==================== PORTFOLIO ====================*/
+/*==================== PORTAFOLIO ====================*/
 .portfolio__container {
   overflow: initial;
 }
@@ -1108,7 +1112,7 @@ img {
   outline: none;
 }
 
-/*==================== PROJECT IN MIND ====================*/
+/*==================== PROYECTO EN MENTE ====================*/
 .project {
   text-align: center;
 }
@@ -1139,7 +1143,7 @@ img {
 
 
 
-/*==================== TESTIMONIAL ====================*/
+/*==================== TESTIMONIOS ====================*/
 .testimonial__data,
 .testimonial__header {
   display: flex;
@@ -1176,7 +1180,7 @@ img {
 }
 
 
-/*==================== CONTACT ME ====================*/
+/*==================== CONTACTO ====================*/
 .contact__container {
   row-gap: 3rem;
 }
@@ -1224,7 +1228,7 @@ img {
   padding: .25rem .5rem .5rem 0;
 }
 
-/*==================== FOOTER ====================*/
+/*==================== PIE DE PÁGINA ====================*/
 .footer {
   padding-top: 2rem;
 }
@@ -1250,7 +1254,7 @@ img {
   transition: all 0.3s ease;
 }
 
-/* Footer uses black logo */
+/* El pie de página usa el logo negro */
 .footer__logo-img {
   content: url('../img/mg_logo_black.png');
 }
@@ -1302,7 +1306,7 @@ footer .footer__social a:hover {
 }
 
 
-/*========== SCROLL UP ==========*/
+/*========== SCROLL HACIA ARRIBA ==========*/
 .scrollup {
   position: fixed;
   right: 1rem;
@@ -1326,12 +1330,12 @@ footer .footer__social a:hover {
 
 
 
-/* Show scroll */
+/* Mostrar scroll */
 .show-scroll {
   bottom: 5rem;
 }
 
-/*========== SCROLL BAR ==========*/
+/*========== BARRA DE DESPLAZAMIENTO ==========*/
 ::-webkit-scrollbar {
   width: 0.6rem;
   background-color: var(--scroll-bar-color);
@@ -1348,7 +1352,7 @@ footer .footer__social a:hover {
 }
 
 /*==================== MEDIA QUERIES ====================*/
-/* For small devices */
+/* Para dispositivos pequeños */
 @media screen and (max-width: 350px) {
   .container {
     margin-left: var(--mb-1);
@@ -1371,7 +1375,7 @@ footer .footer__social a:hover {
     height: 2.5rem;
   }
   
-  /* Mobile footer - black logo */
+  /* Pie de página en móvil - logo negro */
   .footer__logo-img {
     content: url('../img/mg_logo_black.png');
   }
@@ -1447,7 +1451,7 @@ footer .footer__social a:hover {
   }
 }
 
-/* For medium devices */
+/* Para dispositivos medianos */
 @media screen and (min-width: 568px) {
   .home__content {
     grid-template-columns: max-content 1fr 1fr;
@@ -1646,7 +1650,7 @@ footer .footer__social a:hover {
 
 
 
-/* For large devices */
+/* Para dispositivos grandes */
 @media screen and (min-width: 1024px) {
 
   .header,
@@ -1717,16 +1721,27 @@ footer .footer__social a:hover {
   }
 }
 
-/*==================== Waving hand  ====================*/
+@media screen and (max-width: 767px) {
+    .home__scroll-mouse {
+        display: none;
+    }
+
+    .home__scroll-mobile {
+        display: inline-block;
+        font-size: 2rem;
+    }
+}
+
+/*==================== Animación de Mano Saludando ====================*/
 .wave {
   animation-name: wave-animation;
-  /* Refers to the name of your @keyframes element below */
+  /* Se refiere al nombre del elemento @keyframes a continuación */
   animation-duration: 2.5s;
-  /* Change to speed up or slow down */
+  /* Cambiar para acelerar o ralentizar */
   animation-iteration-count: infinite;
-  /* Never stop waving :) */
+  /* Para que nunca deje de saludar :) */
   transform-origin: 70% 70%;
-  /* Pivot around the bottom-left palm */
+  /* Pivota alrededor de la palma inferior izquierda */
   display: inline-block;
 }
 
@@ -1739,7 +1754,7 @@ footer .footer__social a:hover {
     transform: rotate(14.0deg)
   }
 
-  /* The following five values can be played with to make the waving more or less extreme */
+  /* Los siguientes cinco valores se pueden ajustar para que el saludo sea más o menos extremo */
   20% {
     transform: rotate(-8.0deg)
   }
@@ -1760,13 +1775,13 @@ footer .footer__social a:hover {
     transform: rotate(0.0deg)
   }
 
-  /* Reset for the last half to pause */
+  /* Reiniciar para la última mitad para pausar */
   100% {
     transform: rotate(0.0deg)
   }
 }
 
-/*==================== Skills logo ====================*/
+/*==================== Logo de Habilidades ====================*/
 .skills__logo {
   font-size: 1.5rem;
   color: var(--first-color);
@@ -1780,7 +1795,7 @@ footer .footer__social a:hover {
   color: var(--ctp-pink);
 }
 
-/*==================== Catppuccin Accent Colors ====================*/
+/*==================== Colores de Acento Catppuccin ====================*/
 .skills__data:nth-child(1) .skills__logo {
   color: var(--ctp-green);
 }
@@ -1797,8 +1812,8 @@ footer .footer__social a:hover {
   color: var(--ctp-pink);
 }
 
-/*==================== Different Colors for Skill Bars ====================*/
-/* Technology & Development */
+/*==================== Colores Diferentes para las Barras de Habilidades ====================*/
+/* Tecnología y Desarrollo */
 .skills__html {
   background-color: var(--ctp-green);
 }
@@ -1812,7 +1827,7 @@ footer .footer__social a:hover {
   background-color: var(--ctp-pink);
 }
 
-/* Engineering & Technical Systems */
+/* Ingeniería y Sistemas Técnicos */
 .skills__php {
   background-color: var(--ctp-blue);
 }
@@ -1826,7 +1841,7 @@ footer .footer__social a:hover {
   background-color: var(--ctp-maroon);
 }
 
-/* Marketing & Creativity */
+/* Marketing y Creatividad */
 .skills__blender {
   background-color: var(--ctp-lavender);
 }
@@ -1840,7 +1855,7 @@ footer .footer__social a:hover {
   background-color: var(--ctp-sapphire);
 }
 
-/* Entrepreneurship & Management */
+/* Emprendimiento y Gestión */
 .skills__leadership {
   background-color: var(--ctp-mauve);
 }
@@ -1854,7 +1869,7 @@ footer .footer__social a:hover {
   background-color: var(--ctp-peach);
 }
 
-/* Service icons specific colors using Catppuccin palette */
+/* Colores específicos para iconos de servicios usando la paleta Catppuccin */
 .services__content:nth-child(1) .services__icon {
   color: var(--ctp-mauve);
 }
@@ -1871,7 +1886,7 @@ footer .footer__social a:hover {
   color: var(--ctp-pink);
 }
 
-/* Solid Catppuccin colors for buttons */
+/* Colores sólidos de Catppuccin para botones */
 .button {
   background-color: var(--ctp-mauve);
   color: var(--ctp-base);
