@@ -234,25 +234,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /*==================== MODAL DE SERVICIOS ====================*/
 const modalViews = document.querySelectorAll('.services__modal'),
-    modalBtns = document.querySelectorAll('.services__button'),
-    modalCloses = document.querySelectorAll('.services__modal-close')
+      modalBtns = document.querySelectorAll('.services__button'),
+      modalCloses = document.querySelectorAll('.services__modal-close')
 
-let modal = function (modalClick) {
-    modalViews[modalClick].classList.add('active-modal')
+console.log('Modal setup - Buttons found:', modalBtns.length, 'Modals found:', modalViews.length)
+
+// Función para abrir modal
+function openModal(modalClick) {
+    if (modalViews[modalClick]) {
+        // Cerrar cualquier modal abierto primero con transición suave
+        closeModal()
+        
+        // Pequeño delay para permitir que la transición de cierre termine
+        setTimeout(() => {
+            modalViews[modalClick].classList.add('show-modal')
+            document.body.style.overflow = 'hidden'
+            console.log('Modal opened:', modalClick)
+        }, 100)
+    }
 }
 
+// Función para cerrar modal
+function closeModal() {
+    modalViews.forEach(modal => {
+        if (modal.classList.contains('show-modal')) {
+            modal.classList.remove('show-modal')
+            console.log('Modal closed')
+        }
+    })
+    document.body.style.overflow = 'auto'
+}
+
+// Event listeners para botones de abrir modal
 modalBtns.forEach((modalBtn, i) => {
     modalBtn.addEventListener('click', () => {
-        modal(i)
+        openModal(i)
     })
 })
 
-modalCloses.forEach((modalClose) => {
-    modalClose.addEventListener('click', () => {
-        modalViews.forEach((modalView) => {
-            modalView.classList.remove('active-modal')
-        })
+// Event listeners para botones de cerrar modal
+modalCloses.forEach(modalClose => {
+    modalClose.addEventListener('click', closeModal)
+})
+
+// Cerrar modal al hacer click en el backdrop
+modalViews.forEach(modalView => {
+    modalView.addEventListener('click', (e) => {
+        if (e.target === modalView) {
+            closeModal()
+        }
     })
+})
+
+// Cerrar modal con tecla ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeModal()
+    }
 })
 /*==================== CARRUSEL DEL PORTAFOLIO ====================*/
 let swiperPortfolio = new Swiper('.portfolio__container', {
