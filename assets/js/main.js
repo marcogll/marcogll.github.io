@@ -125,7 +125,7 @@ const assignRandomProfileImages = () => {
     });
     
     // Asignar imagen para la sección About - usar una imagen consistente pero aleatoria
-    const aboutMainImg = document.querySelector('.about__blob-carousel .about__blob-img[src*="about.jpg"]');
+    const aboutMainImg = document.querySelector('.about__blob-carousel .about__blob-img[src*="mg_1.png"]');
     if (aboutMainImg && randomizedProfileImages[9]) {
         aboutMainImg.src = randomizedProfileImages[9]; // Usar la 10ma imagen aleatoria para about
         aboutMainImg.alt = 'Marco Gallegos - About';
@@ -886,7 +886,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Array con información de cada imagen about
     const aboutImageInfo = [
-        { src: 'assets/img/about.jpg', title: 'Marco Gallegos', theme: 'personal' },
+        { src: 'assets/img/profiles/mg_1.png', title: 'Marco Gallegos', theme: 'personal' },
         { src: 'assets/img/about_technology.png', title: 'Tecnología & Desarrollo', theme: 'technology' },
         { src: 'assets/img/about_engineering.png', title: 'Ingeniería & Manufactura', theme: 'engineering' },
         { src: 'assets/img/about_marketing.png', title: 'Marketing & Creatividad', theme: 'marketing' }
@@ -911,7 +911,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         // Rotación automática
-        const aboutRotationInterval = setInterval(() => {
+        let aboutRotationInterval = setInterval(() => {
             const nextIndex = (currentAboutImageIndex + 1) % aboutImages.length;
             changeAboutImage(nextIndex);
         }, 5000);
@@ -1034,6 +1034,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form inputs for validation
     const nameInput = contactForm?.querySelector('#contact-name');
     const emailInput = contactForm?.querySelector('#contact-email');
+    const phoneInput = contactForm?.querySelector('#contact-phone');
     const projectInput = contactForm?.querySelector('#contact-project');
     const messageInput = contactForm?.querySelector('#contact-message');
     
@@ -1051,6 +1052,10 @@ document.addEventListener('DOMContentLoaded', function() {
         email: {
             pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
             message: 'Por favor ingresa un email válido'
+        },
+        phone: {
+            pattern: /^[\+]?[1-9][\d]{0,15}$/,
+            message: 'Por favor ingresa un número de celular válido'
         },
         message: {
             pattern: /^.{10,500}$/s,
@@ -1309,14 +1314,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Real-time validation
     const setupFieldValidation = () => {
-        const fieldMappings = {
-            [nameInput]: 'name',
-            [emailInput]: 'email',
-            [messageInput]: 'message'
-        };
+        const fieldMappings = [
+            { input: nameInput, fieldName: 'name' },
+            { input: emailInput, fieldName: 'email' },
+            { input: phoneInput, fieldName: 'phone' },
+            { input: messageInput, fieldName: 'message' }
+        ];
         
-        Object.entries(fieldMappings).forEach(([input, fieldName]) => {
-            if (input) {
+        fieldMappings.forEach(({ input, fieldName }) => {
+            if (input && typeof input.addEventListener === 'function') {
                 input.addEventListener('blur', () => validateField(input, fieldName));
                 input.addEventListener('input', () => {
                     // Clear all validation states on typing
@@ -1380,9 +1386,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const validateForm = () => {
         const nameValid = validateField(nameInput, 'name');
         const emailValid = validateField(emailInput, 'email');
+        const phoneValid = validateField(phoneInput, 'phone');
         const messageValid = validateField(messageInput, 'message');
         
-        return nameValid && emailValid && messageValid;
+        return nameValid && emailValid && phoneValid && messageValid;
     };
     
     // Handle form submission
