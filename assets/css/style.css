@@ -887,6 +887,45 @@ img {
   filter: brightness(1.05) contrast(1.03) saturate(1.08);
 }
 
+/* Spacer para about carousel en mobile */
+@media screen and (max-width: 768px) {
+  .about__blob-container {
+    margin-bottom: 75px;
+  }
+  
+  .about__carousel-indicators {
+    bottom: -75px;
+  }
+  
+  /* Ajustar tamaño del carrusel en mobile */
+  .about__blob-container {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .about__blob-img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about__blob-container {
+    margin-bottom: 50px;
+    width: 200px;
+    height: 200px;
+  }
+  
+  .about__carousel-indicators {
+    bottom: -50px;
+  }
+  
+  .about__blob-img {
+    width: 160px;
+    height: 160px;
+  }
+}
+
 /*==================== HABILIDADES ====================*/
 .skills__container {
   row-gap: 0;
@@ -1805,18 +1844,25 @@ footer .footer__social a:hover {
 /*==================== LOGO ALMA FOOTER ====================*/
 .footer__alma-logo {
   position: absolute;
-  bottom: 20px;
   right: 20px;
-  width: 250px;
-  height: 250px;
   opacity: 0.8;
   transition: all 0.3s ease;
   z-index: 10;
 }
 
+/* Desktop: Alinear con altura del texto Marco Gallegos + subtitle */
+@media screen and (min-width: 769px) {
+  .footer__alma-logo {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    height: 120px;
+  }
+}
+
 .footer__alma-logo:hover {
   opacity: 1;
-  transform: scale(1.05);
+  transform: translateY(-50%) scale(1.05);
 }
 
 .footer__alma-img {
@@ -1826,43 +1872,54 @@ footer .footer__social a:hover {
   transition: opacity 0.3s ease;
 }
 
-/* Mostrar logo blanco en tema oscuro por defecto */
+/* Por defecto tema oscuro: mostrar logo negro */
 .footer__alma-img--dark {
-  display: none;
-}
-
-.footer__alma-img--light {
   display: block;
 }
 
-/* En temas claros, mostrar el logo negro */
+.footer__alma-img--light {
+  display: none;
+}
+
+/* En temas claros, mostrar el logo blanco */
 @media (prefers-color-scheme: light) {
   .footer__alma-img--dark {
-    display: block;
+    display: none;
   }
   
   .footer__alma-img--light {
-    display: none;
+    display: block;
   }
 }
 
-/* Responsive para el logo AlMa */
+/* Responsive para móvil */
 @media screen and (max-width: 768px) {
   .footer__alma-logo {
-    width: 150px;
-    height: 150px;
-    bottom: 10px;
-    right: 10px;
+    position: static;
+    width: 60px;
+    height: 60px;
+    margin-left: auto;
+    margin-top: 1rem;
+    transform: none;
   }
-}
-
-@media screen and (max-width: 480px) {
+  
+  .footer__alma-logo:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Mover logo al área de links en mobile */
+  .footer__container {
+    position: relative;
+  }
+  
+  .footer__links {
+    position: relative;
+  }
+  
   .footer__alma-logo {
-    width: 100px;
-    height: 100px;
-    bottom: 5px;
-    right: 5px;
-    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 }
 
