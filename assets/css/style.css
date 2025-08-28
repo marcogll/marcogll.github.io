@@ -1258,10 +1258,12 @@ img {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     max-width: 500px;
+    margin: 0 auto;
   }
   
   .education__content {
     padding: 1.5rem 1rem;
+    text-align: center;
   }
   
   .education__header {
@@ -1272,6 +1274,14 @@ img {
   
   .education__icon {
     font-size: 2rem;
+    margin: 0 auto;
+  }
+  
+  .education__title,
+  .education__subtitle,
+  .education__date,
+  .education__description {
+    text-align: center;
   }
 }
 
@@ -1607,38 +1617,64 @@ body.modal-open {
 
 
 
-/*==================== TESTIMONIOS ====================*/
+/*==================== TESTIMONIOS COMPACTOS ====================*/
+.testimonial__content {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 .testimonial__data,
 .testimonial__header {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .testimonial__data {
-  justify-content: space-between;
-  margin-bottom: var(--mb-1);
+  margin-bottom: 1rem;
 }
 
 .testimonial__img {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  margin-right: var(--mb-0-75);
+  margin: 0 auto;
+  object-fit: cover;
+  object-position: center;
+  border: 3px solid var(--ctp-blue);
+  transition: all 0.3s ease;
+}
+
+.testimonial__img:hover {
+  transform: scale(1.05);
+  border-color: var(--ctp-mauve);
 }
 
 .testimonial__name {
   font-size: var(--h3-font-size);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-semi-bold);
+  color: var(--title-color);
+  margin-bottom: 0.25rem;
 }
 
 .testimonial__client {
   font-size: var(--small-font-size);
-  color: var(--text-color-light);
+  color: var(--ctp-subtext1);
+  font-style: italic;
 }
 
 .testimonial__description {
-  margin-bottom: var(--mb-2-5);
-  line-height: 1.8;
+  margin-bottom: 1rem;
+  line-height: 1.7;
   font-size: var(--normal-font-size);
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .testimonial__description strong {
@@ -1657,21 +1693,28 @@ body.modal-open {
   font-style: italic;
 }
 
-.swiper-container .swiper-pagination-testimonial {
-  bottom: 0;
+/* Container del carrusel más compacto */
+.testimonial__container {
+  padding-bottom: 2rem;
 }
 
-/* Botones de navegación para testimoniales */
+.swiper-container .swiper-pagination-testimonial {
+  bottom: -10px;
+}
+
+/* Botones de navegación compactos */
 .testimonial__container .swiper-button-next,
 .testimonial__container .swiper-button-prev {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   background-color: var(--ctp-surface1);
   border-radius: 50%;
   color: var(--ctp-blue);
   border: 2px solid var(--ctp-blue);
   transition: all 0.3s ease;
-  opacity: 0.7;
+  opacity: 0.8;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .testimonial__container .swiper-button-next::after,
@@ -1683,35 +1726,51 @@ body.modal-open {
 .testimonial__container .swiper-button-prev:hover {
   background-color: var(--ctp-blue);
   color: var(--ctp-base);
-  transform: scale(1.1);
+  transform: translateY(-50%) scale(1.1);
   opacity: 1;
-  box-shadow: 0 8px 15px rgba(137, 180, 250, 0.3);
+  box-shadow: 0 6px 12px rgba(137, 180, 250, 0.3);
 }
 
 .testimonial__container .swiper-testimonial-icon {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   line-height: 1;
 }
 
-/* Posicionamiento específico */
+/* Posicionamiento más cercano al contenido */
 .testimonial__container .swiper-button-next {
-  right: 10px;
+  right: 5px;
 }
 
 .testimonial__container .swiper-button-prev {
-  left: 10px;
+  left: 5px;
 }
 
+/* Responsive más compacto */
 @media screen and (max-width: 768px) {
   .testimonial__container .swiper-button-next,
   .testimonial__container .swiper-button-prev {
-    width: 40px;
-    height: 40px;
-    opacity: 0.5;
+    width: 35px;
+    height: 35px;
+    opacity: 0.6;
+    right: -5px;
+  }
+  
+  .testimonial__container .swiper-button-prev {
+    left: -5px;
   }
   
   .testimonial__container .swiper-testimonial-icon {
-    font-size: 1.2rem;
+    font-size: 1rem;
+  }
+  
+  .testimonial__img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .testimonial__description {
+    font-size: var(--small-font-size);
+    max-width: 500px;
   }
 }
 
@@ -1762,6 +1821,179 @@ body.modal-open {
   border: none;
   outline: none;
   padding: .25rem .5rem .5rem 0;
+  transition: all 0.3s ease;
+}
+
+/*==================== CONTACT FORM ENHANCEMENTS ====================*/
+.contact__content {
+  position: relative;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.contact__content:focus-within {
+  border-color: var(--ctp-lavender);
+  box-shadow: 0 0 0 4px rgba(180, 190, 254, 0.1);
+  background-color: rgba(180, 190, 254, 0.05);
+}
+
+.contact__input:focus {
+  color: var(--title-color);
+}
+
+/* Enhanced states for form validation */
+.contact__content:has(.contact__input--error) {
+  border-color: var(--ctp-red);
+  box-shadow: 0 0 0 4px rgba(243, 139, 168, 0.1);
+  background-color: rgba(243, 139, 168, 0.05);
+}
+
+.contact__content:has(.contact__input--valid) {
+  border-color: var(--ctp-green);
+  box-shadow: 0 0 0 4px rgba(166, 227, 161, 0.1);
+  background-color: rgba(166, 227, 161, 0.05);
+}
+
+.contact__input--error {
+  color: var(--ctp-red) !important;
+}
+
+.contact__input--valid {
+  color: var(--ctp-green) !important;
+}
+
+.contact__error {
+  color: var(--ctp-red);
+  font-size: var(--smaller-font-size);
+  margin-top: 0.25rem;
+  display: block;
+  font-weight: var(--font-medium);
+  animation: slideInError 0.3s ease-out;
+}
+
+@keyframes slideInError {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Success checkmark animation */
+.contact__input--valid + .contact__success {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ctp-green);
+  font-size: 1.25rem;
+  animation: checkmarkPop 0.4s ease-out;
+}
+
+@keyframes checkmarkPop {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.5);
+  }
+  50% {
+    transform: translateY(-50%) scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+/* Submit button enhanced states */
+.button[type="submit"] {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.button[type="submit"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.button[type="submit"]:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Loading state animation */
+.button[type="submit"] .uil-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Success state styles */
+.button[type="submit"]:has(.uil-check) {
+  background: linear-gradient(135deg, var(--ctp-green), var(--ctp-teal)) !important;
+  box-shadow: 0 4px 15px rgba(166, 227, 161, 0.4);
+}
+
+/* Error state styles */
+.button[type="submit"]:has(.uil-exclamation-triangle) {
+  background: linear-gradient(135deg, var(--ctp-red), var(--ctp-peach)) !important;
+  box-shadow: 0 4px 15px rgba(243, 139, 168, 0.4);
+}
+
+/* Notification styles */
+.contact__notification {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  color: white;
+  font-weight: var(--font-medium);
+  max-width: 350px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateX(400px);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  opacity: 0;
+}
+
+.contact__notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.contact__notification--success {
+  background: linear-gradient(135deg, var(--ctp-green), var(--ctp-teal));
+}
+
+.contact__notification--error {
+  background: linear-gradient(135deg, var(--ctp-red), var(--ctp-peach));
+}
+
+.contact__notification--warning {
+  background: linear-gradient(135deg, var(--ctp-yellow), var(--ctp-peach));
+}
+
+/* Mobile responsive notifications */
+@media screen and (max-width: 568px) {
+  .contact__notification {
+    right: 1rem;
+    left: 1rem;
+    max-width: calc(100vw - 2rem);
+    transform: translateY(-100px);
+  }
+  
+  .contact__notification.show {
+    transform: translateY(0);
+  }
 }
 
 /*==================== PIE DE PÁGINA ====================*/

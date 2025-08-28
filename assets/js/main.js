@@ -984,3 +984,491 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     }
 });
+
+/*==================== CONTACT FORM LOGIC ====================*/
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.querySelector('.contact__form');
+    const submitButton = contactForm?.querySelector('button[type="submit"]');
+    const buttonText = submitButton?.querySelector('i').previousSibling;
+    const buttonIcon = submitButton?.querySelector('i');
+    
+    // Form inputs for validation
+    const nameInput = contactForm?.querySelector('#contact-name');
+    const emailInput = contactForm?.querySelector('#contact-email');
+    const projectInput = contactForm?.querySelector('#contact-project');
+    const messageInput = contactForm?.querySelector('#contact-message');
+    
+    if (!contactForm) {
+        console.error('Contact form not found');
+        return;
+    }
+    
+    // Validation patterns
+    const validationRules = {
+        name: {
+            pattern: /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]{2,50}$/,
+            message: 'Nombre debe tener entre 2 y 50 caracteres, solo letras'
+        },
+        email: {
+            pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+            message: 'Por favor ingresa un email válido'
+        },
+        message: {
+            pattern: /^.{10,500}$/s,
+            message: 'El mensaje debe tener entre 10 y 500 caracteres'
+        }
+    };
+    
+    // Create notification element
+    const createNotification = () => {
+        const notification = document.createElement('div');
+        notification.className = 'contact__notification';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 500;
+            max-width: 350px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            transform: translateX(400px);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            opacity: 0;
+        `;
+        document.body.appendChild(notification);
+        return notification;
+    };
+    
+    // Show notification
+    const showNotification = (message, type = 'success') => {
+        const notification = createNotification();
+        const colors = {
+            success: 'linear-gradient(135deg, #a6e3a1, #94e2d5)',
+            error: 'linear-gradient(135deg, #f38ba8, #fab387)',
+            warning: 'linear-gradient(135deg, #f9e2af, #fab387)'
+        };
+        
+        notification.style.background = colors[type] || colors.success;
+        notification.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <i class="uil ${type === 'success' ? 'uil-check-circle' : type === 'error' ? 'uil-exclamation-triangle' : 'uil-info-circle'}" 
+                   style="font-size: 24px;"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        
+        // Animate in
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+            notification.style.opacity = '1';
+        }, 100);
+        
+        // Auto hide
+        setTimeout(() => {
+            notification.style.transform = 'translateX(400px)';
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 400);
+        }, 5000);
+    };
+    
+    // Create success overlay with detailed confirmation
+    const createSuccessOverlay = (userName) => {
+        const overlay = document.createElement('div');
+        overlay.className = 'contact__success-overlay';
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 30, 46, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 20000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+        `;
+        
+        overlay.innerHTML = `
+            <div class="success-modal" style="
+                background: var(--body-color);
+                border-radius: 20px;
+                padding: 2.5rem;
+                max-width: 500px;
+                margin: 1rem;
+                text-align: center;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+                border: 1px solid var(--ctp-surface2);
+                transform: scale(0.8);
+                transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            ">
+                <div style="margin-bottom: 1.5rem;">
+                    <i class="uil uil-check-circle" style="
+                        font-size: 4rem; 
+                        color: var(--ctp-green);
+                        animation: successPulse 1s ease-out;
+                    "></i>
+                </div>
+                <h3 style="
+                    color: var(--title-color);
+                    margin-bottom: 1rem;
+                    font-size: 1.5rem;
+                    font-weight: var(--font-semi-bold);
+                ">¡Mensaje Enviado!</h3>
+                <p style="
+                    color: var(--text-color);
+                    margin-bottom: 1.5rem;
+                    line-height: 1.6;
+                ">Hola <strong style="color: var(--ctp-mauve);">${userName}</strong>, tu mensaje ha sido enviado exitosamente.</p>
+                <div style="
+                    background: var(--ctp-surface0);
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                    margin-bottom: 1.5rem;
+                    border: 1px solid var(--ctp-surface1);
+                ">
+                    <h4 style="
+                        color: var(--title-color);
+                        margin-bottom: 1rem;
+                        font-size: 1.1rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.5rem;
+                    ">
+                        <i class="uil uil-info-circle" style="color: var(--ctp-blue);"></i>
+                        ¿Qué sigue?
+                    </h4>
+                    <div style="text-align: left; color: var(--text-color);">
+                        <p style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="uil uil-envelope" style="color: var(--ctp-green); font-size: 1.1rem;"></i>
+                            <span>Recibirás un email de confirmación automático</span>
+                        </p>
+                        <p style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="uil uil-clock" style="color: var(--ctp-yellow); font-size: 1.1rem;"></i>
+                            <span>Te responderé dentro de las próximas 24 horas</span>
+                        </p>
+                        <p style="margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="uil uil-rocket" style="color: var(--ctp-pink); font-size: 1.1rem;"></i>
+                            <span>¡Exploremos juntos nuevas oportunidades!</span>
+                        </p>
+                    </div>
+                </div>
+                <button class="close-success-modal" style="
+                    background: linear-gradient(135deg, var(--ctp-mauve), var(--ctp-lavender));
+                    color: white;
+                    border: none;
+                    border-radius: 10px;
+                    padding: 0.75rem 2rem;
+                    font-weight: var(--font-medium);
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    font-family: var(--body-font);
+                " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.2)'"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    Perfecto, ¡gracias!
+                </button>
+            </div>
+        `;
+        
+        document.body.appendChild(overlay);
+        
+        // Animate in
+        setTimeout(() => {
+            overlay.style.opacity = '1';
+            overlay.querySelector('.success-modal').style.transform = 'scale(1)';
+        }, 100);
+        
+        // Close handler
+        const closeButton = overlay.querySelector('.close-success-modal');
+        const closeOverlay = () => {
+            overlay.style.opacity = '0';
+            overlay.querySelector('.success-modal').style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                document.body.removeChild(overlay);
+            }, 400);
+        };
+        
+        closeButton.addEventListener('click', closeOverlay);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeOverlay();
+        });
+        
+        // Auto close after 8 seconds
+        setTimeout(closeOverlay, 8000);
+    };
+    
+    // Validate single field
+    const validateField = (input, fieldName) => {
+        const value = input.value.trim();
+        const rule = validationRules[fieldName];
+        
+        // Remove existing error styling and checkmarks
+        input.classList.remove('contact__input--error');
+        const existingError = input.parentNode.querySelector('.contact__error');
+        const existingCheckmarkToRemove = input.parentNode.querySelector('.contact__success');
+        if (existingError) existingError.remove();
+        if (existingCheckmarkToRemove) existingCheckmarkToRemove.remove();
+        
+        // Skip validation for optional project field
+        if (fieldName === 'project') return true;
+        
+        // Check required fields
+        if (!value && input.required) {
+            showFieldError(input, 'Este campo es obligatorio');
+            return false;
+        }
+        
+        // Check pattern if field has value
+        if (value && rule && !rule.pattern.test(value)) {
+            showFieldError(input, rule.message);
+            return false;
+        }
+        
+        // Show success state
+        input.classList.add('contact__input--valid');
+        
+        // Add success checkmark
+        const currentCheckmark = input.parentNode.querySelector('.contact__success');
+        if (!currentCheckmark) {
+            const checkmark = document.createElement('i');
+            checkmark.className = 'uil uil-check contact__success';
+            input.parentNode.appendChild(checkmark);
+        }
+        
+        return true;
+    };
+    
+    // Show field error
+    const showFieldError = (input, message) => {
+        input.classList.add('contact__input--error');
+        input.classList.remove('contact__input--valid');
+        
+        // Remove any existing checkmarks
+        const oldCheckmark = input.parentNode.querySelector('.contact__success');
+        if (oldCheckmark) oldCheckmark.remove();
+        
+        const errorElement = document.createElement('span');
+        errorElement.className = 'contact__error';
+        errorElement.textContent = message;
+        errorElement.style.cssText = `
+            color: #f38ba8;
+            font-size: 0.875rem;
+            margin-top: 4px;
+            display: block;
+            font-weight: 400;
+        `;
+        input.parentNode.appendChild(errorElement);
+    };
+    
+    // Real-time validation
+    const setupFieldValidation = () => {
+        const fieldMappings = {
+            [nameInput]: 'name',
+            [emailInput]: 'email',
+            [messageInput]: 'message'
+        };
+        
+        Object.entries(fieldMappings).forEach(([input, fieldName]) => {
+            if (input) {
+                input.addEventListener('blur', () => validateField(input, fieldName));
+                input.addEventListener('input', () => {
+                    // Clear all validation states on typing
+                    input.classList.remove('contact__input--error', 'contact__input--valid');
+                    const existingError = input.parentNode.querySelector('.contact__error');
+                    const checkmarkToRemove = input.parentNode.querySelector('.contact__success');
+                    if (existingError) existingError.remove();
+                    if (checkmarkToRemove) checkmarkToRemove.remove();
+                });
+            }
+        });
+    };
+    
+    // Update button state
+    const updateButtonState = (state, message = 'Enviar Mensaje') => {
+        const states = {
+            default: {
+                text: 'Enviar Mensaje',
+                icon: 'uil-message',
+                disabled: false,
+                style: ''
+            },
+            loading: {
+                text: 'Enviando...',
+                icon: 'uil-spinner',
+                disabled: true,
+                style: 'opacity: 0.7; cursor: not-allowed;'
+            },
+            success: {
+                text: '¡Enviado!',
+                icon: 'uil-check',
+                disabled: true,
+                style: 'background: linear-gradient(135deg, #a6e3a1, #94e2d5);'
+            },
+            error: {
+                text: 'Error, reintenta',
+                icon: 'uil-exclamation-triangle',
+                disabled: false,
+                style: 'background: linear-gradient(135deg, #f38ba8, #fab387);'
+            }
+        };
+        
+        const config = states[state] || states.default;
+        
+        if (buttonText) buttonText.textContent = config.text;
+        if (buttonIcon) {
+            buttonIcon.className = `uil ${config.icon} button__icon`;
+            if (state === 'loading') {
+                buttonIcon.style.animation = 'spin 1s linear infinite';
+            } else {
+                buttonIcon.style.animation = '';
+            }
+        }
+        if (submitButton) {
+            submitButton.disabled = config.disabled;
+            submitButton.style.cssText = config.style;
+        }
+    };
+    
+    // Validate entire form
+    const validateForm = () => {
+        const nameValid = validateField(nameInput, 'name');
+        const emailValid = validateField(emailInput, 'email');
+        const messageValid = validateField(messageInput, 'message');
+        
+        return nameValid && emailValid && messageValid;
+    };
+    
+    // Handle form submission
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        
+        console.log('Form submission started');
+        
+        // Validate form
+        if (!validateForm()) {
+            showNotification('Por favor corrige los errores en el formulario', 'error');
+            return;
+        }
+        
+        // Update UI to loading state
+        updateButtonState('loading');
+        
+        try {
+            // Prepare form data
+            const formData = new FormData(contactForm);
+            
+            // Submit form using fetch API
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // Success
+                updateButtonState('success');
+                
+                // Enhanced success notification with personalized message
+                const userName = nameInput.value.split(' ')[0]; // Get first name
+                showNotification(
+                    `¡Excelente ${userName}! Tu mensaje ha sido enviado correctamente. Recibirás un email de confirmación automático y te responderé dentro de las próximas 24 horas. 🚀`, 
+                    'success'
+                );
+                
+                // Create success overlay with additional information
+                createSuccessOverlay(userName);
+                
+                // Reset form after delay
+                setTimeout(() => {
+                    contactForm.reset();
+                    document.querySelectorAll('.contact__input--valid, .contact__success').forEach(element => {
+                        if (element.classList.contains('contact__input--valid')) {
+                            element.classList.remove('contact__input--valid');
+                        } else {
+                            element.remove();
+                        }
+                    });
+                    updateButtonState('default');
+                }, 5000);
+                
+                console.log('Message sent successfully');
+            } else {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+        } catch (error) {
+            console.error('Form submission error:', error);
+            updateButtonState('error');
+            showNotification('Error al enviar el mensaje. Por favor intenta de nuevo.', 'error');
+            
+            // Reset button after delay
+            setTimeout(() => {
+                updateButtonState('default');
+            }, 3000);
+        }
+    };
+    
+    // Initialize form functionality
+    contactForm.addEventListener('submit', handleFormSubmit);
+    setupFieldValidation();
+    
+    // Add CSS for loading animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .contact__input--error {
+            border: 2px solid #f38ba8 !important;
+            background: rgba(243, 139, 168, 0.1) !important;
+        }
+        
+        .contact__input--valid {
+            border: 2px solid #a6e3a1 !important;
+            background: rgba(166, 227, 161, 0.1) !important;
+        }
+        
+        .contact__error {
+            animation: fadeInError 0.3s ease-out;
+        }
+        
+        @keyframes fadeInError {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes successPulse {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @media screen and (max-width: 568px) {
+            .contact__notification {
+                right: 10px !important;
+                left: 10px !important;
+                max-width: calc(100vw - 20px) !important;
+                transform: translateY(-100px) !important;
+            }
+            
+            .contact__notification.show {
+                transform: translateY(0) !important;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    console.log('Contact form functionality initialized');
+});
