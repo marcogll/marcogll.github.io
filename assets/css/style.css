@@ -1896,8 +1896,8 @@ footer .footer__social a:hover {
 @media screen and (max-width: 768px) {
   .footer__alma-logo {
     position: static;
-    width: 60px;
-    height: 60px;
+    width: 120px;
+    height: 120px;
     margin-left: auto;
     margin-top: 1rem;
     transform: none;
@@ -1920,6 +1920,14 @@ footer .footer__social a:hover {
     position: absolute;
     top: 0;
     right: 0;
+  }
+}
+
+/* Para móviles muy pequeños, mantener un tamaño más conservador */
+@media screen and (max-width: 480px) {
+  .footer__alma-logo {
+    width: 100px;
+    height: 100px;
   }
 }
 
