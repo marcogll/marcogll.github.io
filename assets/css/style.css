@@ -1802,6 +1802,75 @@ footer .footer__social a:hover {
   color: var(--ctp-base);
 }
 
+/*==================== LOGO ALMA FOOTER ====================*/
+.footer__alma-logo {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 250px;
+  height: 250px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.footer__alma-logo:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.footer__alma-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+/* Mostrar logo blanco en tema oscuro por defecto */
+.footer__alma-img--dark {
+  display: none;
+}
+
+.footer__alma-img--light {
+  display: block;
+}
+
+/* En temas claros, mostrar el logo negro */
+@media (prefers-color-scheme: light) {
+  .footer__alma-img--dark {
+    display: block;
+  }
+  
+  .footer__alma-img--light {
+    display: none;
+  }
+}
+
+/* Responsive para el logo AlMa */
+@media screen and (max-width: 768px) {
+  .footer__alma-logo {
+    width: 150px;
+    height: 150px;
+    bottom: 10px;
+    right: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer__alma-logo {
+    width: 100px;
+    height: 100px;
+    bottom: 5px;
+    right: 5px;
+    opacity: 0.6;
+  }
+}
+
+/* Asegurar que el footer tenga posición relativa para el posicionamiento absoluto */
+.footer__bg {
+  position: relative;
+}
+
 
 /*========== SCROLL HACIA ARRIBA ==========*/
 .scrollup {
