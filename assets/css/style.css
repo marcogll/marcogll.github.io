@@ -1324,6 +1324,9 @@ img {
   min-height: 280px;
   display: flex;
   flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
   justify-content: space-between;
 }
 
@@ -1640,6 +1643,16 @@ body.modal-open {
   padding: 1.5rem 1rem;
   max-width: 550px;
   margin: 0 auto;
+  background-color: var(--ctp-mantle);
+  border-radius: 1rem;
+  border: 1px solid var(--ctp-surface1);
+  transition: all 0.3s ease;
+}
+
+.testimonial__content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--ctp-blue);
 }
 
 .testimonial__data,
@@ -1713,6 +1726,12 @@ body.modal-open {
 /* Container del carrusel más compacto */
 .testimonial__container {
   padding-bottom: 2rem;
+  background-color: var(--ctp-base);
+}
+
+.testimonial.section {
+  background-color: var(--ctp-base);
+  color: var(--ctp-text);
 }
 
 .swiper-container .swiper-pagination-testimonial {
@@ -3869,6 +3888,30 @@ footer .footer__social a:hover {
 }
 
 /* Responsive para servicios */
+/* Mejorar centrado en desktop */
+@media screen and (min-width: 769px) {
+  .services__content,
+  .education__content {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .services__header,
+  .education__header {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .services__description,
+  .education__description {
+    text-align: center;
+    margin: var(--mb-1) auto;
+    max-width: 400px;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .services__container {
     max-width: 700px;
@@ -3886,12 +3929,22 @@ footer .footer__social a:hover {
   
   .services__content {
     padding: 1.5rem 1rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
   }
   
   .services__header {
     flex-direction: column;
     text-align: center;
     gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .services__description {
+    text-align: center;
+    margin: var(--mb-1) auto;
   }
   
   .services__icon {
