@@ -1643,19 +1643,9 @@ body.modal-open {
   padding: 1.5rem 1rem;
   max-width: 550px;
   margin: 0 auto;
-  background-color: var(--ctp-mantle);
-  border-radius: 1rem;
-  border: 1px solid var(--ctp-surface1);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background: transparent;
 }
 
-.testimonial__content:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border-color: var(--ctp-blue);
-  background-color: var(--ctp-surface0);
-}
 
 .testimonial__data,
 .testimonial__header {
@@ -1727,10 +1717,104 @@ body.modal-open {
   font-style: italic;
 }
 
-/* Container del carrusel más compacto */
+/* Container del carrusel más compacto - FORZADO PARA UN SOLO SLIDE */
+/* Carrusel personalizado de testimonios */
 .testimonial__container {
   padding-bottom: 2rem;
   background-color: transparent;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.testimonial__wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 200px;
+}
+
+.testimonial__slide {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  width: 100%;
+}
+
+.testimonial__slide.active {
+  display: block;
+  opacity: 1;
+}
+
+.testimonial__slide .testimonial__content {
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Navegación del carrusel personalizado */
+.testimonial__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.testimonial__btn {
+  background: transparent;
+  color: var(--ctp-pink);
+  border: none;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.8rem;
+  border-radius: 8px;
+}
+
+.testimonial__btn:hover {
+  background: var(--ctp-surface0);
+  color: var(--ctp-mauve);
+  transform: scale(1.1);
+}
+
+.testimonial__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--ctp-surface1);
+}
+
+.testimonial__indicators {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.testimonial__indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ctp-surface2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.testimonial__indicator:hover {
+  background: var(--ctp-subtext0);
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+.testimonial__indicator.active {
+  background: var(--ctp-pink);
+  transform: scale(1.4);
+  opacity: 1;
+  box-shadow: 0 0 8px var(--ctp-pink);
 }
 
 .testimonial.section {
@@ -2154,24 +2238,22 @@ footer .footer__social a:hover {
   transition: opacity 0.3s ease;
 }
 
-/* Por defecto tema oscuro: mostrar logo negro */
-.footer__alma-img--dark {
+/* Tema claro por defecto: mostrar logo blanco */
+.footer__alma-img--light {
   display: block;
 }
 
-.footer__alma-img--light {
+.footer__alma-img--dark {
   display: none;
 }
 
-/* En temas claros, mostrar el logo blanco */
-@media (prefers-color-scheme: light) {
-  .footer__alma-img--dark {
-    display: none;
-  }
-  
-  .footer__alma-img--light {
-    display: block;
-  }
+/* En tema oscuro: mostrar logo normal */
+body.dark-theme .footer__alma-img--light {
+  display: none;
+}
+
+body.dark-theme .footer__alma-img--dark {
+  display: block;
 }
 
 /* Responsive para móvil */
@@ -2626,22 +2708,6 @@ footer .footer__social a:hover {
 
   .contact__inputs {
     grid-template-columns: repeat(2, 1fr);
-  }
-  
-  /* Asegurar visibilidad del botón CTA en desktop */
-  .button--white {
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: relative !important;
-    z-index: 100 !important;
-  }
-  
-  /* Asegurar que el contenedor del proyecto mantenga su layout correcto */
-  .project__container {
-    display: grid !important;
-    grid-template-columns: 1fr auto !important;
-    align-items: center !important;
   }
 }
 
@@ -4025,28 +4091,29 @@ footer .footer__social a:hover {
 }
 
 .button--white {
-  background-color: var(--ctp-base) !important;
-  color: var(--ctp-text) !important;
-  border: 2px solid var(--ctp-base) !important;
-  font-weight: var(--font-semi-bold);
-  padding: 1rem 2rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  border: 2px solid #ffffff !important;
+  font-weight: var(--font-semi-bold) !important;
+  padding: 1rem 2rem !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
   display: inline-flex !important;
-  align-items: center;
-  gap: 0.5rem;
+  align-items: center !important;
+  gap: 0.5rem !important;
   text-decoration: none !important;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease !important;
   opacity: 1 !important;
   visibility: visible !important;
-  position: relative;
-  z-index: 10;
+  position: relative !important;
+  z-index: 1000 !important;
+  font-size: var(--normal-font-size) !important;
 }
 
 .button--white:hover {
-  background-color: var(--ctp-surface0);
-  color: var(--ctp-text);
-  border-color: var(--ctp-surface0);
+  background-color: #f8f8f8;
+  color: #333333;
+  border-color: #f8f8f8;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
@@ -4058,6 +4125,27 @@ footer .footer__social a:hover {
 
 .button--white:hover .button__icon {
   transform: rotate(15deg) scale(1.1);
+}
+
+/* Asegurar visibilidad del botón CTA en todas las pantallas */
+.button--white {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+
+.project__container {
+  display: grid !important;
+  align-items: center !important;
+}
+
+/* Desktop específico */
+@media screen and (min-width: 768px) {
+  .project__container {
+    grid-template-columns: 1fr auto !important;
+  }
 }
 
 .project__image-container {
