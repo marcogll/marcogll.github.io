@@ -1913,6 +1913,12 @@ footer .footer__social a:hover {
     width: 100px;
     height: 100px;
   }
+  
+  /* Centrar título y subtítulo en móvil */
+  .footer__title,
+  .footer__subtitle {
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 480px) {

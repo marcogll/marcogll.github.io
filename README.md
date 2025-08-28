@@ -295,6 +295,27 @@ Este sitio web refleja mi filosofía de **mejora continua** y **excelencia técn
 
 ---
 
+## 📋 Pendientes y Próximas Mejoras
+
+### 🚧 En Desarrollo
+- **Lógica de envío de mensaje** - Implementar sistema de notificaciones y confirmación de envío
+- **Validación de formulario** - Mejorar validación del lado cliente con feedback visual
+- **Sistema de respuestas automáticas** - Configurar mensajes de confirmación personalizados
+
+### 🎯 Próximas Funcionalidades
+- **Blog/Artículos** - Sección de contenido técnico y casos de estudio
+- **Galería de proyectos** - Showcase interactivo de trabajos realizados
+- **Sistema de comentarios** - Integración con sistema de feedback
+- **Analytics avanzados** - Métricas de conversión y engagement
+
+### ⚡ Optimizaciones Planificadas
+- **Service Worker** - Cache estratégico para mejor rendimiento
+- **Compresión de imágenes** - WebP y lazy loading avanzado
+- **Bundle optimization** - Tree shaking y code splitting
+- **A11y improvements** - Mejoras de accesibilidad y navegación por teclado
+
+---
+
 ## 🤖 Desarrollo
 
 **Desarrollado con [Claude Code](https://claude.ai/code)**
