@@ -1841,28 +1841,37 @@ footer .footer__social a:hover {
   color: var(--ctp-base);
 }
 
-/*==================== LOGO ALMA FOOTER ====================*/
-.footer__alma-logo {
-  position: absolute;
-  right: 20px;
-  opacity: 0.8;
-  transition: all 0.3s ease;
-  z-index: 10;
+/*==================== LOGO ALMA FOOTER - LAYOUT DIVIDIDO ====================*/
+.footer__menu-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
 }
 
-/* Desktop: Alinear con altura del texto Marco Gallegos + subtitle */
-@media screen and (min-width: 769px) {
-  .footer__alma-logo {
-    top: 50%;
-    transform: translateY(-50%);
-    width: 120px;
-    height: 120px;
-  }
+.footer__menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer__alma-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__alma-logo {
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  width: 120px;
+  height: 120px;
 }
 
 .footer__alma-logo:hover {
   opacity: 1;
-  transform: translateY(-50%) scale(1.05);
+  transform: scale(1.05);
 }
 
 .footer__alma-img {
@@ -1894,40 +1903,22 @@ footer .footer__social a:hover {
 
 /* Responsive para móvil */
 @media screen and (max-width: 768px) {
-  .footer__alma-logo {
-    position: static;
-    width: 120px;
-    height: 120px;
-    margin-left: auto;
-    margin-top: 1rem;
-    transform: none;
+  .footer__menu-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
   }
   
-  .footer__alma-logo:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Mover logo al área de links en mobile */
-  .footer__container {
-    position: relative;
-  }
-  
-  .footer__links {
-    position: relative;
-  }
-  
-  .footer__alma-logo {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-}
-
-/* Para móviles muy pequeños, mantener un tamaño más conservador */
-@media screen and (max-width: 480px) {
   .footer__alma-logo {
     width: 100px;
     height: 100px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer__alma-logo {
+    width: 80px;
+    height: 80px;
   }
 }
 
