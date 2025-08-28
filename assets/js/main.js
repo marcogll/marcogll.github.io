@@ -250,6 +250,12 @@ function openModal(modalClick) {
             modalViews[modalClick].classList.add('show-modal')
             document.body.style.overflow = 'hidden'
             console.log('Modal opened:', modalClick)
+            
+            // Check if this is the CV modal (modal index 4 in our array)
+            if (modalClick === 4) {
+                console.log('CV Modal opened, initializing collapsible sections...')
+                setTimeout(initCollapsibleCVSections, 200)
+            }
         }, 100)
     }
 }
@@ -265,10 +271,20 @@ function closeModal() {
     document.body.style.overflow = 'auto'
 }
 
+// Mapeo correcto de botones a modales
+// Botón 0 (CV) -> Modal 4 (CV)
+// Botón 1 (Automatizaciones) -> Modal 0 (Automatizaciones)  
+// Botón 2 (Proyectos Llave) -> Modal 1 (Proyectos Llave)
+// Botón 3 (Contenido Visual) -> Modal 2 (Contenido Visual)
+// Botón 4 (Paquetes Vanity) -> Modal 3 (Paquetes Vanity)
+const buttonToModalMap = [4, 0, 1, 2, 3]
+
 // Event listeners para botones de abrir modal
 modalBtns.forEach((modalBtn, i) => {
     modalBtn.addEventListener('click', () => {
-        openModal(i)
+        const modalIndex = buttonToModalMap[i]
+        console.log(`Button ${i} clicked, opening modal ${modalIndex}`)
+        openModal(modalIndex)
     })
 })
 
@@ -456,63 +472,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateThemeMetaTags()
 })
 
-/*==================== MODAL DEL CV ====================*/
-const cvButton = document.getElementById('cv-button'),
-      cvModal = document.getElementById('cv-modal'),
-      cvModalClose = document.getElementById('cv-modal-close')
-
-// Abrir modal del CV
-if(cvButton) {
-    cvButton.addEventListener('click', () => {
-        cvModal.classList.add('show-modal')
-        // Animar las barras de progreso de skills cuando se abra el modal
-        setTimeout(() => {
-            animateSkillBars()
-        }, 400)
-        // Prevenir scroll del body
-        document.body.style.overflow = 'hidden'
-    })
-}
-
-// Cerrar modal del CV
-if(cvModalClose) {
-    cvModalClose.addEventListener('click', () => {
-        cvModal.classList.remove('show-modal')
-        document.body.style.overflow = 'auto'
-    })
-}
-
-// Cerrar modal al hacer click fuera del contenido
-cvModal?.addEventListener('click', (e) => {
-    if(e.target === cvModal) {
-        cvModal.classList.remove('show-modal')
-        document.body.style.overflow = 'auto'
-    }
-})
-
-// Cerrar modal con tecla ESC
-document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && cvModal?.classList.contains('show-modal')) {
-        cvModal.classList.remove('show-modal')
-        document.body.style.overflow = 'auto'
-    }
-})
-
-// Función para animar las barras de progreso de skills
-function animateSkillBars() {
-    const skillBars = document.querySelectorAll('.cv-skill__progress')
-    
-    skillBars.forEach((bar, index) => {
-        setTimeout(() => {
-            const level = bar.getAttribute('data-level')
-            bar.style.width = '0%'
-            setTimeout(() => {
-                bar.style.width = level + '%'
-            }, 50)
-        }, index * 150) // Animación escalonada
-    })
-}
-
 /*==================== CARRUSEL DE IMÁGENES CTA ====================*/
 document.addEventListener('DOMContentLoaded', function() {
     const projectImages = document.querySelectorAll('.project__img');
@@ -570,3 +529,212 @@ themeButton.addEventListener('click', () => {
     updatePWAManifest()
     updateThemeMetaTags()
 })
+
+/*==================== ABOUT READ MORE ====================*/
+const aboutDescriptionContainer = document.querySelector('.about__description-container');
+const aboutReadMoreBtn = document.querySelector('.about__read-more');
+
+if (aboutReadMoreBtn) {
+    aboutReadMoreBtn.addEventListener('click', () => {
+        aboutDescriptionContainer.classList.toggle('expanded');
+        if (aboutDescriptionContainer.classList.contains('expanded')) {
+            aboutReadMoreBtn.textContent = 'Leer menos';
+        } else {
+            aboutReadMoreBtn.textContent = 'Leer más';
+        }
+    });
+}
+
+/*==================== CV COLLAPSIBLE SECTIONS ====================*/
+// Initialize CV collapsible sections with event delegation
+function initCollapsibleCVSections() {
+    // Remove existing listeners to prevent duplicates
+    document.removeEventListener('click', handleCVSectionClick);
+    document.removeEventListener('click', handleCardClick);
+    
+    // Add event delegation to handle clicks on CV section headers and cards
+    document.addEventListener('click', handleCVSectionClick);
+    document.addEventListener('click', handleCardClick);
+    
+    console.log('CV collapsible sections initialized with event delegation');
+}
+
+// Handle clicks on collapsible cards
+function handleCardClick(e) {
+    const cardHeader = e.target.closest('.collapsible-card__header');
+    if (!cardHeader) return;
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const card = cardHeader.closest('.collapsible-card');
+    if (!card) return;
+    
+    // Toggle this card
+    const isExpanded = card.classList.contains('expanded');
+    card.classList.toggle('expanded');
+    
+    console.log('Card toggled:', card, 'expanded:', !isExpanded);
+}
+
+// Handle clicks on CV section headers
+function handleCVSectionClick(e) {
+    const header = e.target.closest('.cv-section__header');
+    if (!header) return;
+    
+    const section = header.closest('.cv-section');
+    const cvModal = section?.closest('.cv-modal__content');
+    
+    // Only handle clicks within the CV modal
+    if (!cvModal) return;
+    
+    e.stopPropagation();
+    
+    // Close all other sections first (accordion behavior)
+    const allSections = cvModal.querySelectorAll('.cv-section');
+    allSections.forEach(otherSection => {
+        if (otherSection !== section && otherSection.classList.contains('expanded')) {
+            const otherContent = otherSection.querySelector('.cv-section__content');
+            const otherArrow = otherSection.querySelector('.cv-section__arrow');
+            
+            otherSection.classList.remove('expanded');
+            console.log(`Closed section: ${otherSection.querySelector('.cv-section__title')?.textContent}`);
+            
+            // Update arrow animation for closed sections
+            if (otherArrow) {
+                otherArrow.style.transform = 'rotate(-90deg) scale(1.1)';
+                setTimeout(() => {
+                    otherArrow.style.transform = 'rotate(-90deg) scale(1)';
+                }, 150);
+            }
+        }
+    });
+    
+    // Now toggle the clicked section
+    const content = section.querySelector('.cv-section__content');
+    const arrow = section.querySelector('.cv-section__arrow');
+    const title = section.querySelector('.cv-section__title')?.textContent || 'Unknown';
+    
+    if (content && arrow) {
+        console.log(`Toggling CV section: ${title}`);
+        toggleCVSection(section, content, arrow);
+    }
+}
+
+function toggleCVSection(section, content, arrow) {
+    const isExpanded = section.classList.contains('expanded');
+    const title = section.querySelector('.cv-section__title')?.textContent || 'Section';
+    
+    console.log(`${title}: ${isExpanded ? 'collapsing' : 'expanding'}`);
+    
+    if (isExpanded) {
+        // Collapse section
+        section.classList.remove('expanded');
+        console.log(`${title} collapsed`);
+    } else {
+        // Expand section
+        section.classList.add('expanded');
+        console.log(`${title} expanded`);
+        
+        // Trigger skills animation if this is the Skills section
+        if (title.toLowerCase().includes('skills')) {
+            setTimeout(() => {
+                triggerSkillsAnimation(section);
+            }, 200); // Small delay to let the section expand first
+        }
+        
+        // Trigger languages animation if this is the Languages section
+        if (title.toLowerCase().includes('idiomas')) {
+            setTimeout(() => {
+                triggerLanguagesAnimation(section);
+            }, 200);
+        }
+    }
+    
+    // Add a subtle bounce animation to the arrow
+    arrow.style.transform = isExpanded ? 'rotate(-90deg) scale(1.1)' : 'rotate(0deg) scale(1.1)';
+    setTimeout(() => {
+        arrow.style.transform = isExpanded ? 'rotate(-90deg) scale(1)' : 'rotate(0deg) scale(1)';
+    }, 150);
+}
+
+// Function to trigger skills bars animation
+function triggerSkillsAnimation(section) {
+    const skillBars = section.querySelectorAll('.cv-skill__progress');
+    skillBars.forEach((bar, index) => {
+        const level = bar.getAttribute('data-level');
+        // Reset animation
+        bar.style.width = '0';
+        // Trigger animation with staggered delay
+        setTimeout(() => {
+            bar.style.width = level + '%';
+        }, index * 100); // 100ms delay between each bar
+    });
+    console.log(`Animated ${skillBars.length} skill bars`);
+}
+
+// Function to trigger languages bars animation
+function triggerLanguagesAnimation(section) {
+    const languageBars = section.querySelectorAll('.cv-language__progress');
+    languageBars.forEach((bar, index) => {
+        const level = bar.getAttribute('data-level');
+        // Reset animation
+        bar.style.width = '0';
+        // Trigger animation with staggered delay
+        setTimeout(() => {
+            bar.style.width = level + '%';
+        }, index * 200); // 200ms delay between each bar
+    });
+    console.log(`Animated ${languageBars.length} language bars`);
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing CV sections...');
+    initCollapsibleCVSections();
+});
+
+// Also initialize when CV modal is opened using our corrected button mapping
+document.addEventListener('click', (e) => {
+    const clickedButton = e.target.closest('.services__button');
+    if (clickedButton) {
+        const allButtons = document.querySelectorAll('.services__button');
+        const buttonIndex = Array.from(allButtons).indexOf(clickedButton);
+        
+        // Check if it's the CV button (index 0 maps to modal 4 which is CV)
+        if (buttonIndex === 0) {
+            console.log('CV Modal button clicked, scheduling initialization...');
+            setTimeout(() => {
+                initCollapsibleCVSections();
+            }, 300);
+        }
+    }
+});
+
+// Observer to detect when modal becomes visible
+const observeModalChanges = () => {
+    const targetNode = document.body;
+    const config = { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] };
+    
+    const callback = (mutationsList) => {
+        for (let mutation of mutationsList) {
+            // Check for show-modal class changes
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target;
+                if (target.classList.contains('services__modal') && target.classList.contains('show-modal')) {
+                    const cvModal = target.querySelector('.cv-modal__content');
+                    if (cvModal) {
+                        console.log('CV Modal detected as visible, initializing sections...');
+                        setTimeout(initCollapsibleCVSections, 200);
+                    }
+                }
+            }
+        }
+    };
+    
+    const observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+};
+
+// Start observing when DOM is ready
+document.addEventListener('DOMContentLoaded', observeModalChanges);

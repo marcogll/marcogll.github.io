@@ -191,18 +191,21 @@
                 <img src="assets/img/about.jpg" alt="" class="about__img" />
 
                 <div class="about__data">
-                    <p class="about__description">
-                        Soy <strong>Marco Gallegos</strong>, ingeniero en mecatrónica con formación en manufactura y especialización en <strong>moldeo por inyección científico</strong>, 
-                        con más de 10 años de experiencia práctica en la industria automotriz. <br><br>
-                        
-                        Hoy soy <strong>partner en Vanity</strong> y <strong>cofundador de Aura Marketing</strong>, donde aplico mi experiencia de ingeniería y gestión 
-                        para crear soluciones digitales, automatizar operaciones y desarrollar estrategias de posicionamiento para empresas de distintos giros. <br><br>
-                        
-                        Me considero un <strong>desarrollador de soluciones inteligentes para negocios</strong>: desde muebles IoT y prototipos de impresión 3D, 
-                        hasta sistemas de control de asistencia con IA que han mejorado la puntualidad del personal en un <strong>96% de llegadas on-time</strong>. <br><br>
-                        
-                        <em>"Si existe una forma mejor de hacerlo, la voy a encontrar."</em>
-                    </p>
+                    <div class="about__description-container">
+                        <p class="about__description">
+                            Soy <strong>Marco Gallegos</strong>, ingeniero en mecatrónica con formación en manufactura y especialización en <strong>moldeo por inyección científico</strong>, 
+                            con más de 10 años de experiencia práctica en la industria automotriz. <br><br>
+                            
+                            Hoy soy <strong>partner en Vanity</strong> y <strong>cofundador de Aura Marketing</strong>, donde aplico mi experiencia de ingeniería y gestión 
+                            para crear soluciones digitales, automatizar operaciones y desarrollar estrategias de posicionamiento para empresas de distintos giros. <br><br>
+                            
+                            Me considero un <strong>desarrollador de soluciones inteligentes para negocios</strong>: desde muebles IoT y prototipos de impresión 3D, 
+                            hasta sistemas de control de asistencia con IA que han mejorado la puntualidad del personal en un <strong>96% de llegadas on-time</strong>. <br><br>
+                            
+                            <em>"Si existe una forma mejor de hacerlo, la voy a encontrar."</em>
+                        </p>
+                    </div>
+                    <span class="about__read-more">Leer más...</span>
 
                     <div class="about_info">
                         <div>
@@ -223,7 +226,7 @@
                         <a href="#contact" class="button button--flex">
                             ¿Platicamos? <i class="uil uil-message button__icon"></i>
                         </a>
-                        <button class="button button--flex button--outline cv-button" id="cv-button">
+                        <button class="button button--flex button--outline services__button">
                             Ver mi CV <i class="uil uil-user-circle button__icon"></i>
                         </button>
                     </div>
@@ -743,6 +746,367 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- Modal CV -->
+            <div class="services__modal">
+                <div class="services__modal-content cv-modal__content">
+                    <div class="cv-header">
+                        <div class="cv-header__info">
+                            <h1 class="cv-header__name">Marco Gallegos</h1>
+                            <h3 class="cv-header__title">Ingeniero en Mecatrónica | Especialista en Moldeo | Emprendedor</h3>
+                            <div class="cv-header__contact">
+                                <span><i class="uil uil-map-marker"></i> Saltillo, Coahuila, MX</span>
+                                <span><i class="uil uil-envelope"></i> marco@vanityexperience.mx</span>
+                                <span><i class="uil uil-github"></i> github.com/marcogll</span>
+                            </div>
+                        </div>
+                        <i class="uil uil-times services__modal-close"></i>
+                    </div>
+
+                    <div class="cv-content">
+                        <div class="cv-left">
+                            <!-- Perfil -->
+                            <section class="cv-section">
+                                <div class="cv-section__header">
+                                    <i class="uil uil-user-circle cv-section__icon"></i>
+                                    <h2 class="cv-section__title">Perfil</h2>
+                                    <i class="uil uil-angle-down cv-section__arrow"></i>
+                                </div>
+                                <div class="cv-section__content">
+                                    <p class="cv-section__text">
+                                        Soy <strong>ingeniero en mecatrónica</strong> con más de 10 años de experiencia en <strong>moldeo por inyección</strong>. 
+                                        Mi trayectoria me dio un entrenamiento práctico aplicando metodologías de <strong>5S, Lean Manufacturing y estandarización de procesos</strong>. 
+                                        Actualmente soy <strong>partner en Vanity</strong> y <strong>cofundador de Aura Marketing</strong>, donde aplico mi experiencia en automatización 
+                                        y competencias en <strong>IA, prototipado e integración de sistemas</strong> para transformar negocios con soluciones digitales.
+                                    </p>
+                                </div>
+                            </section>
+
+                            <!-- Experiencia -->
+                            <section class="cv-section">
+                                <div class="cv-section__header">
+                                    <i class="uil uil-briefcase-alt cv-section__icon"></i>
+                                    <h2 class="cv-section__title">Experiencia Profesional</h2>
+                                    <i class="uil uil-angle-down cv-section__arrow"></i>
+                                </div>
+                                <div class="cv-section__content">
+                                    <div class="cv-experience">
+                                    <div class="cv-experience__item collapsible-card experience-card--tech">
+                                        <div class="collapsible-card__header">
+                                            <i class="uil uil-circuit-board collapsible-card__icon"></i>
+                                            <h4 class="cv-experience__title">Partner – Vanity (Vanity Nail Salon / Vanity Experience)</h4>
+                                            <i class="uil uil-angle-down collapsible-card__arrow"></i>
+                                        </div>
+                                        <div class="collapsible-card__content">
+                                            <span class="cv-experience__date">Saltillo, MX | 2022 – Presente</span>
+                                            <ul class="cv-experience__list">
+                                                <li>Migración de sistemas manuales a plataformas semiautomáticas con control de nómina</li>
+                                                <li>Implementación de un ecosistema digital en VPS (Docker, n8n, Supabase, Formbricks)</li>
+                                                <li>Desarrollo de proyectos con IoT aplicado a servicios (mesas inteligentes, sensores)</li>
+                                                <li>+45% en ventas por automatización y procesos digitalizados</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="cv-experience__item collapsible-card experience-card--marketing">
+                                        <div class="collapsible-card__header">
+                                            <i class="uil uil-megaphone collapsible-card__icon"></i>
+                                            <h4 class="cv-experience__title">Cofundador – Aura Marketing</h4>
+                                            <i class="uil uil-angle-down collapsible-card__arrow"></i>
+                                        </div>
+                                        <div class="collapsible-card__content">
+                                            <span class="cv-experience__date">Saltillo, MX | 2021 – Presente</span>
+                                            <ul class="cv-experience__list">
+                                                <li>Desarrollo de estrategias de marketing y contenido digital con visión de negocio</li>
+                                                <li>Producción audiovisual, storytelling de marca y campañas en medios digitales</li>
+                                                <li>Implementación de encuestas y análisis de mercado para clientes</li>
+                                                <li>Acompañamiento en el lanzamiento y posicionamiento de modelos de negocio</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="cv-experience__item collapsible-card experience-card--engineering">
+                                        <div class="collapsible-card__header">
+                                            <i class="uil uil-setting collapsible-card__icon"></i>
+                                            <h4 class="cv-experience__title">Ingeniero de Procesos de Moldeo – Aptiv</h4>
+                                            <i class="uil uil-angle-down collapsible-card__arrow"></i>
+                                        </div>
+                                        <div class="collapsible-card__content">
+                                            <span class="cv-experience__date">Saltillo, MX | 2011 – 2022</span>
+                                            <ul class="cv-experience__list">
+                                                <li>Implementación de moldeo científico y estandarización en sitios de México, Honduras, USA y Europa</li>
+                                                <li>Soporte divisional a proyectos críticos (Radar Housing, Frenos MKC1)</li>
+                                                <li>Arranque de más de 50 máquinas de moldeo y un sistema central de secado</li>
+                                                <li>Troubleshooting en equipos ENGEL, Van Dorn, Sumitomo, Sodick, Milacron, Battenfeld y Newbury</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Educación -->
+                            <section class="cv-section">
+                                <div class="cv-section__header">
+                                    <i class="uil uil-book-alt cv-section__icon"></i>
+                                    <h2 class="cv-section__title">Educación</h2>
+                                    <i class="uil uil-angle-down cv-section__arrow"></i>
+                                </div>
+                                <div class="cv-section__content">
+                                    <div class="cv-education">
+                                        <div class="cv-education__item collapsible-card">
+                                            <div class="collapsible-card__header">
+                                                <i class="uil uil-trophy collapsible-card__icon"></i>
+                                                <h4 class="cv-education__title">MBA en Gestión de Negocios – Especialidad en Manufactura</h4>
+                                                <i class="uil uil-angle-down collapsible-card__arrow"></i>
+                                            </div>
+                                            <div class="collapsible-card__content">
+                                                <span class="cv-education__school">Universidad Autónoma del Noreste – Saltillo, Coahuila</span>
+                                                <span class="cv-education__date">2015 – 2017</span>
+                                                <div class="cv-education__details">
+                                                    <p>Maestría enfocada en optimización de procesos de manufactura, gestión de operaciones y liderazgo empresarial con énfasis en la industria automotriz.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-education__item collapsible-card">
+                                            <div class="collapsible-card__header">
+                                                <i class="uil uil-cog collapsible-card__icon"></i>
+                                                <h4 class="cv-education__title">Ingeniería en Mecatrónica</h4>
+                                                <i class="uil uil-angle-down collapsible-card__arrow"></i>
+                                            </div>
+                                            <div class="collapsible-card__content">
+                                                <span class="cv-education__school">Universidad Tecnológica de Coahuila – Ramos Arizpe, Coahuila</span>
+                                                <span class="cv-education__date">2008 – 2010</span>
+                                                <div class="cv-education__details">
+                                                    <p>Formación integral en automatización, robótica, control de procesos y sistemas mecatrónicos aplicados a la industria manufacturera.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-education__item collapsible-card">
+                                            <div class="collapsible-card__header">
+                                                <i class="uil uil-wrench collapsible-card__icon"></i>
+                                                <h4 class="cv-education__title">Especialización en Moldeo Científico</h4>
+                                                <i class="uil uil-angle-down collapsible-card__arrow"></i>
+                                            </div>
+                                            <div class="collapsible-card__content">
+                                                <span class="cv-education__school">Experiencia práctica especializada en la industria automotriz</span>
+                                                <span class="cv-education__date">2011 - 2022</span>
+                                                <div class="cv-education__details">
+                                                    <p>Especialización práctica en metodologías avanzadas de moldeo por inyección, troubleshooting y optimización de procesos en producción automotriz.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <div class="cv-right">
+                            <!-- Skills -->
+                            <section class="cv-section">
+                                <div class="cv-section__header">
+                                    <i class="uil uil-constructor cv-section__icon"></i>
+                                    <h2 class="cv-section__title">Skills</h2>
+                                    <i class="uil uil-angle-down cv-section__arrow"></i>
+                                </div>
+                                <div class="cv-section__content">
+                                    <div class="cv-skills cv-skills--compact">
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">Moldeo científico</span>
+                                            <span class="cv-skill__level">100%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">Troubleshooting procesos</span>
+                                            <span class="cv-skill__level">100%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">Insert molding</span>
+                                            <span class="cv-skill__level">100%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">Lean Manufacturing</span>
+                                            <span class="cv-skill__level">100%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">VPS & Docker</span>
+                                            <span class="cv-skill__level">85%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="85"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">Automatización n8n</span>
+                                            <span class="cv-skill__level">100%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">React / Python</span>
+                                            <span class="cv-skill__level">80%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="80"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">IA aplicada</span>
+                                            <span class="cv-skill__level">85%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="85"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">Marketing digital</span>
+                                            <span class="cv-skill__level">90%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="90"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">Video & Fotografía</span>
+                                            <span class="cv-skill__level">85%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="85"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">Diseño gráfico</span>
+                                            <span class="cv-skill__level">80%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="80"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">Liderazgo equipos</span>
+                                            <span class="cv-skill__level">95%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="95"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">Gestión proyectos</span>
+                                            <span class="cv-skill__level">90%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="90"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-skill">
+                                            <span class="cv-skill__name">Nuevos negocios</span>
+                                            <span class="cv-skill__level">85%</span>
+                                            <div class="cv-skill__bar">
+                                                <div class="cv-skill__progress" data-level="85"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Idiomas -->
+                            <section class="cv-section">
+                                <div class="cv-section__header">
+                                    <i class="uil uil-language cv-section__icon"></i>
+                                    <h2 class="cv-section__title">Idiomas</h2>
+                                    <i class="uil uil-angle-down cv-section__arrow"></i>
+                                </div>
+                                <div class="cv-section__content">
+                                    <div class="cv-languages cv-languages--compact">
+                                        <div class="cv-language">
+                                            <span class="cv-language__name">Español</span>
+                                            <span class="cv-language__level">100%</span>
+                                            <div class="cv-language__bar">
+                                                <div class="cv-language__progress" data-level="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cv-language">
+                                            <span class="cv-language__name">Inglés</span>
+                                            <span class="cv-language__level">85%</span>
+                                            <div class="cv-language__bar">
+                                                <div class="cv-language__progress" data-level="85"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Proyectos Destacados -->
+                            <section class="cv-section">
+                                <div class="cv-section__header">
+                                    <i class="uil uil-medal cv-section__icon"></i>
+                                    <h2 class="cv-section__title">Proyectos Destacados</h2>
+                                    <i class="uil uil-angle-down cv-section__arrow"></i>
+                                </div>
+                                <div class="cv-section__content">
+                                    <div class="cv-projects">
+                                        <div class="cv-projects__item collapsible-card">
+                                            <div class="collapsible-card__header">
+                                                <i class="uil uil-server-network collapsible-card__icon"></i>
+                                                <h4 class="cv-projects__title">Transformación Digital en Vanity</h4>
+                                                <i class="uil uil-angle-down collapsible-card__arrow"></i>
+                                            </div>
+                                            <div class="collapsible-card__content">
+                                                <div class="cv-projects__details">
+                                                    <p>Ecosistema completo en VPS utilizando Docker, n8n y Supabase para automatización de procesos de negocio y gestión de datos en tiempo real.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="cv-projects__item collapsible-card">
+                                            <div class="collapsible-card__header">
+                                                <i class="uil uil-window-grid collapsible-card__icon"></i>
+                                                <h4 class="cv-projects__title">Aplicaciones Web a Medida</h4>
+                                                <i class="uil uil-angle-down collapsible-card__arrow"></i>
+                                            </div>
+                                            <div class="collapsible-card__content">
+                                                <div class="cv-projects__details">
+                                                    <p>Desarrollo de soluciones web personalizadas para diversos sectores de servicios, optimizando flujos de trabajo y experiencia de usuario.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="cv-projects__item collapsible-card">
+                                            <div class="collapsible-card__header">
+                                                <i class="uil uil-circuit collapsible-card__icon"></i>
+                                                <h4 class="cv-projects__title">Soluciones IoT - Mesas Inteligentes</h4>
+                                                <i class="uil uil-angle-down collapsible-card__arrow"></i>
+                                            </div>
+                                            <div class="collapsible-card__content">
+                                                <div class="cv-projects__details">
+                                                    <p>Integración IoT en mobiliario corporativo, logrando una mejora del 96% en puntualidad y optimización de espacios de trabajo.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="cv-projects__item collapsible-card">
+                                            <div class="collapsible-card__header">
+                                                <i class="uil uil-shield-check collapsible-card__icon"></i>
+                                                <h4 class="cv-projects__title">Radar Housing & Frenos MKC1 (Aptiv)</h4>
+                                                <i class="uil uil-angle-down collapsible-card__arrow"></i>
+                                            </div>
+                                            <div class="collapsible-card__content">
+                                                <div class="cv-projects__details">
+                                                    <p>Soporte técnico divisional en proyectos críticos de seguridad automotriz, garantizando estándares de calidad en sistemas de frenado.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!--==================== PORTAFOLIO ====================-->
@@ -757,9 +1121,11 @@
                         <img src="assets/img/portfolio_vanity_website.png" alt="" class="portfolio__img">
 
                         <div class="portfolio__data">
-                            <h3 class="portfolio__title">Sitio de SPA</h3>
-                            <p class="portfolio__description">Sitio web con diferentes capacidades y subdominios para
-                                usos internos del negocio</p>
+                                <h3 class="portfolio__title">Vanity Experience</h3>
+    <p class="portfolio__description">
+        Desarrollo e integración de servicios digitales para el salón de belleza y SPA, 
+        aplicando conocimientos de ingeniería y desarrollo de software.
+    </p>
                             <a href="https://vanityexperience.mx"
                                 class="button button--flex button--small portfolio__button" target="_blank"
                                 rel="noopener noreferrer">
@@ -1059,228 +1425,6 @@
     <div><a href="#" class="scrollup" id="scroll-up">
             <i class="uil uil-arrow-up scrollup__icon"></i>
         </a></div>
-
-    <!--==================== POPUP DEL CV ====================-->
-    <div class="cv-modal" id="cv-modal">
-        <div class="cv-modal__content">
-            <div class="cv-header">
-                <div class="cv-header__info">
-                    <h1 class="cv-header__name">Marco Gallegos</h1>
-                    <h3 class="cv-header__title">Ingeniero en Mecatrónica | Especialista en Moldeo | Emprendedor</h3>
-                    <div class="cv-header__contact">
-                        <span><i class="uil uil-map-marker"></i> Saltillo, Coahuila, MX</span>
-                        <span><i class="uil uil-envelope"></i> marco@vanityexperience.mx</span>
-                        <span><i class="uil uil-github"></i> github.com/marcogll</span>
-                    </div>
-                </div>
-                <i class="uil uil-times cv-modal__close" id="cv-modal-close"></i>
-            </div>
-
-            <div class="cv-content">
-                <div class="cv-left">
-                    <!-- Perfil -->
-                    <section class="cv-section">
-                        <h2 class="cv-section__title">Perfil</h2>
-                        <p class="cv-section__text">
-                            Soy <strong>ingeniero en mecatrónica</strong> con más de 10 años de experiencia en <strong>moldeo por inyección</strong>. 
-                            Mi trayectoria me dio un entrenamiento práctico aplicando metodologías de <strong>5S, Lean Manufacturing y estandarización de procesos</strong>. 
-                            Actualmente soy <strong>partner en Vanity</strong> y <strong>cofundador de Aura Marketing</strong>, donde aplico mi experiencia en automatización 
-                            y competencias en <strong>IA, prototipado e integración de sistemas</strong> para transformar negocios con soluciones digitales.
-                        </p>
-                    </section>
-
-                    <!-- Experiencia -->
-                    <section class="cv-section">
-                        <h2 class="cv-section__title">Experiencia Profesional</h2>
-                        
-                        <div class="cv-experience">
-                            <div class="cv-experience__item">
-                                <h3 class="cv-experience__title">Partner – Vanity (Vanity Nail Salon / Vanity Experience)</h3>
-                                <span class="cv-experience__date">Saltillo, MX | 2022 – Presente</span>
-                                <ul class="cv-experience__list">
-                                    <li>Migración de sistemas manuales a plataformas semiautomáticas con control de nómina</li>
-                                    <li>Implementación de un ecosistema digital en VPS (Docker, n8n, Supabase, Formbricks)</li>
-                                    <li>Desarrollo de proyectos con IoT aplicado a servicios (mesas inteligentes, sensores)</li>
-                                    <li>+45% en ventas por automatización y procesos digitalizados</li>
-                                </ul>
-                            </div>
-
-                            <div class="cv-experience__item">
-                                <h3 class="cv-experience__title">Cofundador – Aura Marketing</h3>
-                                <span class="cv-experience__date">Saltillo, MX | 2021 – Presente</span>
-                                <ul class="cv-experience__list">
-                                    <li>Desarrollo de estrategias de marketing y contenido digital con visión de negocio</li>
-                                    <li>Producción audiovisual, storytelling de marca y campañas en medios digitales</li>
-                                    <li>Implementación de encuestas y análisis de mercado para clientes</li>
-                                    <li>Acompañamiento en el lanzamiento y posicionamiento de modelos de negocio</li>
-                                </ul>
-                            </div>
-
-                            <div class="cv-experience__item">
-                                <h3 class="cv-experience__title">Ingeniero de Procesos de Moldeo – Aptiv</h3>
-                                <span class="cv-experience__date">Saltillo, MX | 2011 – 2022</span>
-                                <ul class="cv-experience__list">
-                                    <li>Implementación de moldeo científico y estandarización en sitios de México, Honduras, USA y Europa</li>
-                                    <li>Soporte divisional a proyectos críticos (Radar Housing, Frenos MKC1)</li>
-                                    <li>Arranque de más de 50 máquinas de moldeo y un sistema central de secado</li>
-                                    <li>Troubleshooting en equipos ENGEL, Van Dorn, Sumitomo, Sodick, Milacron, Battenfeld y Newbury</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Educación -->
-                    <section class="cv-section">
-                        <h2 class="cv-section__title">Educación</h2>
-                        <div class="cv-education">
-                            <div class="cv-education__item">
-                                <h4 class="cv-education__title">MBA en Gestión de Negocios – Especialidad en Manufactura</h4>
-                                <span class="cv-education__school">Universidad Autónoma del Noreste – Saltillo, Coahuila</span>
-                                <span class="cv-education__date">2015 – 2017</span>
-                            </div>
-                            <div class="cv-education__item">
-                                <h4 class="cv-education__title">Ingeniería en Mecatrónica</h4>
-                                <span class="cv-education__school">Universidad Tecnológica de Coahuila – Ramos Arizpe, Coahuila</span>
-                                <span class="cv-education__date">2008 – 2010</span>
-                            </div>
-                            <div class="cv-education__item">
-                                <h4 class="cv-education__title">Especialización en Moldeo Científico</h4>
-                                <span class="cv-education__school">Experiencia práctica especializada en la industria automotriz</span>
-                                <span class="cv-education__date">2011 - 2022</span>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-
-                <div class="cv-right">
-                    <!-- Skills -->
-                    <section class="cv-section">
-                        <h2 class="cv-section__title">Skills</h2>
-                        
-                        <div class="cv-skills">
-                            <h4 class="cv-skills__category">Ingeniería & Manufactura</h4>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Moldeo científico</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="100"></div>
-                                </div>
-                            </div>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Troubleshooting de procesos</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="100"></div>
-                                </div>
-                            </div>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Insert molding y co-moldeo</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="100"></div>
-                                </div>
-                            </div>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Lean Manufacturing & 5S</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="100"></div>
-                                </div>
-                            </div>
-
-                            <h4 class="cv-skills__category">Tecnología & Desarrollo</h4>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Infraestructura VPS & Docker</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="80"></div>
-                                </div>
-                            </div>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Automatización con n8n</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="100"></div>
-                                </div>
-                            </div>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Sistemas Web (React, JS, Python)</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="80"></div>
-                                </div>
-                            </div>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">IA aplicada a procesos</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="80"></div>
-                                </div>
-                            </div>
-
-                            <h4 class="cv-skills__category">Marketing & Creatividad</h4>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Estrategias de posicionamiento</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="80"></div>
-                                </div>
-                            </div>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Producción de video y fotografía</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="80"></div>
-                                </div>
-                            </div>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Diseño gráfico y campañas</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="80"></div>
-                                </div>
-                            </div>
-
-                            <h4 class="cv-skills__category">Gestión & Liderazgo</h4>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Manejo y capacitación de personal</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="100"></div>
-                                </div>
-                            </div>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Liderazgo de proyectos</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="100"></div>
-                                </div>
-                            </div>
-                            <div class="cv-skill">
-                                <span class="cv-skill__name">Lanzamiento de modelos de negocio</span>
-                                <div class="cv-skill__bar">
-                                    <div class="cv-skill__progress" data-level="80"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Idiomas -->
-                    <section class="cv-section">
-                        <h2 class="cv-section__title">Idiomas</h2>
-                        <div class="cv-languages">
-                            <div class="cv-language">
-                                <span class="cv-language__name">Español</span>
-                                <span class="cv-language__level">Nativo</span>
-                            </div>
-                            <div class="cv-language">
-                                <span class="cv-language__name">Inglés</span>
-                                <span class="cv-language__level">Avanzado</span>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Proyectos Destacados -->
-                    <section class="cv-section">
-                        <h2 class="cv-section__title">Proyectos Destacados</h2>
-                        <ul class="cv-projects">
-                            <li>Transformación Digital en Vanity: ecosistema en VPS con Docker, n8n y Supabase</li>
-                            <li>Desarrollo de Aplicaciones Web a Medida para distintos giros del sector servicios</li>
-                            <li>Soluciones IoT: integración en mobiliario (mesas inteligentes) con 96% de mejora en puntualidad</li>
-                            <li>Radar Housing & Frenos MKC1 (Aptiv): soporte divisional en proyectos críticos de seguridad</li>
-                        </ul>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!--==================== SWIPER JS (Carrusel) ====================-->
     <script src="/assets/js/swiper-bundle.min.js"></script>
