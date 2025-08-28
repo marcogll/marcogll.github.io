@@ -386,57 +386,95 @@ let swiperPortfolio = new Swiper('.portfolio__container', {
     },
 });
 
-/*==================== TESTIMONIOS ====================*/
-let swiperTestimonial = new Swiper('.testimonial__container', {
-    loop: true,
-    grabCursor: true,
-    spaceBetween: 48,
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-    },
-    effect: 'slide',
-    speed: 600,
-
-    // Navegación con flechas
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-
-    // Paginación
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-        type: 'bullets',
-    },
+/*==================== TESTIMONIOS PERSONALIZADO ====================*/
+class TestimonialCarousel {
+    constructor() {
+        this.slides = document.querySelectorAll('.testimonial__slide');
+        this.prevBtn = document.getElementById('testimonialPrev');
+        this.nextBtn = document.getElementById('testimonialNext');
+        this.indicatorsContainer = document.getElementById('testimonialIndicators');
+        this.currentSlide = 0;
+        this.autoplayInterval = null;
+        
+        this.init();
+    }
     
-    // Responsive breakpoints
-    breakpoints: {
-        568: {
-            slidesPerView: 1,
-            spaceBetween: 32,
-        },
-        768: {
-            slidesPerView: 1,
-            spaceBetween: 48,
-        },
-        1024: {
-            slidesPerView: 1,
-            spaceBetween: 48,
-        }
-    },
+    init() {
+        if (this.slides.length === 0) return;
+        
+        this.createIndicators();
+        this.showSlide(0);
+        this.bindEvents();
+        this.startAutoplay();
+    }
+    
+    createIndicators() {
+        this.slides.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.className = 'testimonial__indicator';
+            indicator.addEventListener('click', () => this.goToSlide(index));
+            this.indicatorsContainer.appendChild(indicator);
+        });
+    }
+    
+    showSlide(index) {
+        // Ocultar todos los slides
+        this.slides.forEach(slide => {
+            slide.classList.remove('active');
+        });
+        
+        // Mostrar el slide actual
+        this.slides[index].classList.add('active');
+        this.currentSlide = index;
+        
+        // Actualizar indicadores
+        const indicators = this.indicatorsContainer.querySelectorAll('.testimonial__indicator');
+        indicators.forEach((indicator, i) => {
+            indicator.classList.toggle('active', i === index);
+        });
+    }
+    
+    goToSlide(index) {
+        this.showSlide(index);
+        this.resetAutoplay();
+    }
+    
+    nextSlide() {
+        const nextIndex = (this.currentSlide + 1) % this.slides.length;
+        this.goToSlide(nextIndex);
+    }
+    
+    prevSlide() {
+        const prevIndex = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+        this.goToSlide(prevIndex);
+    }
+    
+    bindEvents() {
+        this.nextBtn.addEventListener('click', () => this.nextSlide());
+        this.prevBtn.addEventListener('click', () => this.prevSlide());
+        
+        // Soporte para teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') this.prevSlide();
+            if (e.key === 'ArrowRight') this.nextSlide();
+        });
+    }
+    
+    startAutoplay() {
+        this.autoplayInterval = setInterval(() => {
+            this.nextSlide();
+        }, 5000);
+    }
+    
+    resetAutoplay() {
+        clearInterval(this.autoplayInterval);
+        this.startAutoplay();
+    }
+}
 
-    // Configuraciones adicionales
-    keyboard: {
-        enabled: true,
-    },
-    mousewheel: {
-        enabled: false,
-    },
-    slidesPerView: 1,
-    centeredSlides: true,
+// Inicializar el carrusel cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    new TestimonialCarousel();
 });
 
 /*==================== ENLACE ACTIVO DE SECCIONES AL HACER SCROLL ====================*/
@@ -1362,26 +1400,44 @@ document.addEventListener('DOMContentLoaded', function() {
         updateButtonState('loading');
         
         try {
-            // Prepare form data
+            // Prepare form data as URL encoded string for better webhook compatibility
             const formData = new FormData(contactForm);
             
-            // Submit form using fetch API
+            // Convert FormData to URLSearchParams for better compatibility
+            const urlParams = new URLSearchParams();
+            
+            // Add form fields
+            for (let [key, value] of formData) {
+                urlParams.append(key, value);
+            }
+            
+            // Add timestamp and metadata
+            urlParams.append('timestamp', new Date().toISOString());
+            urlParams.append('user_agent', navigator.userAgent);
+            urlParams.append('page_url', window.location.href);
+            urlParams.append('form_type', 'contact');
+            
+            console.log('Sending data to webhook:', urlParams.toString());
+            
+            // Submit form using fetch API to webhook
             const response = await fetch(contactForm.action, {
                 method: 'POST',
-                body: formData,
+                body: urlParams,
                 headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
                     'Accept': 'application/json'
                 }
             });
             
-            if (response.ok) {
+            // Check if response is successful (webhook might return different status codes)
+            if (response.ok || response.status === 200 || response.status === 202) {
                 // Success
                 updateButtonState('success');
                 
                 // Enhanced success notification with personalized message
                 const userName = nameInput.value.split(' ')[0]; // Get first name
                 showNotification(
-                    `¡Excelente ${userName}! Tu mensaje ha sido enviado correctamente. Recibirás un email de confirmación automático y te responderé dentro de las próximas 24 horas. 🚀`, 
+                    `¡Excelente ${userName}! Tu mensaje ha sido enviado correctamente y procesado por nuestro sistema. Te contactaré muy pronto. 🚀`, 
                     'success'
                 );
                 
@@ -1403,7 +1459,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 console.log('Message sent successfully');
             } else {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                // Log response details for debugging
+                console.log('Webhook response status:', response.status);
+                const responseText = await response.text();
+                console.log('Webhook response text:', responseText);
+                console.log('Webhook response headers:', Object.fromEntries(response.headers.entries()));
+                throw new Error(`Webhook error! status: ${response.status} - ${responseText}`);
             }
             
         } catch (error) {
