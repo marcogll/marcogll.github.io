@@ -6,12 +6,13 @@ class BlobController {
         this.morphSpeed = 8; // Velocidad de morphing (4-20 segundos)
         this.colorSpeed = 15; // Velocidad cambio de color (10-30 segundos)
         
-        this.blobShape = document.querySelector('.home__blob-shape');
+        this.homeBlobShape = document.querySelector('.home__blob-shape');
+        this.aboutBlobShape = document.querySelector('.about__blob-shape');
         this.init();
     }
     
     init() {
-        if (this.blobShape) {
+        if (this.homeBlobShape || this.aboutBlobShape) {
             this.updateBlobStyle();
             this.createControls();
         }
@@ -31,7 +32,7 @@ class BlobController {
     }
     
     updateBlobStyle() {
-        if (!this.blobShape) return; 
+        if (!this.homeBlobShape && !this.aboutBlobShape) return; 
         
         // Generar keyframes dinámicos para morphing
         const keyframes = [];
@@ -59,17 +60,29 @@ class BlobController {
         }
         styleSheet.textContent = dynamicCSS;
         
-        // Aplicar animación al blob
-        this.blobShape.style.animation = `blobMorphDynamic ${this.morphSpeed}s ease-in-out infinite, blobColorChangeBorder ${this.colorSpeed}s ease-in-out infinite`;
+        // Aplicar animación a ambos blobs
+        if (this.homeBlobShape) {
+            this.homeBlobShape.style.animation = `blobMorphDynamic ${this.morphSpeed}s ease-in-out infinite, blobColorChangeBorder ${this.colorSpeed}s ease-in-out infinite`;
+        }
+        if (this.aboutBlobShape) {
+            this.aboutBlobShape.style.animation = `blobMorphDynamic ${this.morphSpeed}s ease-in-out infinite, blobColorChangeBorder ${this.colorSpeed}s ease-in-out infinite`;
+        }
         
-        // También aplicar a las imágenes y borde
-        const images = document.querySelectorAll('.home__blob-img');
-        const border = document.querySelector('.home__blob-border');
-        images.forEach(img => {
+        // También aplicar a las imágenes y bordes de ambas secciones
+        const homeImages = document.querySelectorAll('.home__blob-img');
+        const aboutImages = document.querySelectorAll('.about__blob-img');
+        const homeBorder = document.querySelector('.home__blob-border');
+        const aboutBorder = document.querySelector('.about__blob-border');
+        
+        [...homeImages, ...aboutImages].forEach(img => {
             img.style.animation = `blobMorphDynamic ${this.morphSpeed}s ease-in-out infinite`;
         });
-        if (border) {
-            border.style.animation = `blobMorphDynamic ${this.morphSpeed}s ease-in-out infinite`;
+        
+        if (homeBorder) {
+            homeBorder.style.animation = `blobMorphDynamic ${this.morphSpeed}s ease-in-out infinite`;
+        }
+        if (aboutBorder) {
+            aboutBorder.style.animation = `blobMorphDynamic ${this.morphSpeed}s ease-in-out infinite`;
         }
     }
     

@@ -598,19 +598,21 @@ img {
 /*==================== BOTONES ====================*/
 .button {
   display: inline-block;
-  background-color: var(--ctp-mauve);
+  background-color: var(--ctp-blue);
   color: var(--ctp-base);
   padding: 1rem;
   border-radius: .5rem;
   font-weight: var(--font-semi-bold);
   transition: all 0.3s ease;
+  border: 2px solid transparent;
 }
 
 .button:hover {
-  background-color: var(--ctp-teal);
+  background-color: var(--ctp-sapphire);
   color: var(--ctp-base);
   transform: translateY(-2px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 15px rgba(137, 180, 250, 0.3);
+  border-color: var(--ctp-lavender);
 }
 
 .button__icon {
@@ -683,6 +685,206 @@ img {
 .about__buttons {
   display: flex;
   justify-content: center;
+}
+
+/*==================== ABOUT BLOB CARRUSEL ====================*/
+.about__blob-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  justify-self: center;
+  align-self: center;
+}
+
+.about__blob-shape {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--first-color-alt);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  z-index: -2;
+  animation: blobMorph 8s ease-in-out infinite, blobColorChangeBorder 15s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.about__blob-border {
+  position: absolute;
+  width: 108%;
+  height: 108%;
+  border: 2px solid;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  z-index: -1;
+  transition: all 0.3s ease;
+  animation: blobMorph 8s ease-in-out infinite;
+}
+
+/* Bordes temáticos para cada imagen about */
+.about__blob-border--personal {
+  border-color: var(--first-color);
+  background: linear-gradient(135deg, var(--first-color-alt), transparent);
+}
+
+.about__blob-border--technology {
+  border-color: #00d4ff;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), transparent);
+}
+
+.about__blob-border--engineering {
+  border-color: #ff6b35;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), transparent);
+}
+
+.about__blob-border--marketing {
+  border-color: #a855f7;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), transparent);
+}
+
+.about__blob-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.about__blob-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: 1;
+  filter: brightness(1) contrast(1) saturate(1);
+}
+
+.about__blob-img.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Controles del carrusel about */
+.about__carousel-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.about__blob-container:hover .about__carousel-controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.about__nav-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--first-color);
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.about__nav-btn:hover {
+  background: var(--first-color);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.about__nav-prev {
+  margin-left: -20px;
+}
+
+.about__nav-next {
+  margin-right: -20px;
+}
+
+/* Indicadores temáticos */
+.about__carousel-indicators {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.about__indicator {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0;
+}
+
+.about__indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.about__indicator.active .about__indicator-dot {
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+.about__indicator--personal {
+  background: var(--first-color);
+}
+
+.about__indicator--technology {
+  background: #00d4ff;
+}
+
+.about__indicator--engineering {
+  background: #ff6b35;
+}
+
+.about__indicator--marketing {
+  background: #a855f7;
+}
+
+/* Efectos hover para about blob */
+.about__blob-container:hover .about__blob-border {
+  transform: scale(1.05);
+}
+
+.about__blob-container:hover .about__blob-img.active {
+  transform: translate(-50%, -50%) scale(1.02);
+  filter: brightness(1.05) contrast(1.03) saturate(1.08);
 }
 
 /*==================== HABILIDADES ====================*/
@@ -842,26 +1044,62 @@ img {
   transform: rotate(-180deg);
 }
 
-/*==================== EDUCACIÓN ====================*/
+/*==================== EDUCACIÓN MEJORADA ====================*/
 .education__container {
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  row-gap: 2.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .education__content {
   position: relative;
-  background-color: var(--container-color);
+  background-color: var(--ctp-mantle);
   padding: 2rem 1.5rem;
-  border-radius: .75rem;
-  border: 2px solid transparent;
-  transition: all .3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+  border-radius: 1rem;
+  border-left: 4px solid var(--ctp-blue);
+  transition: all 0.4s ease;
+  overflow: visible;
+}
+
+.education__content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ctp-blue), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .education__content:hover {
-  border-color: var(--first-color);
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, .15);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(137, 180, 250, 0.15);
+  border-left-color: var(--ctp-sapphire);
+}
+
+.education__content:hover::before {
+  opacity: 1;
+}
+
+/* Animaciones escalonadas para educación */
+.education__content:nth-child(1) {
+  animation: slideInFromLeft 0.8s ease-out;
+}
+
+.education__content:nth-child(2) {
+  animation: slideInFromRight 0.8s ease-out 0.2s both;
+}
+
+.education__content:nth-child(3) {
+  animation: slideInFromLeft 0.8s ease-out 0.4s both;
+}
+
+.education__content:nth-child(4) {
+  animation: slideInFromRight 0.8s ease-out 0.6s both;
 }
 
 .education__header {
@@ -873,55 +1111,129 @@ img {
 
 .education__icon {
   font-size: 2rem;
-  color: var(--first-color);
   flex-shrink: 0;
   margin-top: 0.2rem;
+  transition: all 0.3s ease;
+}
+
+.education__content:hover .education__icon {
+  color: var(--ctp-lavender);
+  transform: scale(1.1) rotate(5deg);
 }
 
 .education__title {
+  color: var(--ctp-text);
   font-size: var(--h3-font-size);
   font-weight: var(--font-semi-bold);
-  color: var(--title-color);
-  margin-bottom: var(--mb-0-25);
+  margin-bottom: 0.25rem;
   line-height: 1.2;
 }
 
 .education__subtitle {
   font-size: var(--small-font-size);
-  color: var(--first-color);
   font-weight: var(--font-medium);
   display: block;
   margin-bottom: var(--mb-0-25);
+  color: var(--ctp-subtext1);
 }
 
 .education__date {
   font-size: var(--smaller-font-size);
-  color: var(--text-color-light);
+  color: var(--ctp-subtext0);
   font-weight: var(--font-medium);
+  font-style: italic;
 }
 
 .education__description {
   font-size: var(--small-font-size);
-  color: var(--text-color);
+  color: var(--ctp-text);
   line-height: 1.6;
   margin-top: var(--mb-1);
+  opacity: 0.9;
 }
 
-/* Colores específicos para iconos de educación usando la paleta Catppuccin */
+/* Colores específicos por tema educativo */
+.education__content:nth-child(1) {
+  border-left-color: var(--ctp-blue);
+}
+
 .education__content:nth-child(1) .education__icon {
   color: var(--ctp-blue);
+}
+
+.education__content:nth-child(1):hover {
+  border-left-color: var(--ctp-sapphire);
+  box-shadow: 0 12px 32px rgba(137, 180, 250, 0.15);
+}
+
+.education__content:nth-child(2) {
+  border-left-color: var(--ctp-green);
 }
 
 .education__content:nth-child(2) .education__icon {
   color: var(--ctp-green);
 }
 
+.education__content:nth-child(2):hover {
+  border-left-color: var(--ctp-teal);
+  box-shadow: 0 12px 32px rgba(166, 227, 161, 0.15);
+}
+
+.education__content:nth-child(3) {
+  border-left-color: var(--ctp-peach);
+}
+
 .education__content:nth-child(3) .education__icon {
   color: var(--ctp-peach);
 }
 
+.education__content:nth-child(3):hover {
+  border-left-color: var(--ctp-yellow);
+  box-shadow: 0 12px 32px rgba(250, 179, 135, 0.15);
+}
+
+.education__content:nth-child(4) {
+  border-left-color: var(--ctp-pink);
+}
+
 .education__content:nth-child(4) .education__icon {
   color: var(--ctp-pink);
+}
+
+.education__content:nth-child(4):hover {
+  border-left-color: var(--ctp-flamingo);
+  box-shadow: 0 12px 32px rgba(245, 194, 231, 0.15);
+}
+
+/* Responsive para educación */
+@media screen and (max-width: 900px) {
+  .education__container {
+    max-width: 700px;
+    gap: 1.5rem;
+    row-gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .education__container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 500px;
+  }
+  
+  .education__content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .education__header {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  
+  .education__icon {
+    font-size: 2rem;
+  }
 }
 
 /*==================== CALIFICACIÓN ====================*/
@@ -930,8 +1242,8 @@ img {
 /*==================== SERVICIOS ====================*/
 .services__container {
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  max-width: 1200px;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -1286,10 +1598,82 @@ body.modal-open {
 
 .testimonial__description {
   margin-bottom: var(--mb-2-5);
+  line-height: 1.8;
+  font-size: var(--normal-font-size);
+}
+
+.testimonial__description strong {
+  color: var(--ctp-blue);
+  font-weight: var(--font-semi-bold);
+}
+
+.testimonial__description em {
+  color: var(--ctp-peach);
+  font-style: italic;
+}
+
+.testimonial__description strong em {
+  color: var(--ctp-mauve);
+  font-weight: var(--font-semi-bold);
+  font-style: italic;
 }
 
 .swiper-container .swiper-pagination-testimonial {
   bottom: 0;
+}
+
+/* Botones de navegación para testimoniales */
+.testimonial__container .swiper-button-next,
+.testimonial__container .swiper-button-prev {
+  width: 50px;
+  height: 50px;
+  background-color: var(--ctp-surface1);
+  border-radius: 50%;
+  color: var(--ctp-blue);
+  border: 2px solid var(--ctp-blue);
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.testimonial__container .swiper-button-next::after,
+.testimonial__container .swiper-button-prev::after {
+  display: none;
+}
+
+.testimonial__container .swiper-button-next:hover,
+.testimonial__container .swiper-button-prev:hover {
+  background-color: var(--ctp-blue);
+  color: var(--ctp-base);
+  transform: scale(1.1);
+  opacity: 1;
+  box-shadow: 0 8px 15px rgba(137, 180, 250, 0.3);
+}
+
+.testimonial__container .swiper-testimonial-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* Posicionamiento específico */
+.testimonial__container .swiper-button-next {
+  right: 10px;
+}
+
+.testimonial__container .swiper-button-prev {
+  left: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .testimonial__container .swiper-button-next,
+  .testimonial__container .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    opacity: 0.5;
+  }
+  
+  .testimonial__container .swiper-testimonial-icon {
+    font-size: 1.2rem;
+  }
 }
 
 
@@ -2031,16 +2415,16 @@ footer .footer__social a:hover {
 
 .button--outline {
   background-color: transparent;
-  color: var(--first-color);
-  border: 2px solid var(--first-color);
+  color: var(--ctp-peach);
+  border: 2px solid var(--ctp-peach);
 }
 
 .button--outline:hover {
-  background-color: var(--first-color);
-  color: var(--container-color);
-  border: 2px solid var(--first-color);
+  background-color: var(--ctp-peach);
+  color: var(--ctp-base);
+  border: 2px solid var(--ctp-yellow);
   transform: translateY(-2px);
-  box-shadow: 0 8px 15px rgba(136, 57, 239, 0.3);
+  box-shadow: 0 8px 15px rgba(250, 179, 135, 0.3);
 }
 
 .cv-modal__content {
@@ -2882,9 +3266,9 @@ footer .footer__social a:hover {
 /*==================== SERVICIOS MEJORADOS ====================*/
 .services__container {
   gap: 2rem;
-  row-gap: 3rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  max-width: 1200px;
+  row-gap: 2.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -3102,10 +3486,19 @@ footer .footer__social a:hover {
 }
 
 /* Responsive para servicios */
+@media screen and (max-width: 900px) {
+  .services__container {
+    max-width: 700px;
+    gap: 1.5rem;
+    row-gap: 2rem;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .services__container {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    max-width: 500px;
   }
   
   .services__content {

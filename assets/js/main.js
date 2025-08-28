@@ -77,14 +77,76 @@ function initializeSkills() {
     }
 }
 
+// Sistema de carga aleatoria de imágenes de perfil
+const PROFILE_IMAGES_COUNT = 19; // Total de imágenes disponibles (mg_1.png a mg_19.png)
+let randomizedProfileImages = [];
+
+// Función para generar lista aleatoria de imágenes de perfil
+const generateRandomProfileImages = () => {
+    const imageNumbers = Array.from({length: PROFILE_IMAGES_COUNT}, (_, i) => i + 1);
+    
+    // Algoritmo Fisher-Yates para mezclar el array
+    for (let i = imageNumbers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [imageNumbers[i], imageNumbers[j]] = [imageNumbers[j], imageNumbers[i]];
+    }
+    
+    // Convertir números a rutas de imágenes
+    randomizedProfileImages = imageNumbers.map(num => `assets/img/profiles/mg_${num}.png`);
+    
+    console.log('Imágenes de perfil mezcladas:', randomizedProfileImages.slice(0, 9));
+    return randomizedProfileImages;
+};
+
+// Función para asignar imágenes aleatorias a los elementos del DOM
+const assignRandomProfileImages = () => {
+    // Generar lista aleatoria si no existe
+    if (randomizedProfileImages.length === 0) {
+        generateRandomProfileImages();
+    }
+    
+    // Asignar imágenes a la sección home (blob) - usar las primeras 9 imágenes aleatorias
+    const homeImages = document.querySelectorAll('.home__blob-img');
+    homeImages.forEach((img, index) => {
+        if (randomizedProfileImages[index]) {
+            img.src = randomizedProfileImages[index];
+            img.alt = `Marco ${index + 1}`;
+        }
+    });
+    
+    // Asignar imágenes a la sección de proyectos (CTA) - reutilizar las mismas para consistencia
+    const projectImages = document.querySelectorAll('.project__img');
+    projectImages.forEach((img, index) => {
+        if (randomizedProfileImages[index]) {
+            img.src = randomizedProfileImages[index];
+            img.alt = `Marco ${index + 1}`;
+        }
+    });
+    
+    // Asignar imagen para la sección About - usar una imagen consistente
+    const aboutImg = document.querySelector('.about__img');
+    if (aboutImg && randomizedProfileImages[9]) {
+        aboutImg.src = randomizedProfileImages[9]; // Usar la 10ma imagen para about
+        aboutImg.alt = 'Marco Galvan - About';
+    }
+    
+    // Las imágenes de testimoniales se mantienen como están en el HTML
+    // ya que son imágenes específicas del contenido, no fotos de perfil
+    
+    console.log(`Imágenes asignadas - Home: ${homeImages.length}, Proyectos: ${projectImages.length}, About: ${aboutImg ? 1 : 0}`);
+};
+
 // Precarga imágenes críticas para un mejor rendimiento
 const preloadCriticalImages = () => {
     const criticalImages = [
         'assets/img/mg_logo.png',
-        'assets/img/mg_logo_black.png',
-        'assets/img/profiles/mg_1.png',
-        'assets/img/profiles/mg_2.png'
+        'assets/img/mg_logo_black.png'
     ];
+    
+    // Precargar las primeras 4 imágenes aleatorias
+    if (randomizedProfileImages.length > 0) {
+        criticalImages.push(...randomizedProfileImages.slice(0, 4));
+    }
     
     criticalImages.forEach(imagePath => {
         const link = document.createElement('link');
@@ -98,7 +160,8 @@ const preloadCriticalImages = () => {
 // Llama a la inicialización cuando la página se carga
 document.addEventListener('DOMContentLoaded', () => {
     initializeSkills();
-    preloadCriticalImages();
+    assignRandomProfileImages(); // Asignar imágenes aleatorias primero
+    preloadCriticalImages(); // Precargar después de asignar
 })
 
 /*==================== INTERACCIÓN DEL BLOB CON EL RATÓN ====================*/
@@ -328,18 +391,52 @@ let swiperTestimonial = new Swiper('.testimonial__container', {
     loop: true,
     grabCursor: true,
     spaceBetween: 48,
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+    },
+    effect: 'slide',
+    speed: 600,
 
+    // Navegación con flechas
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
 
+    // Paginación
     pagination: {
         el: '.swiper-pagination',
         clickable: true,
         dynamicBullets: true,
+        type: 'bullets',
     },
-    breakpoints:{
-        568:{
-            slidesPerView: 2,
+    
+    // Responsive breakpoints
+    breakpoints: {
+        568: {
+            slidesPerView: 1,
+            spaceBetween: 32,
+        },
+        768: {
+            slidesPerView: 1,
+            spaceBetween: 48,
+        },
+        1024: {
+            slidesPerView: 1,
+            spaceBetween: 48,
         }
-    }
+    },
+
+    // Configuraciones adicionales
+    keyboard: {
+        enabled: true,
+    },
+    mousewheel: {
+        enabled: false,
+    },
+    slidesPerView: 1,
+    centeredSlides: true,
 });
 
 /*==================== ENLACE ACTIVO DE SECCIONES AL HACER SCROLL ====================*/
@@ -738,3 +835,152 @@ const observeModalChanges = () => {
 
 // Start observing when DOM is ready
 document.addEventListener('DOMContentLoaded', observeModalChanges);
+
+/*==================== CARRUSEL ABOUT CON CONTROLES ====================*/
+document.addEventListener('DOMContentLoaded', function() {
+    const aboutBlob = document.querySelector('.about__blob-container');
+    const aboutBlobShape = document.querySelector('.about__blob-shape');
+    
+    // Rotación automática de imágenes de about cada 5 segundos
+    const aboutImages = document.querySelectorAll('.about__blob-img');
+    let currentAboutImageIndex = 0;
+    
+    // Array con información de cada imagen about
+    const aboutImageInfo = [
+        { src: 'assets/img/about.jpg', title: 'Marco Gallegos', theme: 'personal' },
+        { src: 'assets/img/about_technology.png', title: 'Tecnología & Desarrollo', theme: 'technology' },
+        { src: 'assets/img/about_engineering.png', title: 'Ingeniería & Manufactura', theme: 'engineering' },
+        { src: 'assets/img/about_marketing.png', title: 'Marketing & Creatividad', theme: 'marketing' }
+    ];
+    
+    if (aboutImages.length > 0) {
+        // Función para cambiar imagen about
+        const changeAboutImage = (newIndex) => {
+            aboutImages[currentAboutImageIndex].classList.remove('active');
+            currentAboutImageIndex = newIndex;
+            aboutImages[currentAboutImageIndex].classList.add('active');
+            
+            // Cambiar color del borde según la temática
+            const theme = aboutImageInfo[currentAboutImageIndex].theme;
+            const aboutBorder = document.querySelector('.about__blob-border');
+            if (aboutBorder) {
+                aboutBorder.className = 'about__blob-border about__blob-border--' + theme;
+            }
+            
+            // Log para debugging
+            console.log('Imagen About cambiada a:', aboutImageInfo[currentAboutImageIndex].title);
+        };
+        
+        // Rotación automática
+        const aboutRotationInterval = setInterval(() => {
+            const nextIndex = (currentAboutImageIndex + 1) % aboutImages.length;
+            changeAboutImage(nextIndex);
+        }, 5000);
+        
+        // Controles de navegación (flechas)
+        const createAboutControls = () => {
+            const controlsHTML = `
+                <div class="about__carousel-controls">
+                    <button class="about__nav-btn about__nav-prev" title="Anterior">‹</button>
+                    <button class="about__nav-btn about__nav-next" title="Siguiente">›</button>
+                </div>
+                <div class="about__carousel-indicators">
+                    ${aboutImageInfo.map((info, index) => 
+                        `<button class="about__indicator ${index === 0 ? 'active' : ''}" 
+                                data-index="${index}" 
+                                title="${info.title}">
+                            <span class="about__indicator-dot about__indicator--${info.theme}"></span>
+                        </button>`
+                    ).join('')}
+                </div>
+            `;
+            
+            aboutBlob.insertAdjacentHTML('beforeend', controlsHTML);
+            
+            // Event listeners para controles
+            const prevBtn = aboutBlob.querySelector('.about__nav-prev');
+            const nextBtn = aboutBlob.querySelector('.about__nav-next');
+            const indicators = aboutBlob.querySelectorAll('.about__indicator');
+            
+            prevBtn.addEventListener('click', () => {
+                const prevIndex = currentAboutImageIndex === 0 ? aboutImages.length - 1 : currentAboutImageIndex - 1;
+                changeAboutImage(prevIndex);
+                updateIndicators();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                const nextIndex = (currentAboutImageIndex + 1) % aboutImages.length;
+                changeAboutImage(nextIndex);
+                updateIndicators();
+            });
+            
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    changeAboutImage(index);
+                    updateIndicators();
+                });
+            });
+            
+            // Función para actualizar indicadores
+            const updateIndicators = () => {
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentAboutImageIndex);
+                });
+            };
+        };
+        
+        // Interacción con mouse para cambio de imagen
+        if (aboutBlob) {
+            aboutBlob.addEventListener('mousemove', (e) => {
+                const rect = aboutBlob.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Calcular distancia del centro
+                const distance = Math.sqrt(Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2));
+                const maxDistance = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
+                const factor = distance / maxDistance;
+                
+                // Cambiar imagen cuando el ratón esté activo (5% probabilidad)
+                if (factor > 0.2 && Math.random() < 0.05) {
+                    const nextIndex = (currentAboutImageIndex + 1) % aboutImages.length;
+                    changeAboutImage(nextIndex);
+                    const indicators = aboutBlob.querySelectorAll('.about__indicator');
+                    indicators.forEach((indicator, index) => {
+                        indicator.classList.toggle('active', index === currentAboutImageIndex);
+                    });
+                }
+            });
+            
+            // Pausar rotación automática al hacer hover
+            aboutBlob.addEventListener('mouseenter', () => {
+                clearInterval(aboutRotationInterval);
+            });
+            
+            // Reanudar rotación automática al salir del hover
+            aboutBlob.addEventListener('mouseleave', () => {
+                aboutRotationInterval = setInterval(() => {
+                    const nextIndex = (currentAboutImageIndex + 1) % aboutImages.length;
+                    changeAboutImage(nextIndex);
+                    const indicators = aboutBlob.querySelectorAll('.about__indicator');
+                    indicators.forEach((indicator, index) => {
+                        indicator.classList.toggle('active', index === currentAboutImageIndex);
+                    });
+                }, 5000);
+            });
+        }
+        
+        // Crear controles después de un breve delay para asegurar que el DOM esté listo
+        setTimeout(createAboutControls, 500);
+        
+        // Inicializar el primer borde temático
+        setTimeout(() => {
+            const aboutBorder = document.querySelector('.about__blob-border');
+            if (aboutBorder) {
+                aboutBorder.className = 'about__blob-border about__blob-border--personal';
+            }
+        }, 100);
+    }
+});
