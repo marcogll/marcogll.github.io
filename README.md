@@ -20,7 +20,7 @@ Sitio web profesional que presenta de manera interactiva los servicios, experien
 ### 🌐 Enlaces del Sitio
 - **Sitio Principal:** [marcogallegos.mx](https://marcogallegos.mx)
 - **Portfolio Empresarial:** [vanityexperience.mx](https://vanityexperience.mx)
-- **Agencia de Marketing:** [@auramarketing.mx](https://www.instagram.com/auramarketing.mx)
+- **Agencia de Marketing:** [@tangog](https://www.instagram.com/tangog?igsh=MWMwYWQ4c2d6aGZv)
 
 ---
 
@@ -321,7 +321,7 @@ Desarrollo soluciones completas para:
 - **Email:** marco@vanityexperience.mx
 - **GitHub:** [github.com/marcogll](https://github.com/marcogll)
 - **LinkedIn:** Conexión profesional disponible
-- **Instagram Aura:** [@auramarketing.mx](https://www.instagram.com/auramarketing.mx)
+- **Instagram Aura:** [@tangog](https://www.instagram.com/tangog?igsh=MWMwYWQ4c2d6aGZv)
 
 ---
 
@@ -372,7 +372,7 @@ Desarrollo soluciones completas para:
 |-----------|--------|-------------|
 | **🏠 Principal** | [marcogallegos.mx](https://marcogallegos.mx) | Sitio web profesional |
 | **💅 Vanity** | [vanityexperience.mx](https://vanityexperience.mx) | Portfolio empresarial |
-| **🎨 Aura** | [@auramarketing.mx](https://www.instagram.com/auramarketing.mx) | Agencia de marketing |
+| **🎨 Aura** | [@tangog](https://www.instagram.com/tangog?igsh=MWMwYWQ4c2d6aGZv) | Agencia de marketing |
 | **👨‍💻 GitHub** | [github.com/marcogll](https://github.com/marcogll) | Repositorios y código |
 | **📧 Contacto** | marco@vanityexperience.mx | Email profesional |
 

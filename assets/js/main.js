@@ -78,11 +78,12 @@ function initializeSkills() {
 }
 
 // Sistema de carga aleatoria de imágenes de perfil
-const PROFILE_IMAGES_COUNT = 19; // Total de imágenes disponibles (mg_1.png a mg_19.png)
+const PROFILE_IMAGES_COUNT = 20; // Total de imágenes disponibles (mg_1.png a mg_20.png)
 let randomizedProfileImages = [];
 
 // Función para generar lista aleatoria de imágenes de perfil
 const generateRandomProfileImages = () => {
+    // Generar array con todos los números de imagen (1-20)
     const imageNumbers = Array.from({length: PROFILE_IMAGES_COUNT}, (_, i) => i + 1);
     
     // Algoritmo Fisher-Yates para mezclar el array
@@ -94,7 +95,7 @@ const generateRandomProfileImages = () => {
     // Convertir números a rutas de imágenes
     randomizedProfileImages = imageNumbers.map(num => `assets/img/profiles/mg_${num}.png`);
     
-    console.log('Imágenes de perfil mezcladas:', randomizedProfileImages.slice(0, 9));
+    console.log(`Imágenes de perfil mezcladas (${randomizedProfileImages.length} total):`, randomizedProfileImages.slice(0, 9));
     return randomizedProfileImages;
 };
 
@@ -123,17 +124,17 @@ const assignRandomProfileImages = () => {
         }
     });
     
-    // Asignar imagen para la sección About - usar una imagen consistente
-    const aboutImg = document.querySelector('.about__img');
-    if (aboutImg && randomizedProfileImages[9]) {
-        aboutImg.src = randomizedProfileImages[9]; // Usar la 10ma imagen para about
-        aboutImg.alt = 'Marco Galvan - About';
+    // Asignar imagen para la sección About - usar una imagen consistente pero aleatoria
+    const aboutMainImg = document.querySelector('.about__blob-carousel .about__blob-img[src*="about.jpg"]');
+    if (aboutMainImg && randomizedProfileImages[9]) {
+        aboutMainImg.src = randomizedProfileImages[9]; // Usar la 10ma imagen aleatoria para about
+        aboutMainImg.alt = 'Marco Gallegos - About';
     }
     
     // Las imágenes de testimoniales se mantienen como están en el HTML
     // ya que son imágenes específicas del contenido, no fotos de perfil
     
-    console.log(`Imágenes asignadas - Home: ${homeImages.length}, Proyectos: ${projectImages.length}, About: ${aboutImg ? 1 : 0}`);
+    console.log(`Imágenes asignadas - Home: ${homeImages.length}, Proyectos: ${projectImages.length}, About: ${aboutMainImg ? 1 : 0}`);
 };
 
 // Precarga imágenes críticas para un mejor rendimiento
