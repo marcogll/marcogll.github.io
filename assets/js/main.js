@@ -1506,15 +1506,46 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log('Sending data to webhook:', urlParams.toString());
             
-            // Submit form using fetch API to webhook
-            const response = await fetch(contactForm.action, {
-                method: 'POST',
-                body: urlParams,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Accept': 'application/json'
+            // Submit form using fetch API to webhook with fallback
+            let response;
+            const primaryEndpoint = contactForm.action;
+            const fallbackEndpoint = 'https://formspree.io/f/xpwaaewq'; // Fallback form service
+            
+            try {
+                response = await fetch(primaryEndpoint, {
+                    method: 'POST',
+                    body: urlParams,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': 'application/json',
+                        'Origin': window.location.origin
+                    },
+                    mode: 'cors'
+                });
+                
+                // If primary endpoint fails, try fallback
+                if (!response.ok && response.status >= 400) {
+                    console.log('Primary webhook failed, trying fallback...');
+                    response = await fetch(fallbackEndpoint, {
+                        method: 'POST',
+                        body: urlParams,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Accept': 'application/json'
+                        }
+                    });
                 }
-            });
+            } catch (error) {
+                console.log('Primary webhook failed with error, trying fallback...', error.message);
+                response = await fetch(fallbackEndpoint, {
+                    method: 'POST',
+                    body: urlParams,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': 'application/json'
+                    }
+                });
+            }
             
             // Check if response is successful (webhook might return different status codes)
             if (response.ok || response.status === 200 || response.status === 202) {
