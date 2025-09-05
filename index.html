@@ -1479,6 +1479,43 @@
                         <textarea name="message" id="contact-message" cols="0" rows="7" class="contact__input" placeholder="Cuéntame más sobre tu idea, proyecto o consulta. ¡Me emociona escuchar sobre nuevas oportunidades!" required></textarea>
                     </div>
 
+                    <!-- Sección opcional de redes sociales -->
+                    <div class="contact__optional-section">
+                        <div class="contact__optional-toggle">
+                            <label for="show-social-links" class="contact__optional-label">
+                                <input type="checkbox" id="show-social-links" class="contact__optional-checkbox">
+                                <span class="contact__optional-text">Compartir mis redes sociales (opcional)</span>
+                            </label>
+                            <p class="contact__optional-description">
+                                Para poder darte una mejor ayuda, agradecemos nos compartas esta información
+                            </p>
+                        </div>
+
+                        <div class="contact__social-fields" id="social-fields">
+                            <div class="contact__inputs grid">
+                                <div class="contact__content">
+                                    <label for="contact-social-1" class="contact__label" id="social-1-label">Tu link aquí</label>
+                                    <input name="social_link_1" type="url" id="contact-social-1" class="contact__input" placeholder="tu.link.com">
+                                </div>
+                                <div class="contact__content">
+                                    <label for="contact-social-2" class="contact__label" id="social-2-label">Tu link aquí</label>
+                                    <input name="social_link_2" type="url" id="contact-social-2" class="contact__input" placeholder="tu.link.com">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Checkbox de consentimiento -->
+                    <div class="contact__consent">
+                        <label for="contact-consent" class="contact__consent-label">
+                            <input type="checkbox" id="contact-consent" name="consent" required class="contact__consent-checkbox">
+                            <span class="contact__consent-text">
+                                Acepto que mis datos sean procesados para responder a mi consulta. 
+                                Lee nuestra <a href="#" class="privacy__link" id="privacy-link">política de privacidad</a>
+                            </span>
+                        </label>
+                    </div>
+
                     <div>
                         <button type="submit" class="button button--flex">
                             Enviar Mensaje
@@ -1488,6 +1525,74 @@
                 </form>
             </div>
         </section>
+
+        <!--==================== MODAL POLÍTICA DE PRIVACIDAD ====================-->
+        <div class="privacy__modal" id="privacy-modal">
+            <div class="privacy__modal-content">
+                <div class="privacy__modal-header">
+                    <div class="privacy__modal-title-section">
+                        <div class="privacy__modal-icon">
+                            <i class="uil uil-shield-check"></i>
+                        </div>
+                        <div class="privacy__modal-title-content">
+                            <h2 class="privacy__modal-title">Política de Privacidad</h2>
+                            <p class="privacy__modal-subtitle">Resumen de cómo protegemos tu información</p>
+                        </div>
+                    </div>
+                    <button class="privacy__modal-close" id="privacy-modal-close">
+                        <i class="uil uil-times"></i>
+                    </button>
+                </div>
+                
+                <div class="privacy__modal-body">
+                    <div class="privacy__modal-summary">
+                        <div class="privacy__modal-item">
+                            <i class="uil uil-database privacy__modal-item-icon"></i>
+                            <div class="privacy__modal-item-content">
+                                <h4>¿Qué datos recopilamos?</h4>
+                                <p>Solo tu nombre, email, teléfono y mensaje del formulario de contacto. Opcionalmente, enlaces a redes sociales si decides compartirlos.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="privacy__modal-item">
+                            <i class="uil uil-target privacy__modal-item-icon"></i>
+                            <div class="privacy__modal-item-content">
+                                <h4>¿Para qué los usamos?</h4>
+                                <p>Únicamente para responder a tus consultas, dar seguimiento apropiado, mantener comunicación sobre proyectos y mejorar la experiencia del portafolio.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="privacy__modal-item">
+                            <i class="uil uil-shield-plus privacy__modal-item-icon"></i>
+                            <div class="privacy__modal-item-content">
+                                <h4>¿Compartimos tus datos?</h4>
+                                <p><strong>NO.</strong> No vendemos ni compartimos tu información con terceros. Solo se procesa mediante nuestro webhook seguro.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="privacy__modal-item">
+                            <i class="uil uil-setting privacy__modal-item-icon"></i>
+                            <div class="privacy__modal-item-content">
+                                <h4>Tus derechos</h4>
+                                <p>Puedes solicitar acceso, corrección o eliminación de tus datos en cualquier momento contactándome directamente.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="privacy__modal-actions">
+                        <a href="/privacy.html" class="button button--flex privacy__modal-btn">
+                            <i class="uil uil-file-alt button__icon"></i>
+                            Ver política completa
+                        </a>
+                        <button class="button button--outline privacy__modal-btn" id="privacy-modal-accept">
+                            <i class="uil uil-check button__icon"></i>
+                            Entendido
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="privacy__modal-overlay" id="privacy-modal-overlay"></div>
+        </div>
     </main>
 
     <!--==================== PIE DE PÁGINA ====================-->

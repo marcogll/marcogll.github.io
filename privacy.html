@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Política de privacidad del portafolio de Marco Gallegos - Conoce cómo protegemos tu información personal" />
+    <meta name="keywords" content="Política de Privacidad, Marco Gallegos, Protección de Datos, GDPR, Privacidad Digital" />
+
+    <!--==================== UNICONS (Iconos) ====================-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    
+    <!--==================== ICONOS DE GOOGLE MATERIAL ====================-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!--==================== CSS (Estilos) ====================-->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <title>Política de Privacidad | Marco Gallegos</title>
+
+    <!--==================== Favicon & PWA (Icono de pestaña y App Web Progresiva) ====================-->
+    <!-- Favicon Estándar -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Favicons PNG para mejor calidad -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    
+    <!-- Icono para Apple Touch -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Iconos para Android/Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    
+    <!-- Manifiesto PWA -->
+    <link rel="manifest" href="/site.webmanifest" id="theme-manifest">
+    
+    <!-- Meta etiquetas específicas del tema -->
+    <meta name="theme-color" content="#f4b8e4" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#181825" media="(prefers-color-scheme: dark)">
+    <meta name="msapplication-TileColor" content="#f4b8e4">
+    <meta name="application-name" content="Marco Gallegos">
+    <meta name="apple-mobile-web-app-title" content="Marco MG">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Rendimiento y caché -->
+    <meta name="format-detection" content="telephone=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+    <!--==================== CDN para Animar en Scroll ====================-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!--==================== INICIALIZACIÓN INMEDIATA DE TEMA ====================-->
+    <script>
+        // Aplicar tema inmediatamente para evitar parpadeo
+        (function() {
+            const selectedTheme = localStorage.getItem('selected-theme');
+            const selectedIcon = localStorage.getItem('selected-icon');
+            
+            const getSystemTheme = () => {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'light';
+            };
+            
+            let isDarkTheme = false;
+            
+            if (selectedTheme) {
+                isDarkTheme = selectedTheme === 'dark';
+            } else {
+                const systemTheme = getSystemTheme();
+                isDarkTheme = systemTheme === 'dark';
+            }
+            
+            if (isDarkTheme) {
+                document.documentElement.classList.add('dark-theme');
+                document.body.classList.add('dark-theme');
+            }
+            
+            // Configurar el icono cuando el DOM esté listo
+            document.addEventListener('DOMContentLoaded', function() {
+                const themeButton = document.getElementById('theme-button');
+                if (themeButton) {
+                    if (selectedIcon) {
+                        if (selectedIcon === 'uil-moon') {
+                            themeButton.classList.add('uil-sun');
+                        }
+                    } else if (isDarkTheme) {
+                        themeButton.classList.add('uil-sun');
+                    }
+                }
+            });
+        })();
+    </script>
+</head>
+<body>
+
+    <!--==================== ENCABEZADO ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="/" class="nav__logo">
+                <img src="assets/img/mg_logo_black.png" alt="MG Logo" class="nav__logo-img" id="navbar-logo">
+            </a>
+
+            <div data-aos="fade-in" class="nav__menu" id="nav-menu">
+                <ul class="nav__list grid">
+                    <li class="nav__items">
+                        <a href="/#home" class="nav__link">
+                            <i class="uil uil-estate nav__icon"></i> Home
+                        </a>
+                    </li>
+
+                    <li class="nav__items">
+                        <a href="/#about" class="nav__link">
+                            <i class="uil uil-user nav__icon"></i> Acerca de mi
+                        </a>
+                    </li>
+
+                    <li class="nav__items">
+                        <a href="/#skills" class="nav__link">
+                            <i class="uil uil-file nav__icon"></i> Skills
+                        </a>
+                    </li>
+
+                    <li class="nav__items">
+                        <a href="/#services" class="nav__link">
+                            <i class="uil uil-briefcase-alt nav__icon"></i> Servicios
+                        </a>
+                    </li>
+
+                    <li class="nav__items">
+                        <a href="/#portfolio" class="nav__link">
+                            <i class="uil uil-scenery nav__icon"></i> Proyectos
+                        </a>
+                    </li>
+
+                    <li class="nav__items">
+                        <a href="/#contact" class="nav__link">
+                            <i class="uil uil-message nav__icon"></i> ¿Platicamos?
+                        </a>
+                    </li>
+
+                    <li class="nav__items">
+                        <a href="/privacy.html" class="nav__link active-link">
+                            <i class="uil uil-shield-check nav__icon"></i> Privacidad
+                        </a>
+                    </li>
+                </ul>
+                <i class="uil uil-times nav__close" id="nav-close"></i>
+            </div>
+
+            <div class="nav__btns">
+                <!-- Botón para cambiar tema -->
+                <i class="uil uil-moon change-theme" id="theme-button"></i>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="uil uil-apps"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--==================== PRINCIPAL ====================-->
+    <main class="main">
+        <!--==================== POLÍTICA DE PRIVACIDAD ====================-->
+        <section class="privacy section" id="privacy">
+            <div class="privacy__container container">
+                <!-- Header con icono y breadcrumb -->
+                <div data-aos="fade-down" class="privacy__header">
+                    <nav class="privacy__breadcrumb">
+                        <a href="/" class="privacy__breadcrumb-link">
+                            <i class="uil uil-estate"></i>
+                            Inicio
+                        </a>
+                        <i class="uil uil-angle-right"></i>
+                        <span class="privacy__breadcrumb-current">Política de Privacidad</span>
+                    </nav>
+                </div>
+
+                <!-- Título principal con icono -->
+                <div data-aos="fade-up" class="privacy__title-section">
+                    <div class="privacy__title-icon">
+                        <i class="uil uil-shield-check"></i>
+                    </div>
+                    <h1 class="privacy__title">Política de Privacidad</h1>
+                    <p class="privacy__subtitle">Tu privacidad es nuestra prioridad</p>
+                </div>
+
+                <!-- Intro principal -->
+                <div data-aos="fade-up" data-aos-delay="100" class="privacy__intro">
+                    <div class="privacy__intro-content">
+                        <i class="material-symbols-outlined privacy__intro-icon">security</i>
+                        <p class="privacy__intro-text">En este portafolio personal respetamos y protegemos tu privacidad. Esta política explica qué datos recopilamos, cómo los utilizamos y cuáles son tus derechos.</p>
+                    </div>
+                </div>
+
+                <!-- Contenido principal -->
+                <div class="privacy__content">
+    <p>En <strong>marcogll.github.io</strong> respetamos y protegemos tu privacidad. Esta política explica qué datos recopilamos, cómo los utilizamos y cuáles son tus derechos.</p>
+
+                    <!-- Sección 1 -->
+                    <div data-aos="fade-up" data-aos-delay="200" class="privacy__section">
+                        <div class="privacy__section-header">
+                            <div class="privacy__section-icon">
+                                <i class="material-symbols-outlined">database</i>
+                            </div>
+                            <div class="privacy__section-title-container">
+                                <h2 class="privacy__section-title">1. Información que recopilamos</h2>
+                                <span class="privacy__section-subtitle">Los datos que necesitamos para ofrecerte el mejor servicio</span>
+                            </div>
+                        </div>
+                        <div class="privacy__section-content">
+                            <ul class="privacy__list">
+                                <li class="privacy__list-item">
+                                    <i class="uil uil-user-circle privacy__list-icon"></i>
+                                    <div class="privacy__list-content">
+                                        <strong>Datos de contacto:</strong> nombre, correo electrónico, teléfono y mensaje que ingreses en el formulario.
+                                    </div>
+                                </li>
+                                <li class="privacy__list-item">
+                                    <i class="uil uil-link privacy__list-icon"></i>
+                                    <div class="privacy__list-content">
+                                        <strong>Enlaces opcionales:</strong> a tus redes sociales si decides compartirlos.
+                                    </div>
+                                </li>
+                                <li class="privacy__list-item">
+                                    <i class="uil uil-analytics privacy__list-icon"></i>
+                                    <div class="privacy__list-content">
+                                        <strong>Datos técnicos básicos:</strong> IP, navegador, dispositivo de forma automática por motivos de seguridad y estadísticas.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Sección 2 -->
+                    <div data-aos="fade-up" data-aos-delay="300" class="privacy__section">
+                        <div class="privacy__section-header">
+                            <div class="privacy__section-icon">
+                                <i class="material-symbols-outlined">settings_applications</i>
+                            </div>
+                            <div class="privacy__section-title-container">
+                                <h2 class="privacy__section-title">2. Uso de la información</h2>
+                                <span class="privacy__section-subtitle">Cómo utilizamos tus datos de manera responsable</span>
+                            </div>
+                        </div>
+                        <div class="privacy__section-content">
+                            <p class="privacy__section-description">La información se utiliza únicamente para:</p>
+                            <ul class="privacy__list">
+                                <li class="privacy__list-item">
+                                    <i class="uil uil-comment-dots privacy__list-icon"></i>
+                                    <div class="privacy__list-content">
+                                        <strong>Responder consultas:</strong> atender tus solicitudes enviadas mediante el formulario de contacto.
+                                    </div>
+                                </li>
+                                <li class="privacy__list-item">
+                                    <i class="uil uil-users-alt privacy__list-icon"></i>
+                                    <div class="privacy__list-content">
+                                        <strong>Comunicación profesional:</strong> mantener contacto respecto a proyectos o colaboraciones.
+                                    </div>
+                                </li>
+                                <li class="privacy__list-item">
+                                    <i class="uil uil-clipboard-alt privacy__list-icon"></i>
+                                    <div class="privacy__list-content">
+                                        <strong>Seguimiento de consultas:</strong> dar seguimiento apropiado a tus solicitudes y mantener un historial de comunicación.
+                                    </div>
+                                </li>
+                                <li class="privacy__list-item">
+                                    <i class="uil uil-chart-line privacy__list-icon"></i>
+                                    <div class="privacy__list-content">
+                                        <strong>Mejora continua:</strong> optimizar la experiencia de navegación en el portafolio.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Sección 3 -->
+                    <div data-aos="fade-up" data-aos-delay="400" class="privacy__section">
+                        <div class="privacy__section-header">
+                            <div class="privacy__section-icon privacy__section-icon--secure">
+                                <i class="material-symbols-outlined">verified_user</i>
+                            </div>
+                            <div class="privacy__section-title-container">
+                                <h2 class="privacy__section-title">3. Compartición de datos</h2>
+                                <span class="privacy__section-subtitle">Tu información está protegida</span>
+                            </div>
+                        </div>
+                        <div class="privacy__section-content">
+                            <div class="privacy__highlight-box">
+                                <i class="uil uil-shield-check privacy__highlight-icon"></i>
+                                <p class="privacy__highlight-text">
+                                    <strong>Garantía absoluta:</strong> No vendemos ni compartimos tu información con terceros. 
+                                    Solo se procesa a través de servicios necesarios para el funcionamiento del portafolio (por ejemplo, el webhook de contacto).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 4 -->
+                    <div data-aos="fade-up" data-aos-delay="500" class="privacy__section">
+                        <div class="privacy__section-header">
+                            <div class="privacy__section-icon">
+                                <i class="material-symbols-outlined">admin_panel_settings</i>
+                            </div>
+                            <div class="privacy__section-title-container">
+                                <h2 class="privacy__section-title">4. Derechos de los usuarios</h2>
+                                <span class="privacy__section-subtitle">Tienes control total sobre tu información</span>
+                            </div>
+                        </div>
+                        <div class="privacy__section-content">
+                            <p class="privacy__section-description">Puedes solicitar en cualquier momento:</p>
+                            <ul class="privacy__list">
+                                <li class="privacy__list-item">
+                                    <i class="uil uil-eye privacy__list-icon"></i>
+                                    <div class="privacy__list-content">
+                                        <strong>Acceso:</strong> a todos los datos que has proporcionado.
+                                    </div>
+                                </li>
+                                <li class="privacy__list-item">
+                                    <i class="uil uil-edit privacy__list-icon"></i>
+                                    <div class="privacy__list-content">
+                                        <strong>Corrección:</strong> o actualización de tu información.
+                                    </div>
+                                </li>
+                                <li class="privacy__list-item">
+                                    <i class="uil uil-trash-alt privacy__list-icon"></i>
+                                    <div class="privacy__list-content">
+                                        <strong>Eliminación:</strong> completa de tu información de nuestros registros.
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="privacy__contact-box">
+                                <i class="uil uil-envelope-alt privacy__contact-icon"></i>
+                                <div class="privacy__contact-content">
+                                    <span class="privacy__contact-label">Para ejercer estos derechos, contáctame en:</span>
+                                    <a href="mailto:marco@vanityexperience.mx" class="privacy__contact-email">
+                                        <i class="uil uil-envelope"></i>
+                                        marco@vanityexperience.mx
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 5 -->
+                    <div data-aos="fade-up" data-aos-delay="600" class="privacy__section">
+                        <div class="privacy__section-header">
+                            <div class="privacy__section-icon">
+                                <i class="material-symbols-outlined">lock</i>
+                            </div>
+                            <div class="privacy__section-title-container">
+                                <h2 class="privacy__section-title">5. Seguridad</h2>
+                                <span class="privacy__section-subtitle">Protección avanzada de tu información</span>
+                            </div>
+                        </div>
+                        <div class="privacy__section-content">
+                            <div class="privacy__security-grid">
+                                <div class="privacy__security-item">
+                                    <i class="uil uil-shield-plus privacy__security-icon"></i>
+                                    <div class="privacy__security-content">
+                                        <h4 class="privacy__security-title">Medidas implementadas</h4>
+                                        <p class="privacy__security-text">Implementamos medidas razonables y actualizadas para proteger tu información personal.</p>
+                                    </div>
+                                </div>
+                                <div class="privacy__security-item">
+                                    <i class="uil uil-exclamation-triangle privacy__security-icon privacy__security-icon--warning"></i>
+                                    <div class="privacy__security-content">
+                                        <h4 class="privacy__security-title">Transparencia total</h4>
+                                        <p class="privacy__security-text">Recuerda que ninguna transmisión por Internet es 100% segura, por eso somos transparentes sobre nuestras medidas.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 6 -->
+                    <div data-aos="fade-up" data-aos-delay="700" class="privacy__section">
+                        <div class="privacy__section-header">
+                            <div class="privacy__section-icon">
+                                <i class="material-symbols-outlined">cookie</i>
+                            </div>
+                            <div class="privacy__section-title-container">
+                                <h2 class="privacy__section-title">6. Cookies</h2>
+                                <span class="privacy__section-subtitle">Información sobre el uso de cookies</span>
+                            </div>
+                        </div>
+                        <div class="privacy__section-content">
+                            <div class="privacy__cookies-info">
+                                <div class="privacy__cookies-item">
+                                    <i class="uil uil-analytics privacy__cookies-icon"></i>
+                                    <div class="privacy__cookies-content">
+                                        <h4 class="privacy__cookies-title">Cookies analíticas</h4>
+                                        <p class="privacy__cookies-text">Este portafolio puede usar cookies de terceros (Google Analytics) para estadísticas y mejora del servicio.</p>
+                                    </div>
+                                </div>
+                                <div class="privacy__cookies-item">
+                                    <i class="uil uil-setting privacy__cookies-icon"></i>
+                                    <div class="privacy__cookies-content">
+                                        <h4 class="privacy__cookies-title">Control total</h4>
+                                        <p class="privacy__cookies-text">Puedes deshabilitarlas desde la configuración de tu navegador en cualquier momento.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 7 -->
+                    <div data-aos="fade-up" data-aos-delay="800" class="privacy__section">
+                        <div class="privacy__section-header">
+                            <div class="privacy__section-icon">
+                                <i class="material-symbols-outlined">update</i>
+                            </div>
+                            <div class="privacy__section-title-container">
+                                <h2 class="privacy__section-title">7. Cambios a esta política</h2>
+                                <span class="privacy__section-subtitle">Mantenemos nuestra política actualizada</span>
+                            </div>
+                        </div>
+                        <div class="privacy__section-content">
+                            <div class="privacy__update-box">
+                                <i class="uil uil-history-alt privacy__update-icon"></i>
+                                <div class="privacy__update-content">
+                                    <p class="privacy__update-text">
+                                        <strong>Actualizaciones responsables:</strong> Esta política puede actualizarse para reflejar cambios en el portafolio o requisitos legales. 
+                                        La fecha de última modificación aparecerá al final del documento.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 8 -->
+                    <div data-aos="fade-up" data-aos-delay="900" class="privacy__section privacy__section--contact">
+                        <div class="privacy__section-header">
+                            <div class="privacy__section-icon">
+                                <i class="material-symbols-outlined">contact_support</i>
+                            </div>
+                            <div class="privacy__section-title-container">
+                                <h2 class="privacy__section-title">8. Contacto</h2>
+                                <span class="privacy__section-subtitle">¿Tienes dudas? Estoy aquí para ayudarte</span>
+                            </div>
+                        </div>
+                        <div class="privacy__section-content">
+                            <div class="privacy__contact-final">
+                                <div class="privacy__contact-card">
+                                    <div class="privacy__contact-avatar">
+                                        <img src="assets/img/profiles/mg_1.png" alt="Marco Gallegos" class="privacy__contact-img">
+                                    </div>
+                                    <div class="privacy__contact-info">
+                                        <h3 class="privacy__contact-name">Marco Gallegos</h3>
+                                        <p class="privacy__contact-role">Responsable de Datos</p>
+                                        <p class="privacy__contact-description">Si tienes dudas sobre esta política, no dudes en contactarme:</p>
+                                        <a href="mailto:marco@vanityexperience.mx" class="privacy__contact-btn">
+                                            <i class="uil uil-envelope"></i>
+                                            marco@vanityexperience.mx
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer con fecha -->
+                <div data-aos="fade-up" data-aos-delay="1000" class="privacy__footer">
+                    <div class="privacy__update-date">
+                        <i class="uil uil-calendar-alt privacy__date-icon"></i>
+                        <span class="privacy__date-text">Última actualización: <strong>Septiembre 2025</strong></span>
+                    </div>
+                    
+                    <!-- Botones de acción -->
+                    <div class="privacy__actions">
+                        <a href="/" class="button button--flex privacy__action-btn">
+                            <i class="uil uil-estate button__icon"></i>
+                            Volver al inicio
+                        </a>
+                        <a href="/#contact" class="button button--flex button--outline privacy__action-btn">
+                            <i class="uil uil-message button__icon"></i>
+                            ¿Platicamos?
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!--==================== PIE DE PÁGINA ====================-->
+    <footer class="footer">
+        <div class="footer__bg">
+            <div class="footer__container container grid">
+                <div>
+                    <div class="footer__logo">
+                        <img src="assets/img/mg_logo_black.png" alt="MG Logo" class="footer__logo-img">
+                    </div>
+                    <h1 class="footer__title">Marco Gallegos</h1>
+                    <span class="footer__subtitle">Ingeniero & Desarrollador de Soluciones</span>
+                </div>
+
+                <!-- Container dividido para menu y logo AlMa -->
+                <div class="footer__menu-container">
+                    <div class="footer__menu-section">
+                        <ul class="footer__links">
+                            <li>
+                                <a href="/#services" class="footer__link">Services</a>
+                            </li>
+                            <li>
+                                <a href="/#portfolio" class="footer__link">Portfolio</a>
+                            </li>
+                            <li>
+                                <a href="/#contact" class="footer__link">¿Platicamos?</a>
+                            </li>
+                            <li>
+                                <a href="/privacy.html" class="footer__link">Privacidad</a>
+                            </li>
+                        </ul>
+
+                        <div class="footer__socials">
+                            <a href="https://www.instagram.com/tangog?igsh=MWMwYWQ4c2d6aGZv" target="_blank" class="footer__social">
+                                <i class="uil uil-instagram"></i>
+                            </a>
+                            <a href="https://github.com/marcogll" target="_blank" class="footer__social">
+                                <i class="uil uil-github-alt"></i>
+                            </a>
+                            <a href="https://x.com/AuraMarketingMX" target="_blank" class="footer__social">
+                                <i class="uil uil-twitter-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="footer__alma-section">
+                        <!-- Logo AlMa movido aquí -->
+                        <div class="footer__alma-logo">
+                            <img src="assets/img/logo AlMa.png" alt="AlMa Logo" class="footer__alma-img footer__alma-img--dark">
+                            <img src="assets/img/logo_AlMa_wh.png" alt="AlMa Logo" class="footer__alma-img footer__alma-img--light">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="footer__copy">© 2025 Marco Gallegos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!--==================== BOTÓN PARA SUBIR ====================-->
+    <div>
+        <a href="#" class="scrollup" id="scroll-up">
+            <i class="uil uil-arrow-up scrollup__icon"></i>
+        </a>
+    </div>
+
+    <!--==================== SCRIPT PRINCIPAL ====================-->
+    <script src="assets/js/main.js"></script>
+
+    <!--=================== Animar en Scroll (AOS.js) ===============-->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 300,
+            duration: 1000
+        });
+    </script>
+
+    <!--=================== VERIFICACIÓN DE TEMA ===============-->
+    <script>
+        // Debug: verificar que el tema funciona correctamente
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeButton = document.getElementById('theme-button');
+            console.log('Privacy page loaded');
+            console.log('Theme button found:', !!themeButton);
+            console.log('Current theme class:', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+            console.log('Local storage theme:', localStorage.getItem('selected-theme'));
+            
+            // Asegurar que el botón tema tenga el evento correctamente
+            if (themeButton && !themeButton.hasAttribute('data-theme-ready')) {
+                console.log('Adding theme button event listener');
+                themeButton.setAttribute('data-theme-ready', 'true');
+                themeButton.addEventListener('click', function() {
+                    console.log('Theme button clicked on privacy page');
+                    
+                    // Verificar que se guarda el tema
+                    setTimeout(() => {
+                        console.log('After click - Theme:', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+                        console.log('After click - LocalStorage:', localStorage.getItem('selected-theme'));
+                    }, 100);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

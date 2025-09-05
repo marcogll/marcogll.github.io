@@ -174,13 +174,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const images = document.querySelectorAll('.home__blob-img');
     let currentImageIndex = 0;
     
-    setInterval(() => {
-        if (!blob.matches(':hover')) { // Solo auto-rotar cuando no hay hover
-            images.forEach(img => img.classList.remove('active'));
-            currentImageIndex = (currentImageIndex + 1) % images.length;
-            images[currentImageIndex].classList.add('active');
-        }
-    }, 4000);
+    // Solo ejecutar si estamos en una página que tiene el blob
+    if (blob && images.length > 0) {
+        setInterval(() => {
+            if (!blob.matches(':hover')) { // Solo auto-rotar cuando no hay hover
+                images.forEach(img => img.classList.remove('active'));
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                images[currentImageIndex].classList.add('active');
+            }
+        }, 4000);
+    }
     
     if (blob && blobShape) {
         let isHovering = false;
@@ -373,18 +376,23 @@ document.addEventListener('keydown', (e) => {
     }
 })
 /*==================== CARRUSEL DEL PORTAFOLIO ====================*/
-let swiperPortfolio = new Swiper('.portfolio__container', {
-    cssMode: true,
-    loop: true,
-
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
+// Solo inicializar Swiper si existe y estamos en una página que lo necesita
+document.addEventListener('DOMContentLoaded', function() {
+    const portfolioContainer = document.querySelector('.portfolio__container');
+    if (portfolioContainer && typeof Swiper !== 'undefined') {
+        let swiperPortfolio = new Swiper('.portfolio__container', {
+            cssMode: true,
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    }
 });
 
 /*==================== TESTIMONIOS PERSONALIZADO ====================*/
@@ -527,7 +535,13 @@ const selectedIcon = localStorage.getItem('selected-icon')
 
 // Obtenemos el tema actual que tiene la interfaz validando la clase dark-theme
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun'
+const getCurrentIcon = () => {
+    const button = themeButton || document.getElementById('theme-button')
+    if (button) {
+        return button.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun'
+    }
+    return 'uil-sun' // valor por defecto
+}
 
 // Función para obtener la preferencia de tema del sistema
 const getSystemTheme = () => {
@@ -585,24 +599,36 @@ const updateThemeMetaTags = () => {
     }
 }
 
-// Inicializar el tema según la preferencia del usuario o del sistema (por defecto, oscuro si no hay preferencia del sistema)
-if (selectedTheme) {
-    // El usuario ha seleccionado previamente un tema
-    document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-    themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
-} else {
-    // No hay preferencia del usuario, usar la preferencia del sistema o por defecto oscuro
-    const systemTheme = getSystemTheme()
-    const defaultTheme = systemTheme === 'light' ? 'light' : 'dark' // Por defecto, oscuro si el sistema no prefiere claro
-    
-    if (defaultTheme === 'dark') {
-        document.body.classList.add(darkTheme)
-        themeButton.classList.add(iconTheme)
+// Función para inicializar el tema
+const initializeTheme = () => {
+    // Inicializar el tema según la preferencia del usuario o del sistema (por defecto, oscuro si no hay preferencia del sistema)
+    if (selectedTheme) {
+        // El usuario ha seleccionado previamente un tema
+        document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+        if (themeButton) {
+            themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
+        }
+    } else {
+        // No hay preferencia del usuario, usar la preferencia del sistema o por defecto oscuro
+        const systemTheme = getSystemTheme()
+        const defaultTheme = systemTheme === 'light' ? 'light' : 'dark' // Por defecto, oscuro si el sistema no prefiere claro
+        
+        if (defaultTheme === 'dark') {
+            document.body.classList.add(darkTheme)
+            if (themeButton) {
+                themeButton.classList.add(iconTheme)
+            }
+        }
     }
 }
 
+// Inicializar tema inmediatamente para evitar parpadeo
+initializeTheme()
+
 // Actualizar todos los elementos relacionados con el tema en la carga inicial después de que el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
+    // Reinicializar tema por si el botón no estaba disponible antes
+    initializeTheme()
     updateNavbarLogo()
     updatePWAManifest()
     updateThemeMetaTags()
@@ -653,18 +679,36 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 })
 
 // Activar / desactivar el tema manualmente con el botón
-themeButton.addEventListener('click', () => {
-    // Añadir o quitar el tema oscuro / de iconos
-    document.body.classList.toggle(darkTheme)
-    themeButton.classList.toggle(iconTheme)
-    // Guardamos el tema y el icono actual que el usuario eligió
-    localStorage.setItem('selected-theme', getCurrentTheme())
-    localStorage.setItem('selected-icon', getCurrentIcon())
-    // Actualizar logo, manifiesto y metaetiquetas después del cambio manual de tema
-    updateNavbarLogo()
-    updatePWAManifest()
-    updateThemeMetaTags()
-})
+if (themeButton) {
+    themeButton.addEventListener('click', () => {
+        // Añadir o quitar el tema oscuro / de iconos
+        document.body.classList.toggle(darkTheme)
+        themeButton.classList.toggle(iconTheme)
+        // Guardamos el tema y el icono actual que el usuario eligió
+        localStorage.setItem('selected-theme', getCurrentTheme())
+        localStorage.setItem('selected-icon', getCurrentIcon())
+        // Actualizar logo, manifiesto y metaetiquetas después del cambio manual de tema
+        updateNavbarLogo()
+        updatePWAManifest()
+        updateThemeMetaTags()
+    })
+} else {
+    // Si el botón no está disponible al cargar, intentar nuevamente cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeBtn = document.getElementById('theme-button')
+        if (themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                document.body.classList.toggle(darkTheme)
+                themeBtn.classList.toggle(iconTheme)
+                localStorage.setItem('selected-theme', getCurrentTheme())
+                localStorage.setItem('selected-icon', getCurrentIcon())
+                updateNavbarLogo()
+                updatePWAManifest()
+                updateThemeMetaTags()
+            })
+        }
+    })
+}
 
 /*==================== ABOUT READ MORE ====================*/
 const aboutDescriptionContainer = document.querySelector('.about__description-container');
@@ -1038,6 +1082,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const projectInput = contactForm?.querySelector('#contact-project');
     const messageInput = contactForm?.querySelector('#contact-message');
     
+    // Social media and consent inputs
+    const socialToggle = contactForm?.querySelector('#show-social-links');
+    const socialFields = contactForm?.querySelector('#social-fields');
+    const social1Input = contactForm?.querySelector('#contact-social-1');
+    const social2Input = contactForm?.querySelector('#contact-social-2');
+    const consentInput = contactForm?.querySelector('#contact-consent');
+    
     if (!contactForm) {
         console.error('Contact form not found');
         return;
@@ -1060,6 +1111,10 @@ document.addEventListener('DOMContentLoaded', function() {
         message: {
             pattern: /^.{10,500}$/s,
             message: 'El mensaje debe tener entre 10 y 500 caracteres'
+        },
+        social_link: {
+            pattern: /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)\/?$/,
+            message: 'Por favor ingresa una URL válida'
         }
     };
     
@@ -1261,8 +1316,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (existingError) existingError.remove();
         if (existingCheckmarkToRemove) existingCheckmarkToRemove.remove();
         
-        // Skip validation for optional project field
+        // Skip validation for optional fields
         if (fieldName === 'project') return true;
+        
+        // Skip validation for social media fields if toggle is unchecked or field is empty
+        if (fieldName === 'social_link') {
+            if (!socialToggle?.checked || !value) return true;
+        }
         
         // Check required fields
         if (!value && input.required) {
@@ -1318,7 +1378,9 @@ document.addEventListener('DOMContentLoaded', function() {
             { input: nameInput, fieldName: 'name' },
             { input: emailInput, fieldName: 'email' },
             { input: phoneInput, fieldName: 'phone' },
-            { input: messageInput, fieldName: 'message' }
+            { input: messageInput, fieldName: 'message' },
+            { input: social1Input, fieldName: 'social_link' },
+            { input: social2Input, fieldName: 'social_link' }
         ];
         
         fieldMappings.forEach(({ input, fieldName }) => {
@@ -1392,11 +1454,28 @@ document.addEventListener('DOMContentLoaded', function() {
         return nameValid && emailValid && phoneValid && messageValid;
     };
     
+    // Normalize social URLs (add https:// if missing)
+    function normalizeSocialUrls() {
+        [social1Input, social2Input].forEach(input => {
+            if (input && input.value) {
+                let url = input.value.trim();
+                // Add https:// if no protocol is specified
+                if (url && !url.match(/^https?:\/\//)) {
+                    url = 'https://' + url;
+                    input.value = url;
+                }
+            }
+        });
+    }
+    
     // Handle form submission
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         
         console.log('Form submission started');
+        
+        // Normalize social URLs before validation
+        normalizeSocialUrls();
         
         // Validate form
         if (!validateForm()) {
@@ -1490,6 +1569,117 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize form functionality
     contactForm.addEventListener('submit', handleFormSubmit);
     setupFieldValidation();
+    setupSocialToggle();
+    
+    // Setup social media toggle functionality
+    function setupSocialToggle() {
+        if (socialToggle && socialFields) {
+            // Initially hide social fields
+            socialFields.style.display = 'none';
+            socialFields.style.opacity = '0';
+            socialFields.style.maxHeight = '0';
+            socialFields.style.overflow = 'hidden';
+            socialFields.style.transition = 'all 0.4s ease';
+            
+            socialToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    // Show social fields with animation
+                    socialFields.style.display = 'block';
+                    setTimeout(() => {
+                        socialFields.style.opacity = '1';
+                        socialFields.style.maxHeight = '200px';
+                    }, 10);
+                } else {
+                    // Hide social fields with animation
+                    socialFields.style.opacity = '0';
+                    socialFields.style.maxHeight = '0';
+                    setTimeout(() => {
+                        socialFields.style.display = 'none';
+                        // Clear social inputs when hiding
+                        [social1Input, social2Input].forEach(input => {
+                            if (input) {
+                                input.value = '';
+                                input.classList.remove('contact__input--valid', 'contact__input--error');
+                                const errorMsg = input.parentNode.querySelector('.contact__error');
+                                const successIcon = input.parentNode.querySelector('.contact__success');
+                                if (errorMsg) errorMsg.remove();
+                                if (successIcon) successIcon.remove();
+                                // Reset label
+                                const label = input.parentNode.querySelector('label');
+                                if (label) label.textContent = 'Tu link aquí';
+                            }
+                        });
+                    }, 400);
+                }
+            });
+            
+            // Setup domain detection
+            setupDomainDetection();
+        }
+    }
+    
+    // Setup domain detection and label updating
+    function setupDomainDetection() {
+        const domainMappings = {
+            'instagram.com': 'Instagram',
+            'instagr.am': 'Instagram', 
+            'facebook.com': 'Facebook',
+            'fb.com': 'Facebook',
+            'tiktok.com': 'TikTok',
+            'youtube.com': 'YouTube',
+            'youtu.be': 'YouTube',
+            'twitter.com': 'Twitter',
+            'x.com': 'X (Twitter)',
+            'linkedin.com': 'LinkedIn',
+            'github.com': 'GitHub',
+            'behance.net': 'Behance',
+            'dribbble.com': 'Dribbble',
+            'pinterest.com': 'Pinterest',
+            'snapchat.com': 'Snapchat',
+            'discord.com': 'Discord',
+            'twitch.tv': 'Twitch',
+            'spotify.com': 'Spotify',
+            'soundcloud.com': 'SoundCloud'
+        };
+        
+        [social1Input, social2Input].forEach((input, index) => {
+            if (!input) return;
+            
+            const labelIds = ['social-1-label', 'social-2-label'];
+            const labelElement = document.getElementById(labelIds[index]);
+            
+            input.addEventListener('input', function() {
+                const url = this.value.toLowerCase();
+                let detectedTitle = 'Tu link aquí';
+                
+                if (url) {
+                    // Check for domain matches
+                    Object.entries(domainMappings).forEach(([domain, title]) => {
+                        if (url.includes(domain)) {
+                            detectedTitle = title;
+                        }
+                    });
+                    
+                    // If no specific platform detected but it's a valid URL, call it "Sitio Web"
+                    if (detectedTitle === 'Tu link aquí' && (url.includes('www.') || url.includes('http') || url.includes('.'))) {
+                        detectedTitle = 'Sitio Web';
+                    }
+                }
+                
+                // Update label
+                if (labelElement) {
+                    labelElement.textContent = detectedTitle;
+                }
+            });
+            
+            // Reset label when input is cleared
+            input.addEventListener('blur', function() {
+                if (!this.value && labelElement) {
+                    labelElement.textContent = 'Tu link aquí';
+                }
+            });
+        });
+    }
     
     // Add CSS for loading animation
     const style = document.createElement('style');
@@ -1524,6 +1714,68 @@ document.addEventListener('DOMContentLoaded', function() {
             100% { transform: scale(1); opacity: 1; }
         }
         
+        /* Optional social section styles */
+        .contact__optional-section {
+            margin: var(--mb-1-5) 0;
+            border-top: 1px solid var(--ctp-surface1);
+            padding-top: var(--mb-1);
+        }
+        
+        .contact__optional-toggle {
+            margin-bottom: var(--mb-1);
+        }
+        
+        .contact__optional-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: var(--font-medium);
+            color: var(--title-color);
+        }
+        
+        .contact__optional-checkbox {
+            margin-right: var(--mb-0-5);
+            transform: scale(1.2);
+            accent-color: var(--first-color);
+        }
+        
+        .contact__optional-description {
+            font-size: var(--smaller-font-size);
+            color: var(--text-color-light);
+            margin: var(--mb-0-5) 0 0 1.5rem;
+            font-style: italic;
+        }
+        
+        .contact__social-fields {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Consent checkbox styles */
+        .contact__consent {
+            margin: var(--mb-1-5) 0 var(--mb-1) 0;
+            border-top: 1px solid var(--ctp-surface1);
+            padding-top: var(--mb-1);
+        }
+        
+        .contact__consent-label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        .contact__consent-checkbox {
+            margin-right: var(--mb-0-5);
+            margin-top: 2px;
+            transform: scale(1.1);
+            accent-color: var(--first-color);
+        }
+        
+        .contact__consent-text {
+            font-size: var(--small-font-size);
+            line-height: 1.4;
+        }
+        
         @media screen and (max-width: 568px) {
             .contact__notification {
                 right: 10px !important;
@@ -1540,4 +1792,54 @@ document.addEventListener('DOMContentLoaded', function() {
     document.head.appendChild(style);
     
     console.log('Contact form functionality initialized');
+});
+
+/*==================== MODAL DE POLÍTICA DE PRIVACIDAD ====================*/
+document.addEventListener('DOMContentLoaded', function() {
+    const privacyLink = document.getElementById('privacy-link');
+    const privacyModal = document.getElementById('privacy-modal');
+    const privacyModalClose = document.getElementById('privacy-modal-close');
+    const privacyModalAccept = document.getElementById('privacy-modal-accept');
+    const privacyModalOverlay = document.getElementById('privacy-modal-overlay');
+    
+    // Función para mostrar el modal
+    function showPrivacyModal() {
+        privacyModal.classList.add('show');
+        document.body.style.overflow = 'hidden'; // Prevenir scroll del body
+    }
+    
+    // Función para ocultar el modal
+    function hidePrivacyModal() {
+        privacyModal.classList.remove('show');
+        document.body.style.overflow = 'auto'; // Restaurar scroll del body
+    }
+    
+    // Event listeners
+    if (privacyLink) {
+        privacyLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPrivacyModal();
+        });
+    }
+    
+    if (privacyModalClose) {
+        privacyModalClose.addEventListener('click', hidePrivacyModal);
+    }
+    
+    if (privacyModalAccept) {
+        privacyModalAccept.addEventListener('click', hidePrivacyModal);
+    }
+    
+    if (privacyModalOverlay) {
+        privacyModalOverlay.addEventListener('click', hidePrivacyModal);
+    }
+    
+    // Cerrar modal con tecla Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && privacyModal.classList.contains('show')) {
+            hidePrivacyModal();
+        }
+    });
+    
+    console.log('Privacy modal functionality initialized');
 });
