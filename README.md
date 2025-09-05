@@ -150,6 +150,14 @@ Atajo: Ctrl + B
 - Lazy loading de imágenes
 - DNS prefetch para recursos externos
 
+#### 📧 Sistema de Contacto Avanzado
+- **Formulario completo:** Nombre, correo, celular, proyecto y mensaje
+- **Validación en tiempo real:** Patrones regex para cada campo
+- **Integración webhook:** Conectado con n8n para automatización
+- **Notificaciones visuales:** Estados de éxito, error y carga
+- **Overlay de confirmación:** Información detallada post-envío
+- **Endpoint:** `flows.soul23.cloud/webhook/marcogll-92e58d390937`
+
 ---
 
 ## 🚀 Instalación y Uso
@@ -328,9 +336,10 @@ Desarrollo soluciones completas para:
 ## 📋 Roadmap y Mejoras Futuras
 
 ### 🚧 En Desarrollo Activo
-- [ ] **Sistema de notificaciones** - Confirmación de envío de mensajes
-- [ ] **Validación avanzada** - Feedback visual en formularios
-- [ ] **Respuestas automáticas** - Sistema de confirmación personalizado
+- [x] **Sistema de notificaciones** - Confirmación de envío de mensajes ✅
+- [x] **Validación avanzada** - Feedback visual en formularios ✅
+- [x] **Respuestas automáticas** - Sistema de confirmación personalizado ✅
+- [ ] **Analytics de formulario** - Métricas de conversión de contacto
 
 ### 🎯 Próximas Funcionalidades
 - [ ] **Blog técnico** - Casos de estudio y artículos
