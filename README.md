@@ -156,7 +156,7 @@ Atajo: Ctrl + B
 - **Integración webhook:** Conectado con n8n para automatización
 - **Notificaciones visuales:** Estados de éxito, error y carga
 - **Overlay de confirmación:** Información detallada post-envío
-- **Endpoint:** `flows.soul23.cloud/webhook/marcogll-92e58d390937`
+- **Endpoint:** `{webhook_url}`
 
 ---
 

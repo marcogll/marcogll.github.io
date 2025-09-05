@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Profile Images Loading</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1e1e2e; color: #cdd6f4; }
+        .test-container { max-width: 1200px; margin: 0 auto; }
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; margin: 20px 0; }
+        .image-item { text-align: center; padding: 10px; background: #313244; border-radius: 8px; }
+        .image-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 2px solid #cba6f7; }
+        .image-item p { margin: 10px 0 0 0; font-size: 12px; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 8px; }
+        .success { background: rgba(166, 227, 161, 0.2); border: 1px solid #a6e3a1; }
+        .error { background: rgba(243, 139, 168, 0.2); border: 1px solid #f38ba8; }
+        .info { background: rgba(137, 180, 250, 0.2); border: 1px solid #89b4fa; }
+        button { background: #cba6f7; color: #1e1e2e; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; margin: 10px 5px; }
+        button:hover { background: #b4befe; }
+        #randomization-log { background: #181825; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 12px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🖼️ Profile Images Loading Test</h1>
+        
+        <div class="status info">
+            <h3>Test Status</h3>
+            <p id="test-status">Initializing test...</p>
+        </div>
+
+        <button onclick="testImageLoading()">🔄 Test Image Loading</button>
+        <button onclick="testRandomization()">🎲 Test Randomization</button>
+        <button onclick="clearLog()">🗑️ Clear Log</button>
+
+        <div id="randomization-log"></div>
+
+        <h3>Available Images</h3>
+        <div class="image-grid" id="image-grid">
+            <!-- Images will be populated by JavaScript -->
+        </div>
+
+        <h3>Randomized Order Preview</h3>
+        <div id="random-preview" class="status info">
+            <p>Click "Test Randomization" to see random order</p>
+        </div>
+    </div>
+
+    <script>
+        // Replicate the same system from main.js
+        const PROFILE_IMAGES_COUNT = 20;
+        let randomizedProfileImages = [];
+
+        function log(message) {
+            const logElement = document.getElementById('randomization-log');
+            const timestamp = new Date().toLocaleTimeString();
+            logElement.innerHTML += `[${timestamp}] ${message}\n`;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('randomization-log').innerHTML = '';
+        }
+
+        const generateRandomProfileImages = () => {
+            const imageNumbers = Array.from({length: PROFILE_IMAGES_COUNT}, (_, i) => i + 1);
+            
+            // Fisher-Yates shuffle algorithm
+            for (let i = imageNumbers.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [imageNumbers[i], imageNumbers[j]] = [imageNumbers[j], imageNumbers[i]];
+            }
+            
+            randomizedProfileImages = imageNumbers.map(num => `assets/img/profiles/mg_${num}.png`);
+            
+            log(`Generated ${randomizedProfileImages.length} randomized images`);
+            log(`First 10 images: ${randomizedProfileImages.slice(0, 10).map(img => img.split('/').pop()).join(', ')}`);
+            
+            return randomizedProfileImages;
+        };
+
+        function testImageLoading() {
+            log('Starting image loading test...');
+            const imageGrid = document.getElementById('image-grid');
+            imageGrid.innerHTML = '';
+            
+            let loadedCount = 0;
+            let errorCount = 0;
+
+            for (let i = 1; i <= PROFILE_IMAGES_COUNT; i++) {
+                const imagePath = `assets/img/profiles/mg_${i}.png`;
+                
+                const imageItem = document.createElement('div');
+                imageItem.className = 'image-item';
+                
+                const img = document.createElement('img');
+                img.src = imagePath;
+                img.alt = `Marco ${i}`;
+                
+                const label = document.createElement('p');
+                label.textContent = `mg_${i}.png`;
+                
+                img.onload = () => {
+                    loadedCount++;
+                    imageItem.style.border = '2px solid #a6e3a1';
+                    updateStatus();
+                };
+                
+                img.onerror = () => {
+                    errorCount++;
+                    imageItem.style.border = '2px solid #f38ba8';
+                    label.textContent += ' (ERROR)';
+                    label.style.color = '#f38ba8';
+                    log(`ERROR: Failed to load ${imagePath}`);
+                    updateStatus();
+                };
+                
+                imageItem.appendChild(img);
+                imageItem.appendChild(label);
+                imageGrid.appendChild(imageItem);
+            }
+
+            function updateStatus() {
+                const total = loadedCount + errorCount;
+                const statusElement = document.getElementById('test-status');
+                
+                if (total === PROFILE_IMAGES_COUNT) {
+                    if (errorCount === 0) {
+                        statusElement.innerHTML = `✅ All ${PROFILE_IMAGES_COUNT} images loaded successfully!`;
+                        statusElement.parentElement.className = 'status success';
+                        log(`SUCCESS: All ${PROFILE_IMAGES_COUNT} images loaded correctly`);
+                    } else {
+                        statusElement.innerHTML = `⚠️ ${loadedCount} images loaded, ${errorCount} failed`;
+                        statusElement.parentElement.className = 'status error';
+                        log(`PARTIAL: ${loadedCount} loaded, ${errorCount} failed`);
+                    }
+                } else {
+                    statusElement.innerHTML = `Loading... ${total}/${PROFILE_IMAGES_COUNT} processed`;
+                    statusElement.parentElement.className = 'status info';
+                }
+            }
+        }
+
+        function testRandomization() {
+            log('Testing randomization system...');
+            generateRandomProfileImages();
+            
+            const previewElement = document.getElementById('random-preview');
+            previewElement.innerHTML = `
+                <h4>🎲 Random Order Generated:</h4>
+                <p><strong>First 10:</strong> ${randomizedProfileImages.slice(0, 10).map(img => img.split('/').pop()).join(', ')}</p>
+                <p><strong>Total:</strong> ${randomizedProfileImages.length} images</p>
+                <p><strong>Sample paths:</strong></p>
+                <ul>
+                    ${randomizedProfileImages.slice(0, 5).map(img => `<li><code>${img}</code></li>`).join('')}
+                </ul>
+            `;
+            
+            log('Randomization test completed');
+        }
+
+        // Auto-run image loading test on page load
+        window.addEventListener('load', () => {
+            log('Page loaded, starting automatic image loading test...');
+            testImageLoading();
+        });
+    </script>
+</body>
+</html>
