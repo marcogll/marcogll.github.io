@@ -1021,6 +1021,10 @@ img {
   width: 80%;
 }
 
+.skills__prompt.animate {
+  width: 90%;
+}
+
 .skills__php.animate {
   width: 95%;
 }
@@ -3650,6 +3654,9 @@ body.dark-theme .footer__alma-img--dark {
 }
 .skills__react {
   background-color: var(--ctp-pink);
+}
+.skills__prompt {
+  background-color: var(--ctp-lavender);
 }
 
 /* Ingeniería y Sistemas Técnicos */
